@@ -1,4 +1,5 @@
 #!perl -w
+use v5;
 use 5.015;
 use strict;
 use warnings;

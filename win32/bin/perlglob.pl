@@ -1,4 +1,5 @@
 #!perl -w
+use v5;
 use File::DosGlob;
 $| = 1;
 while (@ARGV) {

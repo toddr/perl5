@@ -1,4 +1,5 @@
 #!perl -w
+use v5;
 use strict;
 
 our $file = "storable-testfile.$$";

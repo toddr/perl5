@@ -1,4 +1,5 @@
 #!/usr/bin/perl -w
+use v5;
 use strict;
 
 use Getopt::Long qw(:config bundling no_auto_abbrev);

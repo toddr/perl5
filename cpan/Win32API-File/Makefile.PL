@@ -1,4 +1,5 @@
 #!/usr/bin/perl -w
+use v5;
 use 5.001; #not tested
 use ExtUtils::MakeMaker;
 use Config;

@@ -1,4 +1,5 @@
 #! perl -w
+use v5;
 
 use strict ;
 use ExtUtils::MakeMaker 5.16 ;

@@ -1,4 +1,5 @@
 #!/usr/bin/perl -w
+use v5;
 use strict;
 
 =for comment

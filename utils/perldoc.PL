@@ -1,4 +1,5 @@
 #!/usr/local/bin/perl
+use v5;
 
 # This is for generating the perldoc executable.
 # It may eventually be expanded to generate many executables, as

@@ -1,4 +1,5 @@
 #!/usr/bin/perl -w
+use v5;
 ################################################################################
 #
 #  apicheck.pl -- generate apicheck.c: C source for automated API check

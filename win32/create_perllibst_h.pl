@@ -1,4 +1,5 @@
 #!perl -w
+use v5;
 use strict;
 
 # creates perllibst.h file for inclusion from perllib.c

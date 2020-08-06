@@ -1,4 +1,5 @@
 #!perl -w
+use v5;
 use strict;
 require './regen/regen_lib.pl';
 require './Porting/pod_lib.pl';

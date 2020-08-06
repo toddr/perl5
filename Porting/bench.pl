@@ -1,4 +1,5 @@
 #!/usr/bin/perl
+use v5;
 #
 # A tool for analysing the performance of the code snippets found in
 # t/perf/benchmarks or similar

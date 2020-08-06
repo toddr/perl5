@@ -1,4 +1,5 @@
 #!/usr/local/bin/perl
+use v5;
 #
 # $Id: rt.pl,v 2.1 2006/05/03 18:24:10 dankogai Exp $
 #

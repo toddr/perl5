@@ -1,4 +1,5 @@
 #!perl -w
+use v5;
 use strict;
 
 BEGIN { warn "Running ".__FILE__."\n" };

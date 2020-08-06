@@ -1,4 +1,5 @@
 #!./miniperl -w
+use v5;
 use strict;
 use Config;
 

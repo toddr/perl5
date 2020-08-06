@@ -1,4 +1,5 @@
 #!/usr/local/bin/perl
+use v5;
 
 use Config;
 use File::Basename qw(&basename &dirname);

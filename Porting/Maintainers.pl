@@ -1,4 +1,5 @@
 #!perl
+use v5;
 # A simple listing of core files that have specific maintainers,
 # or at least someone that can be called an "interested party".
 # Also, a "module" does not necessarily mean a CPAN module, it

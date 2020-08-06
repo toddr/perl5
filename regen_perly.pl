@@ -1,4 +1,5 @@
 #!/usr/bin/perl
+use v5;
 #
 # regen_perly.pl, DAPM 12-Feb-04
 #

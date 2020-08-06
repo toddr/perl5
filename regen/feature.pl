@@ -1,4 +1,5 @@
 #!/usr/bin/perl
+use v5;
 # 
 # Regenerate (overwriting only if changed):
 #

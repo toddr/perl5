@@ -1,4 +1,5 @@
 #!/usr/bin/perl
+use v5;
 #
 # Special wrapper script to generate the actual pod2man script.  This is
 # required for proper start-up code on non-UNIX platforms, and is used inside

@@ -1,4 +1,5 @@
 #!/usr/bin/perl -w
+use v5;
 
 #
 # Check the tree against missing VERSIONs.
