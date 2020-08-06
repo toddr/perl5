@@ -8,7 +8,7 @@
 #
 ################################################################################
 
-package IPC::SysV;
+package IPC::SysV;use v5;
 
 use strict;
 use vars qw(@ISA @EXPORT @EXPORT_OK %EXPORT_TAGS $VERSION $AUTOLOAD);

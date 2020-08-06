@@ -1,4 +1,4 @@
-package CPAN::Nox;
+package CPAN::Nox;use v5;
 use strict;
 use vars qw($VERSION @EXPORT);
 

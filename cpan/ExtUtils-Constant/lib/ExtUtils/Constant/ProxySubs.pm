@@ -1,4 +1,4 @@
-package ExtUtils::Constant::ProxySubs;
+package ExtUtils::Constant::ProxySubs;use v5;
 
 use strict;
 use vars qw($VERSION @ISA %type_to_struct %type_from_struct %type_to_sv

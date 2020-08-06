@@ -1,4 +1,4 @@
-package OS2::PrfDB;
+package OS2::PrfDB;use v5;
 
 use strict;
 
@@ -98,7 +98,7 @@ sub NEXTKEY {
   return $key; #, OS2::Prf::Get($self->[0]->[0], $self->[2], $key));
 }
 
-package OS2::PrfDB::Hini;
+package OS2::PrfDB::Hini;use v5;
 
 sub new {
   die "Usage: new OS2::PrfDB::Hini filename\n" unless @_ == 2;
@@ -123,7 +123,7 @@ sub DESTROY {
   }
 }
 
-package OS2::PrfDB::Sub;
+package OS2::PrfDB::Sub;use v5;
 use Tie::Hash;
 
 our $debug;

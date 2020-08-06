@@ -1,6 +1,6 @@
 
 require 5.004;
-package Test;
+package Test;use v5;
 
 use strict;
 

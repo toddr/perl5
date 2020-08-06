@@ -1,4 +1,4 @@
-package t::Markers;
+package t::Markers;use v5;
 
 push @XS::APItest::bhkav, "run/pm";
 

@@ -1,4 +1,4 @@
-package Memoize::NDBM_File;
+package Memoize::NDBM_File;use v5;
 
 =head1 NAME
 

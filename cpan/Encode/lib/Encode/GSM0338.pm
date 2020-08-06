@@ -1,7 +1,7 @@
 #
 # $Id: GSM0338.pm,v 2.7 2017/06/10 17:23:50 dankogai Exp $
 #
-package Encode::GSM0338;
+package Encode::GSM0338;use v5;
 
 use strict;
 use warnings;

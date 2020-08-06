@@ -1,4 +1,4 @@
-package version::regex;
+package version::regex;use v5;
 
 use strict;
 

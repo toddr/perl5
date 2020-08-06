@@ -1,4 +1,4 @@
-package Test2::Tools::Tiny;
+package Test2::Tools::Tiny;use v5;
 use strict;
 use warnings;
 

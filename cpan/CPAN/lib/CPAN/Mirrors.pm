@@ -31,7 +31,7 @@ CPAN::Mirrors - Get CPAN mirror information and select a fast one
 
 =cut
 
-package CPAN::Mirrors;
+package CPAN::Mirrors;use v5;
 use strict;
 use vars qw($VERSION $urllist $silent);
 $VERSION = "2.27";
@@ -559,7 +559,7 @@ sub _parse {
 
 #--------------------------------------------------------------------------#
 
-package CPAN::Mirrored::By;
+package CPAN::Mirrored::By;use v5;
 use strict;
 use Net::Ping   ();
 

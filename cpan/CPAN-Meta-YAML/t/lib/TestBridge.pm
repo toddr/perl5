@@ -1,4 +1,4 @@
-package TestBridge;
+package TestBridge;use v5;
 
 use strict;
 use warnings;

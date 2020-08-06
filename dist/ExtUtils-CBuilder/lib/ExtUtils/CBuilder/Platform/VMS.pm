@@ -1,4 +1,4 @@
-package ExtUtils::CBuilder::Platform::VMS;
+package ExtUtils::CBuilder::Platform::VMS;use v5;
 
 use warnings;
 use strict;

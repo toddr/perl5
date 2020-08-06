@@ -8,7 +8,7 @@
 #
 ################################################################################
 
-package IPC::Msg;
+package IPC::Msg;use v5;
 
 use IPC::SysV qw(IPC_STAT IPC_SET IPC_RMID);
 use strict;

@@ -1,4 +1,4 @@
-package Module::Loaded;
+package Module::Loaded;use v5;
 
 use strict;
 use Carp qw[carp];

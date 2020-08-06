@@ -1,4 +1,4 @@
-package VMS::DCLsym;
+package VMS::DCLsym;use v5;
 
 use Carp;
 use DynaLoader;
@@ -171,7 +171,7 @@ The VMS::DCLsym extension provides access to DCL symbols using a
 tied hash interface.  This allows Perl scripts to manipulate symbols in
 a manner similar to the way in which logical names are manipulated via
 the built-in C<%ENV> hash.  Alternatively, one can call methods in this
-package directly to read, create, and delete symbols.
+package directly to read, create, and delete symbols.use v5;
 
 =head2 Tied hash interface
 

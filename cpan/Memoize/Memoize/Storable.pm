@@ -1,4 +1,4 @@
-package Memoize::Storable;
+package Memoize::Storable;use v5;
 
 =head1 NAME
 

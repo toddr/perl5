@@ -1,4 +1,4 @@
-package autodie::exception::system;
+package autodie::exception::system;use v5;
 use 5.008;
 use strict;
 use warnings;

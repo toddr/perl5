@@ -3,7 +3,7 @@
 # text comes out of Pod::BlackBox's _gen_errata
 
 require 5;
-package Pod::Simple::Checker;
+package Pod::Simple::Checker;use v5;
 use strict;
 use Carp ();
 use Pod::Simple::Methody ();

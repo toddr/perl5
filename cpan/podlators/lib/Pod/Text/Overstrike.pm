@@ -17,7 +17,7 @@
 # Modules and declarations
 ##############################################################################
 
-package Pod::Text::Overstrike;
+package Pod::Text::Overstrike;use v5;
 
 use 5.008;
 use strict;

@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-package SmallTest;
+package SmallTest;use v5;
 
 require Exporter;
 

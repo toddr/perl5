@@ -1,4 +1,4 @@
-package IO::Compress::Base::Common;
+package IO::Compress::Base::Common;use v5;
 
 use strict ;
 use warnings;
@@ -830,7 +830,7 @@ sub IO::Compress::Base::Parameters::clone
     return bless $obj, 'IO::Compress::Base::Parameters' ;
 }
 
-package U64;
+package U64;use v5;
 
 use constant MAX32 => 0xFFFFFFFF ;
 use constant HI_1 => MAX32 + 1 ;
@@ -1048,6 +1048,6 @@ sub Value_VV64
 }
 
 
-package IO::Compress::Base::Common;
+package IO::Compress::Base::Common;use v5;
 
 1;

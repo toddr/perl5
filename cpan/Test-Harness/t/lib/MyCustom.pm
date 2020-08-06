@@ -1,6 +1,6 @@
 # avoid cut-n-paste exhaustion with this mixin
 
-package MyCustom;
+package MyCustom;use v5;
 use strict;
 use warnings;
 

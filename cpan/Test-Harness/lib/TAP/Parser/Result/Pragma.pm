@@ -1,4 +1,4 @@
-package TAP::Parser::Result::Pragma;
+package TAP::Parser::Result::Pragma;use v5;
 
 use strict;
 use warnings;

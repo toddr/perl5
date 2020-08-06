@@ -1,4 +1,4 @@
-package TAP::Parser::YAMLish::Writer;
+package TAP::Parser::YAMLish::Writer;use v5;
 
 use strict;
 use warnings;

@@ -1,4 +1,4 @@
-package File::Fetch;
+package File::Fetch;use v5;
 
 use strict;
 use FileHandle;

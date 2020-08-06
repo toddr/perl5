@@ -1,4 +1,4 @@
-package File::Spec::VMS;
+package File::Spec::VMS;use v5;
 
 use strict;
 use Cwd ();

@@ -1,4 +1,4 @@
-package Class::Struct;
+package Class::Struct;use v5;
 
 ## See POD after __END__
 

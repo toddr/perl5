@@ -12,7 +12,7 @@
 # Modules and declarations
 ##############################################################################
 
-package Pod::Man;
+package Pod::Man;use v5;
 
 use 5.008;
 use strict;

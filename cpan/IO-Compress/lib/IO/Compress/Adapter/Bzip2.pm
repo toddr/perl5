@@ -1,4 +1,4 @@
-package IO::Compress::Adapter::Bzip2 ;
+package IO::Compress::Adapter::Bzip2 ;use v5;
 
 use strict;
 use warnings;

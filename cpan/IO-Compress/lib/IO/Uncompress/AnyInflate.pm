@@ -1,4 +1,4 @@
-package IO::Uncompress::AnyInflate ;
+package IO::Uncompress::AnyInflate ;use v5;
 
 # for RFC1950, RFC1951 or RFC1952
 

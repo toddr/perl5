@@ -202,7 +202,7 @@ particular used C<Term::ReadLine::*> package).
 
 use strict;
 
-package Term::ReadLine::Stub;
+package Term::ReadLine::Stub;use v5;
 our @ISA = qw'Term::ReadLine::Tk Term::ReadLine::TermCap';
 
 $DB::emacs = $DB::emacs;	# To pacify -w
@@ -324,7 +324,7 @@ sub Features { \%features }
 #  return scalar <$in>;
 #}
 
-package Term::ReadLine;		# So late to allow the above code be defined?
+package Term::ReadLine;		# So late to allow the above code be defined?use v5;
 
 our $VERSION = '1.17';
 
@@ -363,7 +363,7 @@ if (defined &Term::ReadLine::Gnu::readline) {
   @ISA = qw(Term::ReadLine::Stub);
 }
 
-package Term::ReadLine::TermCap;
+package Term::ReadLine::TermCap;use v5;
 
 # Prompt-start, prompt-end, command-line-start, command-line-end
 #     -- zero-width beautifies to emit around prompt and the command line.
@@ -397,7 +397,7 @@ sub ornaments {
 }
 
 
-package Term::ReadLine::Tk;
+package Term::ReadLine::Tk;use v5;
 
 # This package inserts a Tk->fileevent() before the diamond operator.
 # The Tk watcher dispatches Tk events until the filehandle returned by

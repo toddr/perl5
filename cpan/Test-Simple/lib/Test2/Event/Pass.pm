@@ -1,4 +1,4 @@
-package Test2::Event::Pass;
+package Test2::Event::Pass;use v5;
 use strict;
 use warnings;
 

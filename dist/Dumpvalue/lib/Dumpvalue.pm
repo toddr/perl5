@@ -1,5 +1,5 @@
 use 5.006_001;			# for (defined ref) and $#$v and our
-package Dumpvalue;
+package Dumpvalue;use v5;
 use strict;
 use warnings;
 our $VERSION = '1.21';

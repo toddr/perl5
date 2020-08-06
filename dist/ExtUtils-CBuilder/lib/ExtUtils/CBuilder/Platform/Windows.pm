@@ -1,4 +1,4 @@
-package ExtUtils::CBuilder::Platform::Windows;
+package ExtUtils::CBuilder::Platform::Windows;use v5;
 use strict;
 use warnings;
 

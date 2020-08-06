@@ -1,4 +1,4 @@
-package constant;
+package constant;use v5;
 use 5.008;
 use strict;
 use warnings::register;

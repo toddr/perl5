@@ -1,4 +1,4 @@
-package Moped::Msg;
+package Moped::Msg;use v5;
 use strict;
 use vars qw(@ISA $VERSION);
 require DynaLoader;

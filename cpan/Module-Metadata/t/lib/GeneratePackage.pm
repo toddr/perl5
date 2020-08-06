@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-package GeneratePackage;
+package GeneratePackage;use v5;
 # vim:ts=8:sw=2:et:sta:sts=2
 
 our @ISA = ('Exporter');

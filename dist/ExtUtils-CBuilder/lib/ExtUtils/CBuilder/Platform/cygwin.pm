@@ -1,4 +1,4 @@
-package ExtUtils::CBuilder::Platform::cygwin;
+package ExtUtils::CBuilder::Platform::cygwin;use v5;
 
 use warnings;
 use strict;

@@ -2,7 +2,7 @@
 # $Id: CJKConstants.pm,v 2.2 2006/06/03 20:28:48 dankogai Exp $
 #
 
-package Encode::CJKConstants;
+package Encode::CJKConstants;use v5;
 
 use strict;
 use warnings;

@@ -1,4 +1,4 @@
-package ExtUtils::CBuilder::Platform::Windows::MSVC;
+package ExtUtils::CBuilder::Platform::Windows::MSVC;use v5;
 
 our $VERSION = '0.280234'; # VERSION
 

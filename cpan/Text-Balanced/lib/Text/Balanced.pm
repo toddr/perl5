@@ -1,4 +1,4 @@
-package Text::Balanced;
+package Text::Balanced;use v5;
 
 # EXTRACT VARIOUSLY DELIMITED TEXT SEQUENCES FROM STRINGS.
 # FOR FULL DOCUMENTATION SEE Balanced.pod
@@ -1009,14 +1009,14 @@ sub gen_extract_tagged # ($opentag, $closetag, $pre, \%options)
 	bless $closure, 'Text::Balanced::Extractor';
 }
 
-package Text::Balanced::Extractor;
+package Text::Balanced::Extractor;use v5;
 
 sub extract($$)	# ($self, $text)
 {
 	&{$_[0]}($_[1]);
 }
 
-package Text::Balanced::ErrorMsg;
+package Text::Balanced::ErrorMsg;use v5;
 
 use overload '""' => sub { "$_[0]->{error}, detected at offset $_[0]->{pos}" };
 

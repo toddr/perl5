@@ -1,6 +1,6 @@
 # -*- Mode: cperl; coding: utf-8; cperl-indent-level: 4 -*-
 # vim: ts=4 sts=4 sw=4:
-package CPAN::Distrostatus;
+package CPAN::Distrostatus;use v5;
 use overload '""' => "as_string",
     fallback => 1;
 use vars qw($something_has_failed_at);

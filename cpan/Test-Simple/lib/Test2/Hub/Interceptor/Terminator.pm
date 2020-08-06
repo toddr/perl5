@@ -1,4 +1,4 @@
-package Test2::Hub::Interceptor::Terminator;
+package Test2::Hub::Interceptor::Terminator;use v5;
 use strict;
 use warnings;
 

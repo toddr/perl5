@@ -2,7 +2,7 @@
 ## Generic data connection package
 ##
 
-package Net::FTP::dataconn;
+package Net::FTP::dataconn;use v5;
 
 use 5.008001;
 

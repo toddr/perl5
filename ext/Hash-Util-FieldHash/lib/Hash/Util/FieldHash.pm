@@ -1,4 +1,4 @@
-package Hash::Util::FieldHash;
+package Hash::Util::FieldHash;use v5;
 
 use 5.009004;
 use strict;

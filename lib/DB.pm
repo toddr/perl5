@@ -2,7 +2,7 @@
 # Documentation is at the __END__
 #
 
-package DB;
+package DB;use v5;
 
 # "private" globals
 

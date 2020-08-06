@@ -1,4 +1,4 @@
-package ExtUtils::MakeMaker::Locale;
+package ExtUtils::MakeMaker::Locale;use v5;
 
 use strict;
 our $VERSION = "7.44";

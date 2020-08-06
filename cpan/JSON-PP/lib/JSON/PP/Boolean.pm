@@ -1,4 +1,4 @@
-package JSON::PP::Boolean;
+package JSON::PP::Boolean;use v5;
 
 use strict;
 require overload;

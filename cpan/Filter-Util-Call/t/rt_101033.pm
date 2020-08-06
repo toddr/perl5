@@ -1,4 +1,4 @@
-package rt_101033;
+package rt_101033;use v5;
 
 use strict;
 use Filter::Util::Call;

@@ -1,4 +1,4 @@
-package CPAN::Version;
+package CPAN::Version;use v5;
 
 use strict;
 use vars qw($VERSION);

@@ -42,7 +42,7 @@ declare the output character set as UTF-8 before parsing, like so:
 
 =cut
 
-package Pod::Simple::XHTML;
+package Pod::Simple::XHTML;use v5;
 use strict;
 use vars qw( $VERSION @ISA $HAS_HTML_ENTITIES );
 $VERSION = '3.40';

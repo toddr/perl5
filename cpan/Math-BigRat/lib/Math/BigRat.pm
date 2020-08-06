@@ -10,7 +10,7 @@
 #   _p   : precision
 # You should not look at the innards of a BigRat - use the methods for this.
 
-package Math::BigRat;
+package Math::BigRat;use v5;
 
 use 5.006;
 use strict;

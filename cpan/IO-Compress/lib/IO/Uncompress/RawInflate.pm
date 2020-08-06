@@ -1,4 +1,4 @@
-package IO::Uncompress::RawInflate ;
+package IO::Uncompress::RawInflate ;use v5;
 # for RFC1951
 
 use strict ;

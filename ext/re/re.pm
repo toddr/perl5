@@ -1,4 +1,4 @@
-package re;
+package re;use v5;
 
 # pragma for controlling the regexp engine
 use strict;

@@ -1,6 +1,6 @@
 
 require 5;
-package Pod::Simple::XMLOutStream;
+package Pod::Simple::XMLOutStream;use v5;
 use strict;
 use Carp ();
 use Pod::Simple ();

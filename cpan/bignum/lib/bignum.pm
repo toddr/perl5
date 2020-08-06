@@ -1,4 +1,4 @@
-package bignum;
+package bignum;use v5;
 
 use 5.010;
 use strict;

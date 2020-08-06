@@ -1,4 +1,4 @@
-package List::Util::XS;
+package List::Util::XS;use v5;
 use strict;
 use warnings;
 use List::Util;

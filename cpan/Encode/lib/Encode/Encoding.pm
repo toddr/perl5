@@ -1,4 +1,4 @@
-package Encode::Encoding;
+package Encode::Encoding;use v5;
 
 # Base class for classes which implement encodings
 use strict;

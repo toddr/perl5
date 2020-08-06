@@ -1,4 +1,4 @@
-package Pod::Escapes;
+package Pod::Escapes;use v5;
 use strict;
 use warnings;
 use 5.006;

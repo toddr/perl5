@@ -1,4 +1,4 @@
-package Locale::Maketext;
+package Locale::Maketext;use v5;
 use strict;
 our $USE_LITERALS;
 use Carp ();

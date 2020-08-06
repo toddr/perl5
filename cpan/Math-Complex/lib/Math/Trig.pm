@@ -4,7 +4,7 @@
 # -- Raphael Manfredi, September 1996 (indirectly: because of Math::Complex)
 #
 
-package Math::Trig;
+package Math::Trig;use v5;
 
 { use 5.006; }
 use strict;

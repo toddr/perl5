@@ -1,4 +1,4 @@
-package Encode::MIME::Name;
+package Encode::MIME::Name;use v5;
 use strict;
 use warnings;
 our $VERSION = do { my @r = ( q$Revision: 1.3 $ =~ /\d+/g ); sprintf "%d." . "%02d" x $#r, @r };

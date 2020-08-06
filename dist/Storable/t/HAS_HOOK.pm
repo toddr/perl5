@@ -1,4 +1,4 @@
-package HAS_HOOK;
+package HAS_HOOK;use v5;
 
 sub STORABLE_thaw {
   ++$thawed_count;

@@ -1,4 +1,4 @@
-package IO::Compress::Adapter::Deflate ;
+package IO::Compress::Adapter::Deflate ;use v5;
 
 use strict;
 use warnings;

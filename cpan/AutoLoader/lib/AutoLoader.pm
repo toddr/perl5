@@ -1,4 +1,4 @@
-package AutoLoader;
+package AutoLoader;use v5;
 
 use strict;
 use 5.006_001;

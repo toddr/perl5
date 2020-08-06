@@ -1,4 +1,4 @@
-package ExtUtils::MM_AIX;
+package ExtUtils::MM_AIX;use v5;
 
 use strict;
 our $VERSION = '7.44';

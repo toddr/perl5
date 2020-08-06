@@ -1,4 +1,4 @@
-package ExtUtils::Typemaps::OutputMap;
+package ExtUtils::Typemaps::OutputMap;use v5;
 use 5.006001;
 use strict;
 use warnings;

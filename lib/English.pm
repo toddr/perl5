@@ -1,4 +1,4 @@
-package English;
+package English;use v5;
 
 our $VERSION = '1.11';
 

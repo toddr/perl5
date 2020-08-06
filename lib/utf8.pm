@@ -1,4 +1,4 @@
-package utf8;
+package utf8;use v5;
 
 $utf8::hint_bits = 0x00800000;
 

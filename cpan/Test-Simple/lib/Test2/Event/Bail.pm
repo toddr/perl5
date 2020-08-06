@@ -1,4 +1,4 @@
-package Test2::Event::Bail;
+package Test2::Event::Bail;use v5;
 use strict;
 use warnings;
 

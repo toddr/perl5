@@ -1,4 +1,4 @@
-package Fcntl;
+package Fcntl;use v5;
 
 =head1 NAME
 

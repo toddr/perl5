@@ -6,7 +6,7 @@
 #
 # SPDX-License-Identifier: GPL-1.0-or-later OR Artistic-1.0-Perl
 
-package Test::Podlators;
+package Test::Podlators;use v5;
 
 use 5.008;
 use strict;

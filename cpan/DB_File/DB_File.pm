@@ -7,7 +7,7 @@
 #     modify it under the same terms as Perl itself.
 
 
-package DB_File::HASHINFO ;
+package DB_File::HASHINFO ;use v5;
 
 require 5.008003;
 
@@ -110,7 +110,7 @@ sub FIRSTKEY { my $self = shift ; $self->NotHere("FIRSTKEY") }
 sub NEXTKEY  { my $self = shift ; $self->NotHere("NEXTKEY") }
 sub CLEAR    { my $self = shift ; $self->NotHere("CLEAR") }
 
-package DB_File::RECNOINFO ;
+package DB_File::RECNOINFO ;use v5;
 
 use warnings;
 use strict ;
@@ -128,7 +128,7 @@ sub TIEHASH
           }, $pkg ;
 }
 
-package DB_File::BTREEINFO ;
+package DB_File::BTREEINFO ;use v5;
 
 use warnings;
 use strict ;
@@ -154,7 +154,7 @@ sub TIEHASH
 }
 
 
-package DB_File ;
+package DB_File ;use v5;
 
 use warnings;
 use strict;

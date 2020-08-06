@@ -1,4 +1,4 @@
-package TAP::Parser::YAMLish::Reader;
+package TAP::Parser::YAMLish::Reader;use v5;
 
 use strict;
 use warnings;

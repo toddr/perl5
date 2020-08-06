@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-package Perl::OSType;
+package Perl::OSType;use v5;
 # ABSTRACT: Map Perl operating system names to generic types
 
 our $VERSION = '1.010';

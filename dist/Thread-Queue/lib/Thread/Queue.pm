@@ -1,4 +1,4 @@
-package Thread::Queue;
+package Thread::Queue;use v5;
 
 use strict;
 use warnings;

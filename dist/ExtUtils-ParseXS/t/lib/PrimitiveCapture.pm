@@ -1,4 +1,4 @@
-package PrimitiveCapture;
+package PrimitiveCapture;use v5;
 use strict;
 use warnings;
 

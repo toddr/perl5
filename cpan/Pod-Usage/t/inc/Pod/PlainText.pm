@@ -15,7 +15,7 @@
 # Modules and declarations
 ############################################################################
 
-package Pod::PlainText;
+package Pod::PlainText;use v5;
 use strict;
 
 require 5.005;

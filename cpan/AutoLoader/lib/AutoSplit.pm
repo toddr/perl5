@@ -1,4 +1,4 @@
-package AutoSplit;
+package AutoSplit;use v5;
 
 use Exporter ();
 use Config qw(%Config);
@@ -441,7 +441,7 @@ sub autosplit_file {
 # NOTE: Derived from $filename.
 # Changes made here will be lost when autosplit is run again.
 # See AutoSplit.pm.
-package $this_package;
+package $this_package;use v5;
 
 #line $lineno "$filename (autosplit into $path)"
 EOT
@@ -584,9 +584,9 @@ sub testtesttesttest4_1  { "test 4\n"; }
 sub testtesttesttest4_2  { "duplicate test 4\n"; }
 sub Just::Another::test5 { "another test 5\n"; }
 sub test6       { return join ":", __FILE__,__LINE__; }
-package Yet::Another::AutoSplit;
+package Yet::Another::AutoSplit;use v5;
 sub testtesttesttest4_1 ($)  { "another test 4\n"; }
 sub testtesttesttest4_2 ($$) { "another duplicate test 4\n"; }
-package Yet::More::Attributes;
+package Yet::More::Attributes;use v5;
 sub test_a1 ($) : locked :locked { 1; }
 sub test_a2 : locked { 1; }

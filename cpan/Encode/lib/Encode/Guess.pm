@@ -1,4 +1,4 @@
-package Encode::Guess;
+package Encode::Guess;use v5;
 use strict;
 use warnings;
 use Encode qw(:fallbacks find_encoding);

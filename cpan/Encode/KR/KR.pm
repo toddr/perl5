@@ -1,4 +1,4 @@
-package Encode::KR;
+package Encode::KR;use v5;
 BEGIN {
     if ( ord("A") == 193 ) {
         die "Encode::KR not supported on EBCDIC\n";

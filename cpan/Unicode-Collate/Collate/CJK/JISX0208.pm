@@ -1,4 +1,4 @@
-package Unicode::Collate::CJK::JISX0208;
+package Unicode::Collate::CJK::JISX0208;use v5;
 
 use 5.006;
 use strict;

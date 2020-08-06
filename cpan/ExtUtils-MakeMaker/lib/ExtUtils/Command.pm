@@ -1,4 +1,4 @@
-package ExtUtils::Command;
+package ExtUtils::Command;use v5;
 
 use 5.00503;
 use strict;

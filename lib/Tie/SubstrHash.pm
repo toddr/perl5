@@ -1,4 +1,4 @@
-package Tie::SubstrHash;
+package Tie::SubstrHash;use v5;
 
 our $VERSION = '1.00';
 

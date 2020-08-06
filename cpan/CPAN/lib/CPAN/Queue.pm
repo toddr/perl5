@@ -1,6 +1,6 @@
 # -*- Mode: cperl; coding: utf-8; cperl-indent-level: 4 -*-
 use strict;
-package CPAN::Queue::Item;
+package CPAN::Queue::Item;use v5;
 
 # CPAN::Queue::Item::new ;
 sub new {
@@ -25,7 +25,7 @@ sub optional {
     $self->{optional};
 }
 
-package CPAN::Queue;
+package CPAN::Queue;use v5;
 
 # One use of the queue is to determine if we should or shouldn't
 # announce the availability of a new CPAN module

@@ -1,5 +1,5 @@
 
-package IO::Compress::Zlib::Constants ;
+package IO::Compress::Zlib::Constants ;use v5;
 
 use strict ;
 use warnings;

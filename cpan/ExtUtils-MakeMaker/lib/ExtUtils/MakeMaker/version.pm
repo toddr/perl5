@@ -8,7 +8,7 @@
 # to functions in that module.  It will also override UNIVERSAL::VERSION.
 #--------------------------------------------------------------------------#
 
-package ExtUtils::MakeMaker::version;
+package ExtUtils::MakeMaker::version;use v5;
 
 use 5.006001;
 use strict;

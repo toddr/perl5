@@ -1,5 +1,5 @@
 require 5.005;
-package Pod::Simple::Search;
+package Pod::Simple::Search;use v5;
 use strict;
 
 use vars qw($VERSION $MAX_VERSION_WITHIN $SLEEPY);

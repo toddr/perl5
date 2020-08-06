@@ -1,4 +1,4 @@
-package NEXT;
+package NEXT;use v5;
 
 use Carp;
 use strict;
@@ -104,14 +104,14 @@ sub NEXT::ELSEWHERE::buildAUTOLOAD
 }
 
 no strict 'vars';
-package NEXT;                                  NEXT::ELSEWHERE::buildAUTOLOAD();
-package NEXT::UNSEEN;		@ISA = 'NEXT';     NEXT::ELSEWHERE::buildAUTOLOAD();
-package NEXT::DISTINCT;		@ISA = 'NEXT';     NEXT::ELSEWHERE::buildAUTOLOAD();
-package NEXT::ACTUAL;		@ISA = 'NEXT';     NEXT::ELSEWHERE::buildAUTOLOAD();
-package NEXT::ACTUAL::UNSEEN;	@ISA = 'NEXT'; NEXT::ELSEWHERE::buildAUTOLOAD();
-package NEXT::ACTUAL::DISTINCT;	@ISA = 'NEXT'; NEXT::ELSEWHERE::buildAUTOLOAD();
-package NEXT::UNSEEN::ACTUAL;	@ISA = 'NEXT'; NEXT::ELSEWHERE::buildAUTOLOAD();
-package NEXT::DISTINCT::ACTUAL;	@ISA = 'NEXT'; NEXT::ELSEWHERE::buildAUTOLOAD();
+package NEXT;                                  NEXT::ELSEWHERE::buildAUTOLOAD();use v5;
+package NEXT::UNSEEN;		@ISA = 'NEXT';     NEXT::ELSEWHERE::buildAUTOLOAD();use v5;
+package NEXT::DISTINCT;		@ISA = 'NEXT';     NEXT::ELSEWHERE::buildAUTOLOAD();use v5;
+package NEXT::ACTUAL;		@ISA = 'NEXT';     NEXT::ELSEWHERE::buildAUTOLOAD();use v5;
+package NEXT::ACTUAL::UNSEEN;	@ISA = 'NEXT'; NEXT::ELSEWHERE::buildAUTOLOAD();use v5;
+package NEXT::ACTUAL::DISTINCT;	@ISA = 'NEXT'; NEXT::ELSEWHERE::buildAUTOLOAD();use v5;
+package NEXT::UNSEEN::ACTUAL;	@ISA = 'NEXT'; NEXT::ELSEWHERE::buildAUTOLOAD();use v5;
+package NEXT::DISTINCT::ACTUAL;	@ISA = 'NEXT'; NEXT::ELSEWHERE::buildAUTOLOAD();use v5;
 
 package
     EVERY;
@@ -187,7 +187,7 @@ sub EVERY::ELSEWHERE::buildAUTOLOAD {
     };
 }
 
-package EVERY::LAST;   @ISA = 'EVERY';   EVERY::ELSEWHERE::buildAUTOLOAD();
+package EVERY::LAST;   @ISA = 'EVERY';   EVERY::ELSEWHERE::buildAUTOLOAD();use v5;
 package
     EVERY;             @ISA = 'NEXT';    EVERY::ELSEWHERE::buildAUTOLOAD();
 

@@ -6,7 +6,7 @@
 #      You may distribute under the terms of either the GNU General Public
 #      License or the Artistic License, as specified in the README file.
 #
-package mro;
+package mro;use v5;
 use strict;
 use warnings;
 
@@ -21,7 +21,7 @@ sub import {
     mro::set_mro(scalar(caller), $_[1]) if $_[1];
 }
 
-package # hide me from PAUSE
+package # hide me from PAUSEuse v5;
     next;
 
 sub can { mro::_nextcan($_[0], 0) }
@@ -31,7 +31,7 @@ sub method {
     goto &$method;
 }
 
-package # hide me from PAUSE
+package # hide me from PAUSEuse v5;
     maybe::next;
 
 sub method {

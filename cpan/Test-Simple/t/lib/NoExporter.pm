@@ -1,4 +1,4 @@
-package NoExporter;
+package NoExporter;use v5;
 
 use strict;
 our $VERSION = 1.02;

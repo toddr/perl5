@@ -1,4 +1,4 @@
-package Pod::Perldoc::ToText;
+package Pod::Perldoc::ToText;use v5;
 use strict;
 use warnings;
 

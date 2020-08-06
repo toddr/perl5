@@ -1,4 +1,4 @@
-package Sys::Syslog::Win32;
+package Sys::Syslog::Win32;use v5;
 use strict;
 use warnings;
 use Carp;

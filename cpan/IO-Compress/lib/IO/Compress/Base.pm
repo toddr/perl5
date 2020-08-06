@@ -1,5 +1,5 @@
 
-package IO::Compress::Base ;
+package IO::Compress::Base ;use v5;
 
 require 5.006 ;
 

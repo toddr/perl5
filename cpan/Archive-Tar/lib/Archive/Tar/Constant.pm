@@ -1,4 +1,4 @@
-package Archive::Tar::Constant;
+package Archive::Tar::Constant;use v5;
 
 BEGIN {
     require Exporter;

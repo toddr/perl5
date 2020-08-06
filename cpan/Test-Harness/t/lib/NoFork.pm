@@ -1,4 +1,4 @@
-package NoFork;
+package NoFork;use v5;
 
 BEGIN {
     *CORE::GLOBAL::fork = sub { die "you should not fork" };

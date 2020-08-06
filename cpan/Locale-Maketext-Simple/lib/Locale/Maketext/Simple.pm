@@ -1,4 +1,4 @@
-package Locale::Maketext::Simple;
+package Locale::Maketext::Simple;use v5;
 $Locale::Maketext::Simple::VERSION = '0.21_01';
 
 use strict;

@@ -1,4 +1,4 @@
-package open;
+package open;use v5;
 use warnings;
 
 our $VERSION = '1.12';

@@ -1,4 +1,4 @@
-package TAP::Formatter::Base;
+package TAP::Formatter::Base;use v5;
 
 use strict;
 use warnings;

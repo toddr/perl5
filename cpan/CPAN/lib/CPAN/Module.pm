@@ -1,6 +1,6 @@
 # -*- Mode: cperl; coding: utf-8; cperl-indent-level: 4 -*-
 # vim: ts=4 sts=4 sw=4:
-package CPAN::Module;
+package CPAN::Module;use v5;
 use strict;
 @CPAN::Module::ISA = qw(CPAN::InfoObj);
 

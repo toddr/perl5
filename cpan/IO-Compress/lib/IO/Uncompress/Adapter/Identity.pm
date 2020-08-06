@@ -1,4 +1,4 @@
-package IO::Uncompress::Adapter::Identity;
+package IO::Uncompress::Adapter::Identity;use v5;
 
 use warnings;
 use strict;

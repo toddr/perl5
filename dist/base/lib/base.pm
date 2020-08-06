@@ -1,5 +1,5 @@
 use 5.008;
-package base;
+package base;use v5;
 
 use strict 'vars';
 our $VERSION = '2.27';

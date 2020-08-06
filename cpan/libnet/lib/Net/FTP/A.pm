@@ -2,7 +2,7 @@
 ## Package to read/write on ASCII data connections
 ##
 
-package Net::FTP::A;
+package Net::FTP::A;use v5;
 
 use 5.008001;
 

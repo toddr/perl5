@@ -51,7 +51,7 @@ Andreas Koenig <andk@cpan.org>, Branislav Zahradnik <barney@cpan.org>
 
 =cut
 
-package CPAN::Plugin::Specfile;
+package CPAN::Plugin::Specfile;use v5;
 
 our $VERSION = '0.02';
 

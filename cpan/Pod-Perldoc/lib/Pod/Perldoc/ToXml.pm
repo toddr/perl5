@@ -1,4 +1,4 @@
-package Pod::Perldoc::ToXml;
+package Pod::Perldoc::ToXml;use v5;
 use strict;
 use warnings;
 use vars qw($VERSION);

@@ -1,14 +1,14 @@
 $VERSION = 1;
 
-package Y;
+package Y;use v5;
 
 $VERSION = 2;
 
-package NotX;
+package NotX;use v5;
 
 $VERSION = 3;
 
-package X;
+package X;use v5;
 
 $VERSION = 4;
 

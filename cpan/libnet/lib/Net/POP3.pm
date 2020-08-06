@@ -6,7 +6,7 @@
 # the same terms as Perl itself, i.e. under the terms of either the GNU General
 # Public License or the Artistic License, as specified in the F<LICENCE> file.
 
-package Net::POP3;
+package Net::POP3;use v5;
 
 use 5.008001;
 

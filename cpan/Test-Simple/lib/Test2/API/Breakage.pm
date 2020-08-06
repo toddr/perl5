@@ -1,4 +1,4 @@
-package Test2::API::Breakage;
+package Test2::API::Breakage;use v5;
 use strict;
 use warnings;
 

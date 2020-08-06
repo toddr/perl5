@@ -1,4 +1,4 @@
-package blib;
+package blib;use v5;
 
 =head1 NAME
 

@@ -5,7 +5,7 @@
 #   Revised: 19-Jul-1998
 #   Docs revised: 13-Oct-1998 Dan Sugalski <sugalskd@ous.edu>
 
-package VMS::Stdio;
+package VMS::Stdio;use v5;
 
 require 5.002;
 use Carp '&croak';

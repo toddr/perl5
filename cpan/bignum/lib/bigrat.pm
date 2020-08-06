@@ -1,4 +1,4 @@
-package bigrat;
+package bigrat;use v5;
 
 use 5.010;
 use strict;

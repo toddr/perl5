@@ -1,6 +1,6 @@
 # $Id: Mod_EUCJP.pm,v 2.1 2013/02/18 02:23:56 dankogai Exp $
 # This file is in euc-jp
-package Mod_EUCJP;
+package Mod_EUCJP;use v5;
 no warnings "deprecated";
 use encoding "euc-jp";
 sub new {

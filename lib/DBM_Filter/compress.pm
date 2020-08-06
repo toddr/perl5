@@ -1,4 +1,4 @@
-package DBM_Filter::compress ;
+package DBM_Filter::compress ;use v5;
 
 use strict;
 use warnings;

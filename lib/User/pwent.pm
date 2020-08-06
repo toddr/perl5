@@ -1,4 +1,4 @@
-package User::pwent;
+package User::pwent;use v5;
 
 use 5.006;
 our $VERSION = '1.01';

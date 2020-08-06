@@ -1,6 +1,6 @@
 
 require 5;
-package Pod::Simple::Text;
+package Pod::Simple::Text;use v5;
 use strict;
 use Carp ();
 use Pod::Simple::Methody ();

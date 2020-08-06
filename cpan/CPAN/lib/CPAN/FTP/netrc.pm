@@ -1,4 +1,4 @@
-package CPAN::FTP::netrc;
+package CPAN::FTP::netrc;use v5;
 use strict;
 
 $CPAN::FTP::netrc::VERSION = $CPAN::FTP::netrc::VERSION = "1.01";

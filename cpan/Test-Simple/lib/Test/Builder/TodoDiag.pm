@@ -1,4 +1,4 @@
-package Test::Builder::TodoDiag;
+package Test::Builder::TodoDiag;use v5;
 use strict;
 use warnings;
 

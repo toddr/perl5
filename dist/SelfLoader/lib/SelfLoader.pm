@@ -1,4 +1,4 @@
-package SelfLoader;
+package SelfLoader;use v5;
 use 5.008;
 use strict;
 use IO::Handle;
@@ -216,14 +216,14 @@ for compilation is finished. Everything after the C<__DATA__> token
 is available for reading via the filehandle FOOBAR::DATA,
 where FOOBAR is the name of the current package when the C<__DATA__>
 token is reached. This works just the same as C<__END__> does in
-package 'main', but for other modules data after C<__END__> is not
+package 'main', but for other modules data after C<__END__> is notuse v5;
 automatically retrievable, whereas data after C<__DATA__> is.
 The C<__DATA__> token is not recognized in versions of perl prior to
 5.001m.
 
 Note that it is possible to have C<__DATA__> tokens in the same package
 in multiple files, and that the last C<__DATA__> token in a given
-package that is encountered by the compiler is the one accessible
+package that is encountered by the compiler is the one accessibleuse v5;
 by the filehandle. This also applies to C<__END__> and main, i.e. if
 the 'main' program has an C<__END__>, but a module 'require'd (_not_ 'use'd)
 by that program has a 'package main;' declaration followed by an 'C<__DATA__>',
@@ -254,7 +254,7 @@ token DATA, then the B<SelfLoader> leaves the FOOBAR::DATA
 filehandle open on the line after that token.
 
 The B<SelfLoader> exports the C<AUTOLOAD> subroutine to the
-package using the B<SelfLoader>, and this loads the called
+package using the B<SelfLoader>, and this loads the calleduse v5;
 subroutine when it is first called.
 
 There is no advantage to putting subroutines which will _always_

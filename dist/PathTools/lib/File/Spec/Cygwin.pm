@@ -1,4 +1,4 @@
-package File::Spec::Cygwin;
+package File::Spec::Cygwin;use v5;
 
 use strict;
 require File::Spec::Unix;

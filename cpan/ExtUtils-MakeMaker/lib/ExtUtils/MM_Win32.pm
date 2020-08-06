@@ -1,4 +1,4 @@
-package ExtUtils::MM_Win32;
+package ExtUtils::MM_Win32;use v5;
 
 use strict;
 

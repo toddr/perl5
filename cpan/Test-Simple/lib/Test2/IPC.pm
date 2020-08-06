@@ -1,4 +1,4 @@
-package Test2::IPC;
+package Test2::IPC;use v5;
 use strict;
 use warnings;
 

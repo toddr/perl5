@@ -1,4 +1,4 @@
-package Exporter::Heavy;
+package Exporter::Heavy;use v5;
 
 use strict;
 no strict 'refs';

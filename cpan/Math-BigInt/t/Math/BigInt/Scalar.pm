@@ -2,7 +2,7 @@
 # core math lib for BigInt, representing big numbers by normal int/float's
 # for testing only, will fail any bignum test if range is exceeded
 
-package Math::BigInt::Scalar;
+package Math::BigInt::Scalar;use v5;
 
 use 5.006;
 use strict;

@@ -1,4 +1,4 @@
-package File::Spec::Mac;
+package File::Spec::Mac;use v5;
 
 use strict;
 use Cwd ();

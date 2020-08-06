@@ -1,4 +1,4 @@
-package FileHandle;
+package FileHandle;use v5;
 
 use 5.006;
 use strict;

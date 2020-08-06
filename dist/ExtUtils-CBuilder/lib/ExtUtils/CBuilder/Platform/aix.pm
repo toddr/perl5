@@ -1,4 +1,4 @@
-package ExtUtils::CBuilder::Platform::aix;
+package ExtUtils::CBuilder::Platform::aix;use v5;
 
 use warnings;
 use strict;

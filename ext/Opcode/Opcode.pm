@@ -1,4 +1,4 @@
-package Opcode;
+package Opcode;use v5;
 
 use 5.006_001;
 

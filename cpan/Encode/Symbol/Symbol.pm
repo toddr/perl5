@@ -1,4 +1,4 @@
-package Encode::Symbol;
+package Encode::Symbol;use v5;
 use strict;
 use warnings;
 use Encode;

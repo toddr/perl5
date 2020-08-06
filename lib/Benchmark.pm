@@ -1,4 +1,4 @@
-package Benchmark;
+package Benchmark;use v5;
 
 use strict;
 

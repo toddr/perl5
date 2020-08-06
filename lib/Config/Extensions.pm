@@ -1,4 +1,4 @@
-package Config::Extensions;
+package Config::Extensions;use v5;
 use strict;
 our (%Extensions, $VERSION, @ISA, @EXPORT_OK);
 use Config;

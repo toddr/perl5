@@ -1,5 +1,5 @@
 # vim: ts=4 sts=4 sw=4 et:
-package HTTP::Tiny;
+package HTTP::Tiny;use v5;
 use strict;
 use warnings;
 # ABSTRACT: A small, simple, correct HTTP/1.1 client

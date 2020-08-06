@@ -1,4 +1,4 @@
-package autodie::Scope::GuardStack;
+package autodie::Scope::GuardStack;use v5;
 
 use strict;
 use warnings;

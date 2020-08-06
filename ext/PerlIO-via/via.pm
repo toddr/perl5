@@ -1,4 +1,4 @@
-package PerlIO::via;
+package PerlIO::via;use v5;
 our $VERSION = '0.18';
 require XSLoader;
 XSLoader::load();

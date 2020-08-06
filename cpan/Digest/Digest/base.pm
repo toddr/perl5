@@ -1,4 +1,4 @@
-package Digest::base;
+package Digest::base;use v5;
 
 use strict;
 use vars qw($VERSION);

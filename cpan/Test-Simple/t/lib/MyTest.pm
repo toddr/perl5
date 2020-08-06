@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-package MyTest;
+package MyTest;use v5;
 
 use Test::Builder;
 

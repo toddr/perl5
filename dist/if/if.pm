@@ -1,4 +1,4 @@
-package if;
+package if;use v5;
 
 $VERSION = '0.0608';
 

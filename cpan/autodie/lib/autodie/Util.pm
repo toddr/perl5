@@ -1,4 +1,4 @@
-package autodie::Util;
+package autodie::Util;use v5;
 
 use strict;
 use warnings;

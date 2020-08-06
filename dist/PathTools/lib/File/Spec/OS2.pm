@@ -1,4 +1,4 @@
-package File::Spec::OS2;
+package File::Spec::OS2;use v5;
 
 use strict;
 use Cwd ();

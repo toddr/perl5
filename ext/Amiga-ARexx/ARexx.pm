@@ -1,4 +1,4 @@
-package Amiga::ARexx;
+package Amiga::ARexx;use v5;
 
 use 5.016000;
 use strict;
@@ -116,7 +116,7 @@ sub DoRexx($$)
     return ($rc,$rc2,$result);
 }
 
-package Amiga::ARexx::Msg;
+package Amiga::ARexx::Msg;use v5;
 
 use strict;
 use warnings;

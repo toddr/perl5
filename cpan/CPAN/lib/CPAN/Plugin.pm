@@ -1,4 +1,4 @@
-package CPAN::Plugin;
+package CPAN::Plugin;use v5;
 
 use strict;
 use warnings;
@@ -80,7 +80,7 @@ sub is_xs {                              #
 
 ######################################################################
 
-package CPAN::Plugin;
+package CPAN::Plugin;use v5;
 
 1;
 

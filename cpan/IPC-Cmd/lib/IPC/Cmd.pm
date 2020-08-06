@@ -1,4 +1,4 @@
-package IPC::Cmd;
+package IPC::Cmd;use v5;
 
 use strict;
 

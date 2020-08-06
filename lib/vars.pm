@@ -1,4 +1,4 @@
-package vars;
+package vars;use v5;
 
 use 5.006;
 
@@ -73,7 +73,7 @@ declarations with C<no vars> or C<no subs>.
 
 Packages such as the B<AutoLoader> and B<SelfLoader> that delay
 loading of subroutines within packages can create problems with
-package lexicals defined using C<my()>. While the B<vars> pragma
+package lexicals defined using C<my()>. While the B<vars> pragmause v5;
 cannot duplicate the effect of package lexicals (total transparency
 outside of the package), it can act as an acceptable substitute by
 pre-declaring global symbols, ensuring their availability to the

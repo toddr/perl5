@@ -1,4 +1,4 @@
-package ExtUtils::CBuilder::Platform::darwin;
+package ExtUtils::CBuilder::Platform::darwin;use v5;
 
 use warnings;
 use strict;

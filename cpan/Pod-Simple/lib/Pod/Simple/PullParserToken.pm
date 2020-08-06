@@ -1,6 +1,6 @@
 
 require 5;
-package Pod::Simple::PullParserToken;
+package Pod::Simple::PullParserToken;use v5;
  # Base class for tokens gotten from Pod::Simple::PullParser's $parser->get_token
 @ISA = ();
 $VERSION = '3.40';

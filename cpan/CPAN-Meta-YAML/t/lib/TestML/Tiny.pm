@@ -1,5 +1,5 @@
 use 5.008001; use strict; use warnings;
-package TestML::Tiny;
+package TestML::Tiny;use v5;
 
 ; # original $VERSION removed by Doppelgaenger
 
@@ -66,7 +66,7 @@ sub _slurp {
 
 #------------------------------------------------------------------------------
 
-package TestML::Tiny::Runtime;
+package TestML::Tiny::Runtime;use v5;
 
 # use XXX;
 
@@ -81,7 +81,7 @@ sub run {
 }
 
 #------------------------------------------------------------------------------
-package TestML::Tiny::Compiler;
+package TestML::Tiny::Compiler;use v5;
 
 # use XXX;
 
@@ -285,7 +285,7 @@ sub _parse_testml_points {
 }
 
 #------------------------------------------------------------------------------
-package TestML::Tiny::Function;
+package TestML::Tiny::Function;use v5;
 
 sub new {
     my $self = bless {
@@ -296,14 +296,14 @@ sub new {
 }
 
 #------------------------------------------------------------------------------
-package TestML::Tiny::Bridge;
+package TestML::Tiny::Bridge;use v5;
 
 sub new {
     my $self = bless { @_[1..$#_] }, $_[0];
 }
 
 #------------------------------------------------------------------------------
-package TestML::Tiny::Library::Standard;
+package TestML::Tiny::Library::Standard;use v5;
 
 sub new {
     my $self = bless { @_[1..$#_] }, $_[0];

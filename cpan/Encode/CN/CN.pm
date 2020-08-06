@@ -1,4 +1,4 @@
-package Encode::CN;
+package Encode::CN;use v5;
 BEGIN {
     if ( ord("A") == 193 ) {
         die "Encode::CN not supported on EBCDIC\n";

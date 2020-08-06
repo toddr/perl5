@@ -1,4 +1,4 @@
-package OS2::DLL;
+package OS2::DLL;use v5;
 
 our $VERSION = '1.07';
 
@@ -73,7 +73,7 @@ sub libPath_find {
   return;
 }
 
-package OS2::DLL::dll;
+package OS2::DLL::dll;use v5;
 use Carp;
 @ISA = 'OS2::DLL';
 

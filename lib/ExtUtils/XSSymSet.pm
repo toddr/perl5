@@ -1,4 +1,4 @@
-package ExtUtils::XSSymSet;
+package ExtUtils::XSSymSet;use v5;
 
 use strict;
 use Config;

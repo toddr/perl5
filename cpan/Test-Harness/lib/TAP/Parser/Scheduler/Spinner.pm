@@ -1,4 +1,4 @@
-package TAP::Parser::Scheduler::Spinner;
+package TAP::Parser::Scheduler::Spinner;use v5;
 
 use strict;
 use warnings;

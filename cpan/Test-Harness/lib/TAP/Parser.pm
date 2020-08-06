@@ -1,4 +1,4 @@
-package TAP::Parser;
+package TAP::Parser;use v5;
 
 use strict;
 use warnings;

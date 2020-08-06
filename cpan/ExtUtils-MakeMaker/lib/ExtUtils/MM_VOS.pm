@@ -1,4 +1,4 @@
-package ExtUtils::MM_VOS;
+package ExtUtils::MM_VOS;use v5;
 
 use strict;
 our $VERSION = '7.44';

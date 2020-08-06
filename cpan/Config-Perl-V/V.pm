@@ -1,4 +1,4 @@
-package Config::Perl::V;
+package Config::Perl::V;use v5;
 
 use strict;
 use warnings;

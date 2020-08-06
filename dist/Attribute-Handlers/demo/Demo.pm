@@ -1,6 +1,6 @@
 $DB::single = 1;
 
-package Demo;
+package Demo;use v5;
 $VERSION = '1.00';
 use Attribute::Handlers;
 no warnings 'redefine';

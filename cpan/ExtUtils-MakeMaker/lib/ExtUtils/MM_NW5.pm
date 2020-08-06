@@ -1,4 +1,4 @@
-package ExtUtils::MM_NW5;
+package ExtUtils::MM_NW5;use v5;
 
 =head1 NAME
 

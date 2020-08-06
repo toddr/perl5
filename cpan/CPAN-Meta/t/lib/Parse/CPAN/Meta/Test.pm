@@ -1,4 +1,4 @@
-package Parse::CPAN::Meta::Test;
+package Parse::CPAN::Meta::Test;use v5;
 
 use strict;
 use Test::More ();

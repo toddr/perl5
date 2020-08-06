@@ -1,4 +1,4 @@
-package File::Spec::Unix;
+package File::Spec::Unix;use v5;
 
 use strict;
 use Cwd ();

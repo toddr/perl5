@@ -1,4 +1,4 @@
-package IO::Compress::Zip::Constants;
+package IO::Compress::Zip::Constants;use v5;
 
 use strict ;
 use warnings;

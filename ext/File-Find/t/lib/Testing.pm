@@ -1,4 +1,4 @@
-package Testing;
+package Testing;use v5;
 use 5.006_001;
 use strict;
 use warnings;

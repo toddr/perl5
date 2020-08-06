@@ -1,4 +1,4 @@
-package Broken;
+package Broken;use v5;
 
 sub i_exist { 1 }
 

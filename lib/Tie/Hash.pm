@@ -1,4 +1,4 @@
-package Tie::Hash;
+package Tie::Hash;use v5;
 
 our $VERSION = '1.05';
 
@@ -162,7 +162,7 @@ hash C<< %{ $_[0]->[0] } >>:
 The default C<TIEHASH> method stores "extra" arguments to tie() starting
 from offset 1 in the array referenced by C<tied(%tiedhash)>; this is the
 same storage algorithm as in TIEHASH subroutine above.  Hence, a typical
-package inheriting from B<Tie::ExtraHash> does not need to overwrite this
+package inheriting from B<Tie::ExtraHash> does not need to overwrite thisuse v5;
 method.
 
 =head1 C<SCALAR>, C<UNTIE> and C<DESTROY>
@@ -242,7 +242,7 @@ sub CLEAR {
 # It exists to act as a base class for classes which only wish to
 # alter some parts of their behaviour.
 
-package Tie::StdHash;
+package Tie::StdHash;use v5;
 # @ISA = qw(Tie::Hash);		# would inherit new() only
 
 sub TIEHASH  { bless {}, $_[0] }
@@ -255,7 +255,7 @@ sub DELETE   { delete $_[0]->{$_[1]} }
 sub CLEAR    { %{$_[0]} = () }
 sub SCALAR   { scalar %{$_[0]} }
 
-package Tie::ExtraHash;
+package Tie::ExtraHash;use v5;
 
 sub TIEHASH  { my $p = shift; bless [{}, @_], $p }
 sub STORE    { $_[0][0]{$_[1]} = $_[2] }

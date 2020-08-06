@@ -1,4 +1,4 @@
-package Fatal;
+package Fatal;use v5;
 
 # ABSTRACT: Replace functions with equivalents which succeed or die
 

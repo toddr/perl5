@@ -5,7 +5,7 @@
 # This program is free software; you can redistribute it and/or
 # modify it under the same terms as Perl itself.
 
-package IO::Socket;
+package IO::Socket;use v5;
 
 use 5.008_001;
 

@@ -1,4 +1,4 @@
-package App::Prove::State::Result;
+package App::Prove::State::Result;use v5;
 
 use strict;
 use warnings;

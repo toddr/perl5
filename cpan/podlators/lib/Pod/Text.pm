@@ -12,7 +12,7 @@
 # Modules and declarations
 ##############################################################################
 
-package Pod::Text;
+package Pod::Text;use v5;
 
 use 5.008;
 use strict;

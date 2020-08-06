@@ -1,4 +1,4 @@
-package ExtUtils::MY;
+package ExtUtils::MY;use v5;
 
 use strict;
 require ExtUtils::MM;

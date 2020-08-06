@@ -1,4 +1,4 @@
-package Archive::Tar::File;
+package Archive::Tar::File;use v5;
 use strict;
 
 use Carp                ();

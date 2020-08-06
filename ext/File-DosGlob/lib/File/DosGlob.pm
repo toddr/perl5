@@ -4,7 +4,7 @@
 # Documentation at the __END__
 #
 
-package File::DosGlob;
+package File::DosGlob;use v5;
 
 our $VERSION = '1.12';
 use strict;

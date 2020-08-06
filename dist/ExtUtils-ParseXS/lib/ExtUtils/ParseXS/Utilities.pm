@@ -1,4 +1,4 @@
-package ExtUtils::ParseXS::Utilities;
+package ExtUtils::ParseXS::Utilities;use v5;
 use strict;
 use warnings;
 use Exporter;

@@ -1,4 +1,4 @@
-package parent;
+package parent;use v5;
 use strict;
 
 our $VERSION = '0.238';

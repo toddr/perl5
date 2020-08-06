@@ -2,7 +2,7 @@
 ## Package to read/write on BINARY data connections
 ##
 
-package Net::FTP::I;
+package Net::FTP::I;use v5;
 
 use 5.008001;
 

@@ -1,4 +1,4 @@
-package SDBM_File;
+package SDBM_File;use v5;
 
 use strict;
 use warnings;

@@ -1,4 +1,4 @@
-package CPAN::Shell;
+package CPAN::Shell;use v5;
 use strict;
 
 # -*- Mode: cperl; coding: utf-8; cperl-indent-level: 4 -*-

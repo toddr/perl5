@@ -1,4 +1,4 @@
-package Test2::Event::Plan;
+package Test2::Event::Plan;use v5;
 use strict;
 use warnings;
 

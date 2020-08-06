@@ -1,4 +1,4 @@
-package Test2::Event::Skip;
+package Test2::Event::Skip;use v5;
 use strict;
 use warnings;
 

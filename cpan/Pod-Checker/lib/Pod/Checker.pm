@@ -6,7 +6,7 @@
 # same terms as Perl itself.
 #############################################################################
 
-package Pod::Checker;
+package Pod::Checker;use v5;
 use strict;
 use warnings;
 
@@ -980,7 +980,7 @@ sub end_X {
     $self->end_fcode();
 }
 
-package Pod::Checker::Hyperlink;
+package Pod::Checker::Hyperlink;use v5;
 
 # This class is used to represent L<> link structures, so that the individual
 # elements are easily accessible.  It is based on code in Pod::Hyperlink

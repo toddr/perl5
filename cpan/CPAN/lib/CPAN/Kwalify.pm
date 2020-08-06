@@ -47,7 +47,7 @@ See L<http://www.perl.com/perl/misc/Artistic.html>
 
 use strict;
 
-package CPAN::Kwalify;
+package CPAN::Kwalify;use v5;
 use vars qw($VERSION $VAR1);
 $VERSION = "5.50";
 

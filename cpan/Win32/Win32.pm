@@ -1,4 +1,4 @@
-package Win32;
+package Win32;use v5;
 
 # BEGIN {
     use strict;

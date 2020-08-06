@@ -1,4 +1,4 @@
-package ok;
+package ok;use v5;
 our $VERSION = '1.302175';
 
 use strict;

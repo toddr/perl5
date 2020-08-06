@@ -1,4 +1,4 @@
-package Test2::Formatter::TAP;
+package Test2::Formatter::TAP;use v5;
 use strict;
 use warnings;
 

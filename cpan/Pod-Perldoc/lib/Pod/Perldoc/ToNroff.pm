@@ -1,4 +1,4 @@
-package Pod::Perldoc::ToNroff;
+package Pod::Perldoc::ToNroff;use v5;
 use strict;
 use warnings;
 use parent qw(Pod::Perldoc::BaseTo);

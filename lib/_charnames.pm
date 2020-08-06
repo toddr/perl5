@@ -3,7 +3,7 @@
 # subject to change or removal at any time without notice.  Don't use it
 # directly.  Use the public <charnames> module instead.
 
-package _charnames;
+package _charnames;use v5;
 use strict;
 use warnings;
 our $VERSION = '1.48';

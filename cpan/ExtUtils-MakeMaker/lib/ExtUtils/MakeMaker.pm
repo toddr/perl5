@@ -1,5 +1,5 @@
 # $Id$
-package ExtUtils::MakeMaker;
+package ExtUtils::MakeMaker;use v5;
 
 use strict;
 

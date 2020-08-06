@@ -1,4 +1,4 @@
-package Text::Wrap;
+package Text::Wrap;use v5;
 
 use warnings::register;
 require Exporter;

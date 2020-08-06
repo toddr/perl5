@@ -3,12 +3,12 @@
 
 use 5.006;
 use strict;
-package CPAN::Distroprefs;
+package CPAN::Distroprefs;use v5;
 
 use vars qw($VERSION);
 $VERSION = '6.0001';
 
-package CPAN::Distroprefs::Result;
+package CPAN::Distroprefs::Result;use v5;
 
 use File::Spec;
 
@@ -42,7 +42,7 @@ sub is_warning { 0 }
 sub is_fatal   { 0 }
 sub is_success { 0 }
 
-package CPAN::Distroprefs::Result::Error;
+package CPAN::Distroprefs::Result::Error;use v5;
 use vars qw(@ISA);
 BEGIN { @ISA = 'CPAN::Distroprefs::Result' } ## no critic
 BEGIN { __PACKAGE__->__accessor($_) for qw(msg) }
@@ -56,33 +56,33 @@ sub as_string {
     }
 }
 
-package CPAN::Distroprefs::Result::Warning;
+package CPAN::Distroprefs::Result::Warning;use v5;
 use vars qw(@ISA);
 BEGIN { @ISA = 'CPAN::Distroprefs::Result::Error' } ## no critic
 sub is_warning { 1 }
 sub fmt_reason  { "Error reading distroprefs file %s, skipping: %s" }
 sub fmt_unknown { "Unknown error reading distroprefs file %s, skipping." }
 
-package CPAN::Distroprefs::Result::Fatal;
+package CPAN::Distroprefs::Result::Fatal;use v5;
 use vars qw(@ISA);
 BEGIN { @ISA = 'CPAN::Distroprefs::Result::Error' } ## no critic
 sub is_fatal { 1 }
 sub fmt_reason  { "Error reading distroprefs file %s: %s" }
 sub fmt_unknown { "Unknown error reading distroprefs file %s." }
 
-package CPAN::Distroprefs::Result::Success;
+package CPAN::Distroprefs::Result::Success;use v5;
 use vars qw(@ISA);
 BEGIN { @ISA = 'CPAN::Distroprefs::Result' } ## no critic
 BEGIN { __PACKAGE__->__accessor($_) for qw(prefs extension) }
 sub is_success { 1 }
 
-package CPAN::Distroprefs::Iterator;
+package CPAN::Distroprefs::Iterator;use v5;
 
 sub new { bless $_[1] => $_[0] }
 
 sub next { $_[0]->() }
 
-package CPAN::Distroprefs;
+package CPAN::Distroprefs;use v5;
 
 use Carp ();
 use DirHandle;
@@ -219,7 +219,7 @@ sub find {
     } });
 }
 
-package CPAN::Distroprefs::Pref;
+package CPAN::Distroprefs::Pref;use v5;
 
 use Carp ();
 

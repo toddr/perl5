@@ -1,4 +1,4 @@
-package XS::Typemap;
+package XS::Typemap;use v5;
 
 =head1 NAME
 

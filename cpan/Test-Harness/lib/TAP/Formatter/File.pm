@@ -1,4 +1,4 @@
-package TAP::Formatter::File;
+package TAP::Formatter::File;use v5;
 
 use strict;
 use warnings;

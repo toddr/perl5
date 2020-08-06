@@ -1,4 +1,4 @@
-package MakeMaker::Test::Setup::BFD;
+package MakeMaker::Test::Setup::BFD;use v5;
 
 @ISA = qw(Exporter);
 require Exporter;
@@ -11,7 +11,7 @@ use MakeMaker::Test::Utils;
 
 my %Files = (
              'Big-Dummy/lib/Big/Dummy.pm'     => <<'END',
-package Big::Dummy;
+package Big::Dummy;use v5;
 
 $VERSION = 0.02;
 
@@ -68,7 +68,7 @@ print "ok 3 - TEST_VERBOSE\n";
 END
 
              'Big-Dummy/Liar/lib/Big/Liar.pm' => <<'END',
-package Big::Liar;
+package Big::Liar;use v5;
 
 $VERSION = 0.01;
 
@@ -91,7 +91,7 @@ foreach my $key (qw(INST_LIB INST_ARCHLIB)) {
 END
 
              'Big-Dummy/lib/Dummy/Split.pm'     => <<'END',
-package Dummy::Split;
+package Dummy::Split;use v5;
 $VERSION = 0.02;
 use AutoLoader 'AUTOLOAD';
 

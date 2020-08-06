@@ -1,4 +1,4 @@
-package MyClass;
+package MyClass;use v5;
 $VERSION = '1.00';
 use 5.006;
 use parent qw(Attribute::Handlers);

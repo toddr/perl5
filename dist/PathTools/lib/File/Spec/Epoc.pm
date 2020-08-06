@@ -1,4 +1,4 @@
-package File::Spec::Epoc;
+package File::Spec::Epoc;use v5;
 
 use strict;
 

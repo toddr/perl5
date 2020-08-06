@@ -1,4 +1,4 @@
-package ExtUtils::Liblist;
+package ExtUtils::Liblist;use v5;
 
 use strict;
 

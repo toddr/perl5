@@ -1,4 +1,4 @@
-package autodie::test::missing;
+package autodie::test::missing;use v5;
 use parent qw(autodie);
 
 sub exception_class {

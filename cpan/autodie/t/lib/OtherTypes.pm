@@ -1,4 +1,4 @@
-package OtherTypes;
+package OtherTypes;use v5;
 no warnings;
 
 our $foo = 23;

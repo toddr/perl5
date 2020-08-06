@@ -1,4 +1,4 @@
-package BrokenCookieJar;
+package BrokenCookieJar;use v5;
 
 use strict;
 use warnings;
@@ -8,7 +8,7 @@ sub new {
     return bless {} => $class;
 }
 
-package BrokenCookieJar2;
+package BrokenCookieJar2;use v5;
 
 use strict;
 use warnings;

@@ -1,4 +1,4 @@
-package IO::c55Capture;
+package IO::c55Capture;use v5;
 
 use IO::Handle;
 
@@ -60,7 +60,7 @@ sub dump {
     return @got;
 }
 
-package util;
+package util;use v5;
 
 use IO::File;
 

@@ -1,4 +1,4 @@
-package Net::protoent;
+package Net::protoent;use v5;
 use strict;
 
 use 5.006_001;

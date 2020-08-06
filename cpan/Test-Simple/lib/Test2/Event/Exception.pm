@@ -1,4 +1,4 @@
-package Test2::Event::Exception;
+package Test2::Event::Exception;use v5;
 use strict;
 use warnings;
 

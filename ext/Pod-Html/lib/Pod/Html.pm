@@ -1,4 +1,4 @@
-package Pod::Html;
+package Pod::Html;use v5;
 use strict;
 require Exporter;
 
@@ -727,7 +727,7 @@ sub _unixify {
     return $full_path;
 }
 
-package Pod::Simple::XHTML::LocalPodLinks;
+package Pod::Simple::XHTML::LocalPodLinks;use v5;
 use strict;
 use warnings;
 use parent 'Pod::Simple::XHTML';
@@ -810,7 +810,7 @@ sub resolve_pod_page_link {
     return $url . ".html$section";
 }
 
-package Pod::Html;
+package Pod::Html;use v5;
 
 #
 # relativize_url - convert an absolute URL to one relative to a base URL.

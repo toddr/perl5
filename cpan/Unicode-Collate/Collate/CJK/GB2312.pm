@@ -1,4 +1,4 @@
-package Unicode::Collate::CJK::GB2312;
+package Unicode::Collate::CJK::GB2312;use v5;
 
 use 5.006;
 use strict;

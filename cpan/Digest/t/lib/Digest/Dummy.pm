@@ -1,4 +1,4 @@
-package Digest::Dummy;
+package Digest::Dummy;use v5;
 
 use strict;
 use vars qw($VERSION @ISA);

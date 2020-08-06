@@ -1,4 +1,4 @@
-package ExtUtils::MM_OS2;
+package ExtUtils::MM_OS2;use v5;
 
 use strict;
 

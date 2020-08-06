@@ -1,4 +1,4 @@
-package ExtUtils::CBuilder::Base;
+package ExtUtils::CBuilder::Base;use v5;
 use strict;
 use warnings;
 use File::Spec;

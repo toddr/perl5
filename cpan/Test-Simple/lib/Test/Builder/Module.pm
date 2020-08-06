@@ -1,4 +1,4 @@
-package Test::Builder::Module;
+package Test::Builder::Module;use v5;
 
 use strict;
 

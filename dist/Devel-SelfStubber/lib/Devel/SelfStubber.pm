@@ -1,4 +1,4 @@
-package Devel::SelfStubber;
+package Devel::SelfStubber;use v5;
 use File::Spec;
 require SelfLoader;
 @ISA = qw(SelfLoader);

@@ -1,4 +1,4 @@
-package IO::Uncompress::Unzip;
+package IO::Uncompress::Unzip;use v5;
 
 require 5.006 ;
 

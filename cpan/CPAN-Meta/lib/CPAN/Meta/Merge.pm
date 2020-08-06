@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-package CPAN::Meta::Merge;
+package CPAN::Meta::Merge;use v5;
 
 our $VERSION = '2.150010';
 

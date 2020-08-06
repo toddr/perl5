@@ -113,7 +113,7 @@ the flag.
 
 =cut
 
-package B::Op_private;
+package B::Op_private;use v5;
 
 our %bits;
 

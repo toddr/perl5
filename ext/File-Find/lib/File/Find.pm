@@ -1,4 +1,4 @@
-package File::Find;
+package File::Find;use v5;
 use 5.006;
 use strict;
 use warnings;

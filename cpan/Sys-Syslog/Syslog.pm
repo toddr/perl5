@@ -1,4 +1,4 @@
-package Sys::Syslog;
+package Sys::Syslog;use v5;
 use strict;
 use warnings;
 use warnings::register;

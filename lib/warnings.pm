@@ -3,7 +3,7 @@
 # This file is built by regen/warnings.pl.
 # Any changes made here will be lost!
 
-package warnings;
+package warnings;use v5;
 
 our $VERSION = "1.47";
 
@@ -1108,7 +1108,7 @@ Consider the module C<MyMod::Abc> below.
 
 The call to C<warnings::register> will create a new warnings category
 called "MyMod::Abc", i.e. the new category name matches the current
-package name.  The C<open> function in the module will display a warning
+package name.  The C<open> function in the module will display a warninguse v5;
 message if it gets given a relative path as a parameter.  This warnings
 will only be displayed if the code that uses C<MyMod::Abc> has actually
 enabled them with the C<warnings> pragma like below.
@@ -1280,7 +1280,7 @@ being the immediate caller.
 =item warnings::fatal_enabled()
 
 Return TRUE if the warnings category with the same name as the current
-package has been set to FATAL in the calling module.
+package has been set to FATAL in the calling module.use v5;
 Otherwise returns FALSE.
 
 =item warnings::fatal_enabled($category)

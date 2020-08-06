@@ -1,4 +1,4 @@
-package ExtUtils::CBuilder;
+package ExtUtils::CBuilder;use v5;
 
 use File::Spec ();
 use File::Path ();

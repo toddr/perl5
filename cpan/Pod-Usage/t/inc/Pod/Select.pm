@@ -7,7 +7,7 @@
 # as Perl itself.
 #############################################################################
 
-package Pod::Select;
+package Pod::Select;use v5;
 use strict;
 
 use vars qw($VERSION @ISA @EXPORT $MAX_HEADING_LEVEL %myData @section_headings @selected_sections);

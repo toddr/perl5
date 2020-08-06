@@ -1,4 +1,4 @@
-package Memoize::ExpireTest;
+package Memoize::ExpireTest;use v5;
 
 =head1 NAME
 

@@ -1,4 +1,4 @@
-package Filter::Simple::ExeNoComments;
+package Filter::Simple::ExeNoComments;use v5;
 
 use Filter::Simple;
 

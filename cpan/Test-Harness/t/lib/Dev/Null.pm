@@ -1,6 +1,6 @@
 # For shutting up Test::Harness.
 # Has to work on 5.004 which doesn't have Tie::StdHandle.
-package Dev::Null;
+package Dev::Null;use v5;
 
 sub WRITE  { }
 sub PRINT  { }

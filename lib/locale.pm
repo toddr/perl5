@@ -1,4 +1,4 @@
-package locale;
+package locale;use v5;
 
 our $VERSION = '1.09';
 use Config;

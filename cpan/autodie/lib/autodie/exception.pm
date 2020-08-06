@@ -1,4 +1,4 @@
-package autodie::exception;
+package autodie::exception;use v5;
 use 5.008;
 use strict;
 use warnings;
@@ -207,7 +207,7 @@ An exception is considered to match a string if:
 =item *
 
 For a string not starting with a colon, the string exactly matches the
-package and subroutine that threw the exception.  For example,
+package and subroutine that threw the exception.  For example,use v5;
 C<MyModule::log>.  If the string does not contain a package name,
 C<CORE::> is assumed.
 

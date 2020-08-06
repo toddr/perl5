@@ -8,7 +8,7 @@
 #
 # Documentation (at end) improved 1996 by Nathan Torkington <gnat@frii.com>.
 
-package Net::FTP;
+package Net::FTP;use v5;
 
 use 5.008001;
 
@@ -1587,7 +1587,7 @@ documented here.
 
 Log into the remote FTP server with the given login information. If
 no arguments are given then the C<Net::FTP> uses the C<Net::Netrc>
-package to lookup the login information for the connected host.
+package to lookup the login information for the connected host.use v5;
 If no information is found then a login of I<anonymous> is used.
 If no password is given and the login is I<anonymous> then I<anonymous@>
 will be used for password.

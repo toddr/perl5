@@ -1,6 +1,6 @@
 
 require 5;
-package I18N::LangTags::List;
+package I18N::LangTags::List;use v5;
 #  Time-stamp: "2004-10-06 23:26:21 ADT"
 use strict;
 our (%Name, %Is_Disrec, $Debug);

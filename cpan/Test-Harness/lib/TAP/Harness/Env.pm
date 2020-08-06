@@ -1,4 +1,4 @@
-package TAP::Harness::Env;
+package TAP::Harness::Env;use v5;
 
 use strict;
 use warnings;

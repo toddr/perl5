@@ -1,4 +1,4 @@
-package Test2::API::Instance;
+package Test2::API::Instance;use v5;
 use strict;
 use warnings;
 

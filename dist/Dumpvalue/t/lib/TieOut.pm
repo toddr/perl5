@@ -1,4 +1,4 @@
-package TieOut;
+package TieOut;use v5;
 use overload '"' => sub { "overloaded!" };
 
 sub TIEHANDLE {

@@ -1,4 +1,4 @@
-package File::GlobMapper;
+package File::GlobMapper;use v5;
 
 use strict;
 use warnings;

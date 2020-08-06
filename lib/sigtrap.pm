@@ -1,4 +1,4 @@
-package sigtrap;
+package sigtrap;use v5;
 
 =head1 NAME
 

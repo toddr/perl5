@@ -1,4 +1,4 @@
-package Unicode::Collate::CJK::Korean;
+package Unicode::Collate::CJK::Korean;use v5;
 
 use 5.006;
 use strict;

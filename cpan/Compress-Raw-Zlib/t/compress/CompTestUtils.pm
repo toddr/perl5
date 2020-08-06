@@ -1,6 +1,6 @@
-package CompTestUtils;
+package CompTestUtils;use v5;
 
-package main ;
+package main ;use v5;
 
 use strict ;
 use warnings;
@@ -749,7 +749,7 @@ sub gotScalarUtilXS
     return $@ ? 0 : 1 ;
 }
 
-package CompTestUtils;
+package CompTestUtils;use v5;
 
 1;
 __END__

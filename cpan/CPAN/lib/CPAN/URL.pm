@@ -1,6 +1,6 @@
 # -*- Mode: cperl; coding: utf-8; cperl-indent-level: 4 -*-
 # vim: ts=4 sts=4 sw=4:
-package CPAN::URL;
+package CPAN::URL;use v5;
 use overload '""' => "as_string", fallback => 1;
 # accessors: TEXT(the url string), FROM(DEF=>defaultlist,USER=>urllist),
 # planned are things like age or quality

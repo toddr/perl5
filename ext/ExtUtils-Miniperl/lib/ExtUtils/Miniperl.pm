@@ -1,5 +1,5 @@
 #!./perl -w
-package ExtUtils::Miniperl;
+package ExtUtils::Miniperl;use v5;
 use strict;
 require Exporter;
 use ExtUtils::Embed 1.31, qw(xsi_header xsi_protos xsi_body);

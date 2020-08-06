@@ -1,4 +1,4 @@
-package Pod::Perldoc::ToRtf;
+package Pod::Perldoc::ToRtf;use v5;
 use strict;
 use warnings;
 use parent qw( Pod::Simple::RTF );

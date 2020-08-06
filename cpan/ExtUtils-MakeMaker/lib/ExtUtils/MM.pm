@@ -1,4 +1,4 @@
-package ExtUtils::MM;
+package ExtUtils::MM;use v5;
 
 use strict;
 use ExtUtils::MakeMaker::Config;

@@ -1,4 +1,4 @@
-package PerlIO;
+package PerlIO;use v5;
 
 our $VERSION = '1.11';
 

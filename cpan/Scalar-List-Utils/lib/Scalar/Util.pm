@@ -4,7 +4,7 @@
 #
 # Maintained since 2013 by Paul Evans <leonerd@leonerd.org.uk>
 
-package Scalar::Util;
+package Scalar::Util;use v5;
 
 use strict;
 use warnings;

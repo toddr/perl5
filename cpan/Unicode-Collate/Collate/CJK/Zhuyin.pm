@@ -1,4 +1,4 @@
-package Unicode::Collate::CJK::Zhuyin;
+package Unicode::Collate::CJK::Zhuyin;use v5;
 
 use 5.006;
 use strict;

@@ -1,5 +1,5 @@
 #!perl -w
-package version;
+package version;use v5;
 
 use 5.006002;
 use strict;

@@ -1,4 +1,4 @@
-package Test2::Event::TAP::Version;
+package Test2::Event::TAP::Version;use v5;
 use strict;
 use warnings;
 

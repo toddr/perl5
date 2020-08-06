@@ -1,4 +1,4 @@
-package autodie_skippy;
+package autodie_skippy;use v5;
 use strict;
 use warnings;
 use autodie;
@@ -10,7 +10,7 @@ sub fail_open {
     open(my $fh, '<', 'this_file_had_better_not_exist');
 }
 
-package autodie_unskippy;
+package autodie_unskippy;use v5;
 use autodie;
 
 # This should not skip upwards.

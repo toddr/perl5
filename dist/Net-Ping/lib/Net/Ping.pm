@@ -1,4 +1,4 @@
-package Net::Ping;
+package Net::Ping;use v5;
 
 require 5.002;
 require Exporter;

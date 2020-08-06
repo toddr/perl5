@@ -1,4 +1,4 @@
-package Test2::EventFacet::Meta;
+package Test2::EventFacet::Meta;use v5;
 use strict;
 use warnings;
 

@@ -1,4 +1,4 @@
-package Hints_test;
+package Hints_test;use v5;
 use strict;
 use warnings;
 

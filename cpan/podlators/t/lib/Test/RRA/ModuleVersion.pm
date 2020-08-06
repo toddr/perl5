@@ -6,7 +6,7 @@
 #
 # SPDX-License-Identifier: MIT
 
-package Test::RRA::ModuleVersion;
+package Test::RRA::ModuleVersion;use v5;
 
 use 5.008;
 use base qw(Exporter);

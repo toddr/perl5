@@ -1,4 +1,4 @@
-package File::Spec::AmigaOS;
+package File::Spec::AmigaOS;use v5;
 
 use strict;
 require File::Spec::Unix;

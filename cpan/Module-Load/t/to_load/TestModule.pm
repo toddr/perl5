@@ -1,4 +1,4 @@
-package TestModule;
+package TestModule;use v5;
 
 use strict;
 require Exporter;

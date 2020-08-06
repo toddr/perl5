@@ -1,4 +1,4 @@
-package App::Cpan;
+package App::Cpan;use v5;
 
 use strict;
 use warnings;

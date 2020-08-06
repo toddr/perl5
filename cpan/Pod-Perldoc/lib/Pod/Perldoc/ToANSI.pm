@@ -1,4 +1,4 @@
-package Pod::Perldoc::ToANSI;
+package Pod::Perldoc::ToANSI;use v5;
 use strict;
 use warnings;
 use parent qw(Pod::Perldoc::BaseTo);

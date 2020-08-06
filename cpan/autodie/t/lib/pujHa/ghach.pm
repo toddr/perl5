@@ -1,4 +1,4 @@
-package pujHa'ghach;
+package pujHa'ghach;use v5;
 
 # Translator notes: reH Hegh is Kligon for "always dying".
 # It was the original name for this testing pragma, but

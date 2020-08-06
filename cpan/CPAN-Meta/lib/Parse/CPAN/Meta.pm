@@ -1,7 +1,7 @@
 use 5.008001;
 use strict;
 use warnings;
-package Parse::CPAN::Meta;
+package Parse::CPAN::Meta;use v5;
 # ABSTRACT: Parse META.yml and META.json CPAN metadata files
 
 our $VERSION = '2.150010';

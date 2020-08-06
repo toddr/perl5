@@ -1,7 +1,7 @@
 # This should eventually become part of MakeMaker as ExtUtils::Mkconst2perl.
 # Documentation for this is very skimpy at this point.  Full documentation
 # will be added to ExtUtils::Mkconst2perl when it is created.
-package # Hide from PAUSE
+package # Hide from PAUSEuse v5;
          ExtUtils::Myconst2perl;
 
 use strict;

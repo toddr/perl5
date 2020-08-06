@@ -1,4 +1,4 @@
-package Pod::Perldoc::ToTerm;
+package Pod::Perldoc::ToTerm;use v5;
 use strict;
 use warnings;
 

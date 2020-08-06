@@ -1,6 +1,6 @@
 # -*- Mode: cperl; coding: utf-8; cperl-indent-level: 4 -*-
 # vim: ts=4 sts=4 sw=4:
-package CPAN::LWP::UserAgent;
+package CPAN::LWP::UserAgent;use v5;
 use strict;
 use vars qw(@ISA $USER $PASSWD $SETUPDONE);
 use CPAN::HTTP::Credentials;

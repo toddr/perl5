@@ -4,7 +4,7 @@ $VERSION = 1;
 
 =cut
 
-package InPod;
+package InPod;use v5;
 
 $VERSION = 2;
 

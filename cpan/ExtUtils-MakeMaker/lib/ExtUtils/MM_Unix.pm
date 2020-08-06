@@ -1,4 +1,4 @@
-package ExtUtils::MM_Unix;
+package ExtUtils::MM_Unix;use v5;
 
 require 5.006;
 

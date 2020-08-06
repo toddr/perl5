@@ -1,6 +1,6 @@
 
 use strict;
-package Pod::Simple::TiedOutFH;
+package Pod::Simple::TiedOutFH;use v5;
 use Symbol ('gensym');
 use Carp ();
 use vars qw($VERSION );

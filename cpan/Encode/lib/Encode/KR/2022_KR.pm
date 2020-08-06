@@ -1,4 +1,4 @@
-package Encode::KR::2022_KR;
+package Encode::KR::2022_KR;use v5;
 use strict;
 use warnings;
 our $VERSION = do { my @r = ( q$Revision: 2.4 $ =~ /\d+/g ); sprintf "%d." . "%02d" x $#r, @r };

@@ -1,4 +1,4 @@
-package SelectSaver;
+package SelectSaver;use v5;
 
 our $VERSION = '1.02';
 

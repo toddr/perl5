@@ -1,4 +1,4 @@
-package ExtUtils::MM_Darwin;
+package ExtUtils::MM_Darwin;use v5;
 
 use strict;
 

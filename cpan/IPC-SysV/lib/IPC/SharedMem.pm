@@ -8,7 +8,7 @@
 #
 ################################################################################
 
-package IPC::SharedMem;
+package IPC::SharedMem;use v5;
 
 use IPC::SysV qw(IPC_STAT IPC_RMID shmat shmdt memread memwrite);
 use strict;

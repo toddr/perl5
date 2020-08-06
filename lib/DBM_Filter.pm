@@ -1,10 +1,10 @@
-package DBM_Filter ;
+package DBM_Filter ;use v5;
 
 use strict;
 use warnings;
 our $VERSION = '0.06';
 
-package Tie::Hash ;
+package Tie::Hash ;use v5;
 
 use strict;
 use warnings;

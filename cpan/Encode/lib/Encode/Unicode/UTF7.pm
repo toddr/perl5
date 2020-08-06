@@ -1,7 +1,7 @@
 #
 # $Id: UTF7.pm,v 2.10 2017/06/10 17:23:50 dankogai Exp $
 #
-package Encode::Unicode::UTF7;
+package Encode::Unicode::UTF7;use v5;
 use strict;
 use warnings;
 use parent qw(Encode::Encoding);

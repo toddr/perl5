@@ -1,4 +1,4 @@
-package Hints_pod_examples;
+package Hints_pod_examples;use v5;
 use strict;
 use warnings;
 

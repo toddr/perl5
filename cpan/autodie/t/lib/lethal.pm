@@ -1,4 +1,4 @@
-package lethal;
+package lethal;use v5;
 
 # A dummy package showing how we can trivially subclass autodie
 # to our tastes.

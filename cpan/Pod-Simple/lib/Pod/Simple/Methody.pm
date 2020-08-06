@@ -1,6 +1,6 @@
 
 require 5;
-package Pod::Simple::Methody;
+package Pod::Simple::Methody;use v5;
 use strict;
 use Pod::Simple ();
 use vars qw(@ISA $VERSION);

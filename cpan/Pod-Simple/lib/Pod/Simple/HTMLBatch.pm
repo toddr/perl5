@@ -1,6 +1,6 @@
 
 require 5;
-package Pod::Simple::HTMLBatch;
+package Pod::Simple::HTMLBatch;use v5;
 use strict;
 use vars qw( $VERSION $HTML_RENDER_CLASS $HTML_EXTENSION
  $CSS $JAVASCRIPT $SLEEPY $SEARCH_CLASS @ISA

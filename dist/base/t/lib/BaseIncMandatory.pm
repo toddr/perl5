@@ -1,4 +1,4 @@
-package BaseIncMandatory;
+package BaseIncMandatory;use v5;
 
 BEGIN { package main;
     is $INC[-1], '.', 'trailing dot remains in @INC during mandatory module load from base';

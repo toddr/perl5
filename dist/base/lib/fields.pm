@@ -1,5 +1,5 @@
 use 5.008;
-package fields;
+package fields;use v5;
 
 require 5.005;
 use strict;

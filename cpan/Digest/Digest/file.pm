@@ -1,4 +1,4 @@
-package Digest::file;
+package Digest::file;use v5;
 
 use strict;
 

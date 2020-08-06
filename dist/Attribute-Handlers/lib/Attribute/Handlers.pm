@@ -1,4 +1,4 @@
-package Attribute::Handlers;
+package Attribute::Handlers;use v5;
 use 5.006;
 use Carp;
 use warnings;

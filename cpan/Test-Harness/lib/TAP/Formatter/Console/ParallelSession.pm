@@ -1,4 +1,4 @@
-package TAP::Formatter::Console::ParallelSession;
+package TAP::Formatter::Console::ParallelSession;use v5;
 
 use strict;
 use warnings;

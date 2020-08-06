@@ -1,4 +1,4 @@
-package Math::BigRat::Test;
+package Math::BigRat::Test;use v5;
 
 require 5.006;
 use strict;

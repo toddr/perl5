@@ -1,4 +1,4 @@
-package Test::Harness;
+package Test::Harness;use v5;
 
 use 5.006;
 

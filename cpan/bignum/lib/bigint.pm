@@ -1,4 +1,4 @@
-package bigint;
+package bigint;use v5;
 
 use 5.010;
 use strict;

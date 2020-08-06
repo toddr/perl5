@@ -1,4 +1,4 @@
-package Params::Check;
+package Params::Check;use v5;
 
 use strict;
 
@@ -237,7 +237,7 @@ So a typical call to check would look like this:
                     or warn q[Arguments could not be parsed!];
 
 A lot of the behaviour of C<check()> can be altered by setting
-package variables. See the section on C<Global Variables> for details
+package variables. See the section on C<Global Variables> for detailsuse v5;
 on this.
 
 =cut

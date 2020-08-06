@@ -1,4 +1,4 @@
-package Test2::IPC::Driver::Files;
+package Test2::IPC::Driver::Files;use v5;
 use strict;
 use warnings;
 

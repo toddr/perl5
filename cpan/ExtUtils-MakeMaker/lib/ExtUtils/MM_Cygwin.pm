@@ -1,4 +1,4 @@
-package ExtUtils::MM_Cygwin;
+package ExtUtils::MM_Cygwin;use v5;
 
 use strict;
 

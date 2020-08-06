@@ -1,4 +1,4 @@
-package Socket;
+package Socket;use v5;
 
 use strict;
 { use 5.006001; }

@@ -1,6 +1,6 @@
 use strict;
 
-package Test::Tester;
+package Test::Tester;use v5;
 
 BEGIN
 {

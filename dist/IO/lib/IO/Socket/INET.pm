@@ -4,7 +4,7 @@
 # This program is free software; you can redistribute it and/or
 # modify it under the same terms as Perl itself.
 
-package IO::Socket::INET;
+package IO::Socket::INET;use v5;
 
 use strict;
 use IO::Socket;

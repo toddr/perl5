@@ -1,6 +1,6 @@
 
 require 5;
-package Pod::Simple::Transcode;
+package Pod::Simple::Transcode;use v5;
 use strict;
 use vars qw($VERSION @ISA);
 $VERSION = '3.40';

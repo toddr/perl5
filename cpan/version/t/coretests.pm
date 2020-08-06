@@ -1,5 +1,5 @@
 #! /usr/local/perl -w
-package main;
+package main;use v5;
 require Test::Harness;
 use Data::Dumper;
 use File::Temp qw/tempfile/;
@@ -399,7 +399,7 @@ SKIP: {
 	my ($fh, $filename) = tempfile('tXXXXXXX', SUFFIX => '.pm', UNLINK => 1);
 	(my $package = basename($filename)) =~ s/\.pm$//;
 	print $fh <<"EOF";
-package $package;
+package $package;use v5;
 use $CLASS; \$VERSION = ${CLASS}->new('0.0.4');
 1;
 EOF
@@ -434,7 +434,7 @@ SKIP: {
     my ($fh, $filename) = tempfile('tXXXXXXX', SUFFIX => '.pm', UNLINK => 1);
     (my $package = basename($filename)) =~ s/\.pm$//;
     print $fh <<"EOF";
-package $package;
+package $package;use v5;
 use parent $CLASS;
 1;
 EOF
@@ -455,7 +455,7 @@ SKIP: {
 	my ($fh, $filename) = tempfile('tXXXXXXX', SUFFIX => '.pm', UNLINK => 1);
 	(my $package = basename($filename)) =~ s/\.pm$//;
 	print $fh <<"EOF";
-package $package;
+package $package;use v5;
 \$VERSION = 1.0;
 1;
 EOF

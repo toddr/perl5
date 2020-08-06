@@ -1,5 +1,5 @@
 
-package IO::Uncompress::Base ;
+package IO::Uncompress::Base ;use v5;
 
 use strict ;
 use warnings;
@@ -1515,7 +1515,7 @@ sub _notAvailable
 
 
 
-package IO::Uncompress::Base ;
+package IO::Uncompress::Base ;use v5;
 
 
 1 ;

@@ -1,4 +1,4 @@
-package Module::Load::Conditional;
+package Module::Load::Conditional;use v5;
 
 use strict;
 

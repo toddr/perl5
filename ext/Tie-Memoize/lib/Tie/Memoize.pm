@@ -1,5 +1,5 @@
 use strict;
-package Tie::Memoize;
+package Tie::Memoize;use v5;
 use Tie::Hash;
 our @ISA = 'Tie::ExtraHash';
 our $VERSION = '1.1';

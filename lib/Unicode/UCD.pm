@@ -1,4 +1,4 @@
-package Unicode::UCD;
+package Unicode::UCD;use v5;
 
 use strict;
 use warnings;

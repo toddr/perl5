@@ -1,6 +1,6 @@
 use 5.006;  # we use some open(X, "<", $y) syntax
 
-package Pod::Perldoc;
+package Pod::Perldoc;use v5;
 use strict;
 use warnings;
 use Config '%Config';

@@ -1,4 +1,4 @@
-package TAP::Parser::Aggregator;
+package TAP::Parser::Aggregator;use v5;
 
 use strict;
 use warnings;

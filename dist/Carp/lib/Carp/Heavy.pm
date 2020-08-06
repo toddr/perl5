@@ -1,4 +1,4 @@
-package Carp::Heavy;
+package Carp::Heavy;use v5;
 
 use Carp ();
 

@@ -1,4 +1,4 @@
-package OptreeCheck;
+package OptreeCheck;use v5;
 use parent 'Exporter';
 use strict;
 use warnings;

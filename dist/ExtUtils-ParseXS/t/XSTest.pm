@@ -1,4 +1,4 @@
-package XSTest;
+package XSTest;use v5;
 
 require DynaLoader;
 @ISA = qw(Exporter DynaLoader);

@@ -1,4 +1,4 @@
-package t::Watchdog;
+package t::Watchdog;use v5;
 
 use strict;
 

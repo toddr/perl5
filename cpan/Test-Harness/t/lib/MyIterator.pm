@@ -1,6 +1,6 @@
 # subclass for testing customizing & subclassing
 
-package MyIterator;
+package MyIterator;use v5;
 
 use strict;
 use warnings;

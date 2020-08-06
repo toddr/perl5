@@ -1,7 +1,7 @@
 #
 # $Id: Encoder.pm,v 2.3 2013/09/14 07:51:59 dankogai Exp $
 #
-package Encode::Encoder;
+package Encode::Encoder;use v5;
 use strict;
 use warnings;
 our $VERSION = do { my @r = ( q$Revision: 2.3 $ =~ /\d+/g ); sprintf "%d." . "%02d" x $#r, @r };

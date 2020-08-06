@@ -1,4 +1,4 @@
-package MakeMaker::Test::Setup::XS;
+package MakeMaker::Test::Setup::XS;use v5;
 
 @ISA = qw(Exporter);
 require Exporter;
@@ -24,7 +24,7 @@ $typemap =~ s/ //g unless $MM->can_dep_space;
 chdir File::Spec->updir;
 
 my $PM_TEST = <<'END';
-package XS::Test;
+package XS::Test;use v5;
 require Exporter;
 require DynaLoader;
 $VERSION = 1.01;
@@ -79,7 +79,7 @@ like $w, qr/NOISE/;
 EOF
 
 my $PM_OTHER = <<'END';
-package XS::Other;
+package XS::Other;use v5;
 require Exporter;
 require DynaLoader;
 $VERSION = 1.20;

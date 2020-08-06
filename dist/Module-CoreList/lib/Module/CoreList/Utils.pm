@@ -1,4 +1,4 @@
-package Module::CoreList::Utils;
+package Module::CoreList::Utils;use v5;
 
 use strict;
 use warnings;

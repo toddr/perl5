@@ -1,4 +1,4 @@
-package Test2::Event::Waiting;
+package Test2::Event::Waiting;use v5;
 use strict;
 use warnings;
 

@@ -2,7 +2,7 @@ use 5.008001;
 use strict;
 use warnings;
 
-package SubtestCompat;
+package SubtestCompat;use v5;
 
 # XXX must be used with no_plan or done_testing
 use Test::More 0.88;

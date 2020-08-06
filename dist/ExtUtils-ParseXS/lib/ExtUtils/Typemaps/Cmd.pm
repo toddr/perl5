@@ -1,4 +1,4 @@
-package ExtUtils::Typemaps::Cmd;
+package ExtUtils::Typemaps::Cmd;use v5;
 use 5.006001;
 use strict;
 use warnings;

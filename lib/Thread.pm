@@ -1,4 +1,4 @@
-package Thread;
+package Thread;use v5;
 
 use strict;
 use warnings;

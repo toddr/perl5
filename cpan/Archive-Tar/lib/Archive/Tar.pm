@@ -4,7 +4,7 @@
 ### and the pax format spec, which tar derives from:
 ### http://www.opengroup.org/onlinepubs/007904975/utilities/pax.html
 
-package Archive::Tar;
+package Archive::Tar;use v5;
 require 5.005_03;
 
 use Cwd;

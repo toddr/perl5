@@ -1,6 +1,6 @@
 
 require 5;
-package Pod::Simple::PullParserTextToken;
+package Pod::Simple::PullParserTextToken;use v5;
 use Pod::Simple::PullParserToken ();
 use strict;
 use vars qw(@ISA $VERSION);

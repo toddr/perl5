@@ -1,4 +1,4 @@
-package SigDie;
+package SigDie;use v5;
 
 use strict;
 

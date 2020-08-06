@@ -1,4 +1,4 @@
-package Term::Complete;
+package Term::Complete;use v5;
 require 5.000;
 require Exporter;
 

@@ -1,4 +1,4 @@
-package UNIVERSAL;
+package UNIVERSAL;use v5;
 
 our $VERSION = '1.13';
 
@@ -154,7 +154,7 @@ block or C<blessed> if you need to be extra paranoid.
 =item C<VERSION ( [ REQUIRE ] )>
 
 C<VERSION> will return the value of the variable C<$VERSION> in the
-package the object is blessed into. If C<REQUIRE> is given then
+package the object is blessed into. If C<REQUIRE> is given thenuse v5;
 it will do a comparison and die if the package version is not
 greater than or equal to C<REQUIRE>, or if either C<$VERSION> or C<REQUIRE>
 is not a "lax" version number (as defined by the L<version> module).

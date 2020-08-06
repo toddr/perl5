@@ -1,4 +1,4 @@
-package AnyDBM_File;
+package AnyDBM_File;use v5;
 use warnings;
 use strict;
 

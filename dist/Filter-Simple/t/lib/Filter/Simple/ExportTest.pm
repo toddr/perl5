@@ -1,4 +1,4 @@
-package Filter::Simple::ExportTest;
+package Filter::Simple::ExportTest;use v5;
 
 use Filter::Simple;
 use parent qw(Exporter);

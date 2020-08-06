@@ -1,4 +1,4 @@
-package Encode::Unicode;
+package Encode::Unicode;use v5;
 
 use strict;
 use warnings;

@@ -1,4 +1,4 @@
-package TAP::Formatter::Color;
+package TAP::Formatter::Color;use v5;
 
 use strict;
 use warnings;

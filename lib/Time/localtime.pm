@@ -1,4 +1,4 @@
-package Time::localtime;
+package Time::localtime;use v5;
 use strict;
 use 5.006_001;
 

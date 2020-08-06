@@ -1,4 +1,4 @@
-package overload;
+package overload;use v5;
 
 use v5;
 
@@ -1510,7 +1510,7 @@ the numeric value of $c becomes 13.  There is no doubt now that the module
 symbolic provides a I<symbolic> calculator indeed.
 
 To hide the rough edges under the hood, provide a tie()d interface to the
-package C<symbolic>.  Add methods
+package C<symbolic>.  Add methodsuse v5;
 
   sub TIESCALAR { my $pack = shift; $pack->new(@_) }
   sub FETCH { shift }

@@ -1,4 +1,4 @@
-package ExtUtils::Install;
+package ExtUtils::Install;use v5;
 use strict;
 
 use Config qw(%Config);
@@ -1261,7 +1261,7 @@ sub _autosplit { #XXX OS-SPECIFIC
 }
 
 
-package ExtUtils::Install::Warn;
+package ExtUtils::Install::Warn;use v5;
 
 sub new { bless {}, shift }
 

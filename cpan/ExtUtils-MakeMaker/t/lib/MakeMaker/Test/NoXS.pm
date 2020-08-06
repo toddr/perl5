@@ -1,4 +1,4 @@
-package MakeMaker::Test::NoXS;
+package MakeMaker::Test::NoXS;use v5;
 
 # Disable all XS loading.
 

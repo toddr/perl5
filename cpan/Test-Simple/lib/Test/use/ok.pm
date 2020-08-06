@@ -1,4 +1,4 @@
-package Test::use::ok;
+package Test::use::ok;use v5;
 use 5.005;
 
 our $VERSION = '1.302175';

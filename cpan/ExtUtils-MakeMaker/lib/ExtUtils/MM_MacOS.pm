@@ -1,4 +1,4 @@
-package ExtUtils::MM_MacOS;
+package ExtUtils::MM_MacOS;use v5;
 
 use strict;
 

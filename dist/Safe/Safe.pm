@@ -1,4 +1,4 @@
-package Safe;
+package Safe;use v5;
 
 use 5.003_11;
 use Scalar::Util qw(reftype refaddr);
@@ -622,7 +622,7 @@ for an alternative method (which C<share> uses).
 =head2 share_from (PACKAGE, ARRAYREF)
 
 This method is similar to share() but allows you to explicitly name the
-package that symbols should be shared from. The symbol names (including
+package that symbols should be shared from. The symbol names (includinguse v5;
 type characters) are supplied as an array reference.
 
     $safe->share_from('main', [ '$foo', '%bar', 'func' ]);
@@ -745,7 +745,7 @@ compartment (equivalent to calling the deny_only method).
 
 Returns a reference to an anonymous subroutine that, when executed, will call
 CODEREF with the Safe compartment 'in effect'.  In other words, with the
-package namespace adjusted and the opmask enabled.
+package namespace adjusted and the opmask enabled.use v5;
 
 Note that the opmask doesn't affect the already compiled code, it only affects
 any I<further> compilation that the already compiled code may try to perform.
