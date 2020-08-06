@@ -1,4 +1,4 @@
-package overloading;
+package overloading;use v5;
 use warnings;
 
 our $VERSION = '0.02';

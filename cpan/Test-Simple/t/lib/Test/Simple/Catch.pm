@@ -1,5 +1,5 @@
 # For testing Test::Simple;
-package Test::Simple::Catch;
+package Test::Simple::Catch;use v5;
 
 use strict;
 

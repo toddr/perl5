@@ -1,4 +1,4 @@
-package PerlIO::encoding;
+package PerlIO::encoding;use v5;
 
 use strict;
 our $VERSION = '0.28';

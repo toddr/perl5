@@ -1,4 +1,4 @@
-package Test2::Event::Subtest;
+package Test2::Event::Subtest;use v5;
 use strict;
 use warnings;
 

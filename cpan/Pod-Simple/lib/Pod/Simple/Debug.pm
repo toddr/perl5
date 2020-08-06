@@ -1,5 +1,5 @@
 require 5;
-package Pod::Simple::Debug;
+package Pod::Simple::Debug;use v5;
 use strict;
 use vars qw($VERSION );
 $VERSION = '3.40';

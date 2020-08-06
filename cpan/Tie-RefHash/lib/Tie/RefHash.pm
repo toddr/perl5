@@ -1,4 +1,4 @@
-package Tie::RefHash;
+package Tie::RefHash;use v5;
 
 use vars qw/$VERSION/;
 
@@ -263,7 +263,7 @@ sub CLEAR {
   %{$s->[1]} = ();
 }
 
-package Tie::RefHash::Nestable;
+package Tie::RefHash::Nestable;use v5;
 use vars '@ISA';
 @ISA = 'Tie::RefHash';
 

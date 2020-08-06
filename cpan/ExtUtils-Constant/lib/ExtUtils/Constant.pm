@@ -1,4 +1,4 @@
-package ExtUtils::Constant;
+package ExtUtils::Constant;use v5;
 use vars qw (@ISA $VERSION @EXPORT_OK %EXPORT_TAGS);
 $VERSION = '0.25';
 

@@ -1,4 +1,4 @@
-package t::BHK;
+package t::BHK;use v5;
 
 sub import   { 
     shift;

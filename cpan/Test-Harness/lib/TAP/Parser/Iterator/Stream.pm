@@ -1,4 +1,4 @@
-package TAP::Parser::Iterator::Stream;
+package TAP::Parser::Iterator::Stream;use v5;
 
 use strict;
 use warnings;

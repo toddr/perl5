@@ -1,4 +1,4 @@
-package FileCache;
+package FileCache;use v5;
 
 our $VERSION = '1.10';
 

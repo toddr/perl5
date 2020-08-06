@@ -1,4 +1,4 @@
-package File::Temp; # git description: v0.2308-7-g3bb4d88
+package File::Temp; # git description: v0.2308-7-g3bb4d88use v5;
 # ABSTRACT: return name and handle of a temporary file safely
 
 our $VERSION = '0.2309';
@@ -2578,7 +2578,7 @@ sub unlink1 {
 #pod
 #pod =cut
 
-package ## hide from PAUSE
+package ## hide from PAUSEuse v5;
   File::Temp::Dir;
 
 our $VERSION = '0.2309';

@@ -1,4 +1,4 @@
-package Unicode::Collate;
+package Unicode::Collate;use v5;
 
 BEGIN {
     unless ("A" eq pack('U', 0x41)) {

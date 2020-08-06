@@ -17,7 +17,7 @@
 # Modules and declarations
 ##############################################################################
 
-package Term::ANSIColor;
+package Term::ANSIColor;use v5;
 
 use 5.008;
 use strict;

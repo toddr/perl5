@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-package Test::Tester::Delegate;
+package Test::Tester::Delegate;use v5;
 
 our $VERSION = '1.302175';
 

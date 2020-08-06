@@ -1,4 +1,4 @@
-package Overloaded;  ##no critic (Modules::RequireFilenameMatchesPackage)
+package Overloaded;  ##no critic (Modules::RequireFilenameMatchesPackage)use v5;
 
 use strict;
 
@@ -7,7 +7,7 @@ sub new {
     bless { string => shift, num => shift }, $class;
 }
 
-package Overloaded::Compare;
+package Overloaded::Compare;use v5;
 
 use strict;
 our @ISA = qw(Overloaded);
@@ -18,7 +18,7 @@ use overload
   q{eq} => sub { $_[0]->{string} eq $_[1] },
   q{==} => sub { $_[0]->{num} == $_[1] };
 
-package Overloaded::Ify;
+package Overloaded::Ify;use v5;
 
 use strict;
 our @ISA = qw(Overloaded);

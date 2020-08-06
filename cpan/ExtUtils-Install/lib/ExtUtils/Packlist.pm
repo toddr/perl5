@@ -1,4 +1,4 @@
-package ExtUtils::Packlist;
+package ExtUtils::Packlist;use v5;
 
 use 5.00503;
 use strict;

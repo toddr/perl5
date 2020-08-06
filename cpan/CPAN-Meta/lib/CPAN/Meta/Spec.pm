@@ -6,7 +6,7 @@
 use 5.006;
 use strict;
 use warnings;
-package CPAN::Meta::Spec;
+package CPAN::Meta::Spec;use v5;
 
 our $VERSION = '2.150010';
 

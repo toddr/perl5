@@ -1,4 +1,4 @@
-package BaseIncOptional;
+package BaseIncOptional;use v5;
 
 BEGIN { package main;
     is $INC[-1], '.', 'trailing dot remains in @INC during optional module load from base';

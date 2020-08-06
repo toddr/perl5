@@ -1,4 +1,4 @@
-package FilePathTest;
+package FilePathTest;use v5;
 use strict;
 use warnings;
 use base 'Exporter';

@@ -1,6 +1,6 @@
 #!perl
 
-package Math::BigInt::Trace;
+package Math::BigInt::Trace;use v5;
 
 require 5.010;
 use strict;

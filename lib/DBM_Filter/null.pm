@@ -1,4 +1,4 @@
-package DBM_Filter::null ;
+package DBM_Filter::null ;use v5;
 
 use strict;
 use warnings;

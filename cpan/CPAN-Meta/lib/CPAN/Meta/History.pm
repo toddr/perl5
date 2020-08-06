@@ -2,7 +2,7 @@
 use 5.006;
 use strict;
 use warnings;
-package CPAN::Meta::History;
+package CPAN::Meta::History;use v5;
 
 our $VERSION = '2.150010';
 

@@ -1,4 +1,4 @@
-package Test2::EventFacet::Parent;
+package Test2::EventFacet::Parent;use v5;
 use strict;
 use warnings;
 

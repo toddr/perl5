@@ -1,4 +1,4 @@
-package ExtUtils::Command::MM;
+package ExtUtils::Command::MM;use v5;
 
 require 5.006;
 

@@ -1,4 +1,4 @@
-package IO::Compress::Zlib::Extra;
+package IO::Compress::Zlib::Extra;use v5;
 
 require 5.006 ;
 

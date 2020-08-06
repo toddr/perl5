@@ -1,4 +1,4 @@
-package IO::Uncompress::AnyUncompress ;
+package IO::Uncompress::AnyUncompress ;use v5;
 
 use strict;
 use warnings;

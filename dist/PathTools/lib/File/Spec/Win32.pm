@@ -1,4 +1,4 @@
-package File::Spec::Win32;
+package File::Spec::Win32;use v5;
 
 use strict;
 

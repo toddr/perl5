@@ -1,4 +1,4 @@
-package broken;
+package broken;use v5;
 
 use strict;
 use warnings;

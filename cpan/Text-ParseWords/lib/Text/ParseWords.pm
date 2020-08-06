@@ -1,4 +1,4 @@
-package Text::ParseWords;
+package Text::ParseWords;use v5;
 
 use strict;
 require 5.006;

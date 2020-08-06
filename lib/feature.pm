@@ -3,7 +3,7 @@
 # This file is built by regen/feature.pl.
 # Any changes made here will be lost!
 
-package feature;
+package feature;use v5;
 
 our $VERSION = '1.60';
 

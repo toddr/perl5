@@ -1,7 +1,7 @@
 #
 # $Id: Encode.pm,v 3.06 2020/05/02 02:31:14 dankogai Exp $
 #
-package Encode;
+package Encode;use v5;
 use strict;
 use warnings;
 use constant DEBUG => !!$ENV{PERL_ENCODE_DEBUG};

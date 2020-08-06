@@ -1,6 +1,6 @@
 # subclass for testing TAP::Harness custom sources
 
-package MyFileSourceHandler;
+package MyFileSourceHandler;use v5;
 
 use strict;
 use warnings;

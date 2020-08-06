@@ -10,7 +10,7 @@
 
 BEGIN { require XSLoader }
 require Exporter;
-package Storable;
+package Storable;use v5;
 
 our @ISA = qw(Exporter);
 our @EXPORT = qw(store retrieve);

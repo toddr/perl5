@@ -1,4 +1,4 @@
-package HAS_ATTACH;
+package HAS_ATTACH;use v5;
 
 sub STORABLE_attach {
   ++$attached_count;

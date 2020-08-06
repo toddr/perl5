@@ -1,6 +1,6 @@
 
 require 5;
-package Pod::Simple::HTMLLegacy;
+package Pod::Simple::HTMLLegacy;use v5;
 use strict;
 
 use vars qw($VERSION);

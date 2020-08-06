@@ -2,7 +2,7 @@
 # This program is free software; you can redistribute it and/or
 # modify it under the same terms as Perl itself.
 
-package Sub::Util;
+package Sub::Util;use v5;
 
 use strict;
 use warnings;

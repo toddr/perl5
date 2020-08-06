@@ -1,4 +1,4 @@
-package Math::BigFloat;
+package Math::BigFloat;use v5;
 
 #
 # Mike grinned. 'Two down, infinity to go' - Mike Nostrus in 'Before and After'

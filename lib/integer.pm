@@ -1,4 +1,4 @@
-package integer;
+package integer;use v5;
 
 our $VERSION = '1.01';
 

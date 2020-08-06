@@ -1,4 +1,4 @@
-package Encode::CN::HZ;
+package Encode::CN::HZ;use v5;
 
 use strict;
 use warnings;

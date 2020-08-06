@@ -1,4 +1,4 @@
-package IO::Compress::Gzip::Constants;
+package IO::Compress::Gzip::Constants;use v5;
 
 use strict ;
 use warnings;

@@ -1,4 +1,4 @@
-package TAP::Parser::Result::Unknown;
+package TAP::Parser::Result::Unknown;use v5;
 
 use strict;
 use warnings;

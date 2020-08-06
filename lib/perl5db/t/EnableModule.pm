@@ -1,4 +1,4 @@
-package EnableModule;
+package EnableModule;use v5;
 
 use strict;
 use warnings;

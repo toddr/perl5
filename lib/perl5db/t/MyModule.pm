@@ -1,4 +1,4 @@
-package MyModule;
+package MyModule;use v5;
 
 use strict;
 use warnings;

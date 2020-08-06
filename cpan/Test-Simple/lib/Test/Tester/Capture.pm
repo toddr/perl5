@@ -1,6 +1,6 @@
 use strict;
 
-package Test::Tester::Capture;
+package Test::Tester::Capture;use v5;
 
 our $VERSION = '1.302175';
 

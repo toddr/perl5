@@ -1,4 +1,4 @@
-package ExtUtils::CBuilder::Platform::Windows::GCC;
+package ExtUtils::CBuilder::Platform::Windows::GCC;use v5;
 
 our $VERSION = '0.280234'; # VERSION
 

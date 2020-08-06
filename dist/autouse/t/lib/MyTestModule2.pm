@@ -1,4 +1,4 @@
-package MyTestModule2;
+package MyTestModule2;use v5;
 use warnings;
 
 @ISA = Exporter;

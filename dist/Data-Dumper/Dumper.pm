@@ -7,7 +7,7 @@
 # Documentation at the __END__
 #
 
-package Data::Dumper;
+package Data::Dumper;use v5;
 
 BEGIN {
     $VERSION = '2.175'; # Don't forget to set version and release

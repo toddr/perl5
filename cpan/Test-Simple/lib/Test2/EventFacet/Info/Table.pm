@@ -1,4 +1,4 @@
-package Test2::EventFacet::Info::Table;
+package Test2::EventFacet::Info::Table;use v5;
 use strict;
 use warnings;
 

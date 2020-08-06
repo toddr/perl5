@@ -15,7 +15,7 @@ use 5.004;
 use strict;
 use warnings;
 
-package Getopt::Long;
+package Getopt::Long;use v5;
 
 use vars qw($VERSION);
 $VERSION        =  2.51;
@@ -132,7 +132,7 @@ ConfigDefaults();
 
 ################ OO Interface ################
 
-package Getopt::Long::Parser;
+package Getopt::Long::Parser;use v5;
 
 # Store a copy of the default configuration. Since ConfigDefaults has
 # just been called, what we get from Configure is the default.
@@ -211,7 +211,7 @@ sub getoptionsfromarray {
     return $ret;
 }
 
-package Getopt::Long;
+package Getopt::Long;use v5;
 
 ################ Back to Normal ################
 
@@ -1549,7 +1549,7 @@ sub VERSION {
     shift->SUPER::VERSION(@_);
 }
 
-package Getopt::Long::CallBack;
+package Getopt::Long::CallBack;use v5;
 
 sub new {
     my ($pkg, %atts) = @_;

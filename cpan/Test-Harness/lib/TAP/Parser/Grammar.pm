@@ -1,4 +1,4 @@
-package TAP::Parser::Grammar;
+package TAP::Parser::Grammar;use v5;
 
 use strict;
 use warnings;

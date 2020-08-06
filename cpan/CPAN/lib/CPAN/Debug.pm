@@ -1,5 +1,5 @@
 # -*- Mode: cperl; coding: utf-8; cperl-indent-level: 4 -*-
-package CPAN::Debug;
+package CPAN::Debug;use v5;
 use strict;
 use vars qw($VERSION);
 

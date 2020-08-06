@@ -1,4 +1,4 @@
-package threads;
+package threads;use v5;
 
 use 5.008;
 

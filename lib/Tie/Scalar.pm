@@ -1,4 +1,4 @@
-package Tie::Scalar;
+package Tie::Scalar;use v5;
 
 our $VERSION = '1.05';
 
@@ -38,7 +38,7 @@ This module provides some skeletal methods for scalar-tying classes. See
 L<perltie> for a list of the functions required in tying a scalar to a
 package. The basic B<Tie::Scalar> package provides a C<new> method, as well
 as methods C<TIESCALAR>, C<FETCH> and C<STORE>. The B<Tie::StdScalar>
-package provides all the methods specified in  L<perltie>. It inherits from
+package provides all the methods specified in  L<perltie>. It inherits fromuse v5;
 B<Tie::Scalar> and causes scalars tied to it to behave exactly like the
 built-in scalars, allowing for selective overloading of methods. The C<new>
 method is provided as a means of grandfathering, for classes that forget to
@@ -140,7 +140,7 @@ sub STORE {
 # Perl's built-in scalars. Good base to inherit from, if you're only going to
 # tweak a small bit.
 #
-package Tie::StdScalar;
+package Tie::StdScalar;use v5;
 @ISA = qw(Tie::Scalar);
 
 sub TIESCALAR {

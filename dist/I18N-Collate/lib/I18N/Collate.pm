@@ -1,4 +1,4 @@
-package I18N::Collate;
+package I18N::Collate;use v5;
 
 use strict;
 our $VERSION = '1.02';

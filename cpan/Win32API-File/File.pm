@@ -1,6 +1,6 @@
 # File.pm -- Low-level access to Win32 file/dir functions/constants.
 
-package Win32API::File;
+package Win32API::File;use v5;
 
 use strict;
 use integer;
@@ -221,7 +221,7 @@ sub constant
 #     die "$@"   if  $@;
 # }
 
-package Win32API::File::_error;
+package Win32API::File::_error;use v5;
 
 use overload
     '""' => sub {
@@ -236,7 +236,7 @@ use overload
 sub new { return bless {}, shift }
 sub set { Win32API::File::_fileLastError($_[1]); return $_[0] }
 
-package Win32API::File;
+package Win32API::File;use v5;
 
 my $_error = Win32API::File::_error->new();
 

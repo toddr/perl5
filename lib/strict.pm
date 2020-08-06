@@ -1,4 +1,4 @@
-package strict;
+package strict;use v5;
 
 $strict::VERSION = "1.12";
 

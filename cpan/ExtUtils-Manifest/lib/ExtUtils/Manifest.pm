@@ -1,4 +1,4 @@
-package ExtUtils::Manifest; # git description: 1.71-18-g17b7919
+package ExtUtils::Manifest; # git description: 1.71-18-g17b7919use v5;
 
 require Exporter;
 use Config;

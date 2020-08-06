@@ -1,4 +1,4 @@
-package Test2::EventFacet::Assert;
+package Test2::EventFacet::Assert;use v5;
 use strict;
 use warnings;
 

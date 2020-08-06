@@ -10,7 +10,7 @@
 # Modules and declarations
 ##############################################################################
 
-package Pod::Text::Termcap;
+package Pod::Text::Termcap;use v5;
 
 use 5.008;
 use strict;

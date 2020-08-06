@@ -1,4 +1,4 @@
-package Encode::MIME::Header::ISO_2022_JP;
+package Encode::MIME::Header::ISO_2022_JP;use v5;
 
 use strict;
 use warnings;

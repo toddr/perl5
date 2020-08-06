@@ -1,4 +1,4 @@
-package Memoize::SDBM_File;
+package Memoize::SDBM_File;use v5;
 
 =head1 NAME
 

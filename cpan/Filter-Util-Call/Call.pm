@@ -7,7 +7,7 @@
 # This program is free software; you can redistribute it and/or
 # modify it under the same terms as Perl itself.
  
-package Filter::Util::Call ;
+package Filter::Util::Call ;use v5;
 
 require 5.006 ; # our
 require Exporter;

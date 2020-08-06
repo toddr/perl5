@@ -1,4 +1,4 @@
-package Encode::EBCDIC;
+package Encode::EBCDIC;use v5;
 use strict;
 use warnings;
 use Encode;

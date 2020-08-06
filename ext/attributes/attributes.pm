@@ -1,4 +1,4 @@
-package attributes;
+package attributes;use v5;
 
 our $VERSION = 0.33;
 

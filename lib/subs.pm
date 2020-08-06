@@ -1,4 +1,4 @@
-package subs;
+package subs;use v5;
 
 our $VERSION = '1.03';
 

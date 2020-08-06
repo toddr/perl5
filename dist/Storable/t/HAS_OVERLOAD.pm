@@ -1,4 +1,4 @@
-package HAS_OVERLOAD;
+package HAS_OVERLOAD;use v5;
 
 use overload
 	'""'	=> sub { ${$_[0]} }, fallback => 1;

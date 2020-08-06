@@ -1,4 +1,4 @@
-package experimental;
+package experimental;use v5;
 $experimental::VERSION = '0.020';
 use strict;
 use warnings;

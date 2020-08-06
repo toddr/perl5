@@ -1,4 +1,4 @@
-package Util;
+package Util;use v5;
 
 use strict;
 use warnings;

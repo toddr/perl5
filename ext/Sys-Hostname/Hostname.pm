@@ -1,4 +1,4 @@
-package Sys::Hostname;
+package Sys::Hostname;use v5;
 
 use strict;
 

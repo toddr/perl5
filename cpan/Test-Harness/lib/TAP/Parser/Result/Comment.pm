@@ -1,4 +1,4 @@
-package TAP::Parser::Result::Comment;
+package TAP::Parser::Result::Comment;use v5;
 
 use strict;
 use warnings;

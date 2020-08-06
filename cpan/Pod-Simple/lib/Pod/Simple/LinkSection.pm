@@ -1,6 +1,6 @@
 
 require 5;
-package Pod::Simple::LinkSection;
+package Pod::Simple::LinkSection;use v5;
   # Based somewhat dimly on Array::Autojoin
 
 use strict;

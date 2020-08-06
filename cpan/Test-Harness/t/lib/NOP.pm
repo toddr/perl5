@@ -1,4 +1,4 @@
-package NOP;
+package NOP;use v5;
 
 # Do nothing much
 

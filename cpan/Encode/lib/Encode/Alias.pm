@@ -1,4 +1,4 @@
-package Encode::Alias;
+package Encode::Alias;use v5;
 use strict;
 use warnings;
 our $VERSION = do { my @r = ( q$Revision: 2.24 $ =~ /\d+/g ); sprintf "%d." . "%02d" x $#r, @r };

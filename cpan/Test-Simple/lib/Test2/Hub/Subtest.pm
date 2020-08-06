@@ -1,4 +1,4 @@
-package Test2::Hub::Subtest;
+package Test2::Hub::Subtest;use v5;
 use strict;
 use warnings;
 

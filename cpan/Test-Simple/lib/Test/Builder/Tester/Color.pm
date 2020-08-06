@@ -1,4 +1,4 @@
-package Test::Builder::Tester::Color;
+package Test::Builder::Tester::Color;use v5;
 
 use strict;
 our $VERSION = '1.302175';

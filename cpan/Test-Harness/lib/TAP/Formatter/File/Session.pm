@@ -1,4 +1,4 @@
-package TAP::Formatter::File::Session;
+package TAP::Formatter::File::Session;use v5;
 
 use strict;
 use warnings;

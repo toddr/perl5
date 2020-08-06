@@ -1,4 +1,4 @@
-package ExtUtils::MM_QNX;
+package ExtUtils::MM_QNX;use v5;
 
 use strict;
 our $VERSION = '7.44';

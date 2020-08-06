@@ -1,4 +1,4 @@
-package IO::Uncompress::Adapter::Inflate;
+package IO::Uncompress::Adapter::Inflate;use v5;
 
 use strict;
 use warnings;

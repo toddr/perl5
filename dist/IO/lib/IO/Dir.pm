@@ -4,7 +4,7 @@
 # This program is free software; you can redistribute it and/or
 # modify it under the same terms as Perl itself.
 
-package IO::Dir;
+package IO::Dir;use v5;
 
 use 5.008_001;
 

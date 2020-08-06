@@ -1,4 +1,4 @@
-package Pod::Perldoc::ToPod;
+package Pod::Perldoc::ToPod;use v5;
 use strict;
 use warnings;
 use parent qw(Pod::Perldoc::BaseTo);

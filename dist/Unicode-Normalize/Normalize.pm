@@ -1,4 +1,4 @@
-package Unicode::Normalize;
+package Unicode::Normalize;use v5;
 
 BEGIN {
     unless ('A' eq pack('U', 0x41)) {

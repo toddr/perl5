@@ -1,4 +1,4 @@
-package Amiga::Exec;
+package Amiga::Exec;use v5;
 
 use 5.016000;
 use strict;

@@ -1,4 +1,4 @@
-package IO::Compress::Gzip ;
+package IO::Compress::Gzip ;use v5;
 
 require 5.006 ;
 

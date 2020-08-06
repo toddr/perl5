@@ -1,4 +1,4 @@
-package Test::Builder::Formatter;
+package Test::Builder::Formatter;use v5;
 use strict;
 use warnings;
 

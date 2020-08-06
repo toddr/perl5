@@ -1,7 +1,7 @@
 
 
 require 5;
-package Pod::Simple::TextContent;
+package Pod::Simple::TextContent;use v5;
 use strict;
 use Carp ();
 use Pod::Simple ();

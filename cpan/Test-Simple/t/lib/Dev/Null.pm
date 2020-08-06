@@ -1,4 +1,4 @@
-package Dev::Null;
+package Dev::Null;use v5;
 
 use strict;
 

@@ -3,7 +3,7 @@
 #
 #  (C) Paul Evans, 2010-2015 -- leonerd@leonerd.org.uk
 
-package IO::Socket::IP;
+package IO::Socket::IP;use v5;
 # $VERSION needs to be set before  use base 'IO::Socket'
 #  - https://rt.cpan.org/Ticket/Display.html?id=92107
 BEGIN {
@@ -1153,7 +1153,7 @@ sub join_addr
 # Since IO::Socket->new( Domain => ... ) will delete the Domain parameter
 # before calling ->configure, we need to keep track of which it was
 
-package # hide from indexer
+package # hide from indexeruse v5;
    IO::Socket::IP::_ForINET;
 use base qw( IO::Socket::IP );
 
@@ -1167,7 +1167,7 @@ sub configure
    $self->configure( { %$arg, Family => Socket::AF_INET() } );
 }
 
-package # hide from indexer
+package # hide from indexeruse v5;
    IO::Socket::IP::_ForINET6;
 use base qw( IO::Socket::IP );
 

@@ -1,4 +1,4 @@
-package ExtUtils::MakeMaker::Config;
+package ExtUtils::MakeMaker::Config;use v5;
 
 use strict;
 

@@ -1,4 +1,4 @@
-package my::autodie;
+package my::autodie;use v5;
 use strict;
 use warnings;
 

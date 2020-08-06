@@ -1,4 +1,4 @@
-package NotAutoLoad;
+package NotAutoLoad;use v5;
 
 use strict;
 use warnings;

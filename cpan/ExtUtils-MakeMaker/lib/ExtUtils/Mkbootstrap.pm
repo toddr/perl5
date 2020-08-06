@@ -1,4 +1,4 @@
-package ExtUtils::Mkbootstrap;
+package ExtUtils::Mkbootstrap;use v5;
 
 # There's just too much Dynaloader incest here to turn on strict vars.
 use strict 'refs';

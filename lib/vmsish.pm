@@ -1,4 +1,4 @@
-package vmsish;
+package vmsish;use v5;
 
 our $VERSION = '1.04';
 

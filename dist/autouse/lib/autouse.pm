@@ -1,4 +1,4 @@
-package autouse;
+package autouse;use v5;
 
 #use strict;		# debugging only
 use 5.006;		# use warnings

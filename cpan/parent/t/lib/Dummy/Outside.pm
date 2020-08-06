@@ -1,4 +1,4 @@
-package Dummy::Outside;
+package Dummy::Outside;use v5;
 
 sub exclaim { "I CAN FROM " . __PACKAGE__ }
 

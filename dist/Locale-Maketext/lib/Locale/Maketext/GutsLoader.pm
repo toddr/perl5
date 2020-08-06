@@ -1,4 +1,4 @@
-package Locale::Maketext::GutsLoader;
+package Locale::Maketext::GutsLoader;use v5;
 
 use Locale::Maketext;
 

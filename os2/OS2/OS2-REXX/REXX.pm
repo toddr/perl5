@@ -1,4 +1,4 @@
-package OS2::REXX;
+package OS2::REXX;use v5;
 
 require Exporter;
 use XSLoader;
@@ -84,7 +84,7 @@ sub TIEHASH
 }
 
 #############################################################################
-package OS2::REXX::_SCALAR;
+package OS2::REXX::_SCALAR;use v5;
 
 sub FETCH
 {
@@ -102,7 +102,7 @@ sub DESTROY
 }
 
 #############################################################################
-package OS2::REXX::_ARRAY;
+package OS2::REXX::_ARRAY;use v5;
 
 sub FETCH
 {
@@ -117,7 +117,7 @@ sub STORE
 }
 
 #############################################################################
-package OS2::REXX::_HASH;
+package OS2::REXX::_HASH;use v5;
 
 require Tie::Hash;
 @ISA = ('Tie::Hash');
@@ -167,7 +167,7 @@ sub DELETE
 }
 
 #############################################################################
-package OS2::REXX;
+package OS2::REXX;use v5;
 
 1;
 __END__

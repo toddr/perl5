@@ -1,4 +1,4 @@
-package File::Spec;
+package File::Spec;use v5;
 
 use strict;
 

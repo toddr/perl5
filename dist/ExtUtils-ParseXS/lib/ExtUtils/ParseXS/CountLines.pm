@@ -1,4 +1,4 @@
-package ExtUtils::ParseXS::CountLines;
+package ExtUtils::ParseXS::CountLines;use v5;
 use strict;
 
 our $VERSION = '3.41';

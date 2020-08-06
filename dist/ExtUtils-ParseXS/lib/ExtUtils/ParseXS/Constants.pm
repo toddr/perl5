@@ -1,4 +1,4 @@
-package ExtUtils::ParseXS::Constants;
+package ExtUtils::ParseXS::Constants;use v5;
 use strict;
 use warnings;
 use Symbol;

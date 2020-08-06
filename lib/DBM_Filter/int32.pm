@@ -1,4 +1,4 @@
-package DBM_Filter::int32 ;
+package DBM_Filter::int32 ;use v5;
 
 use strict;
 use warnings;

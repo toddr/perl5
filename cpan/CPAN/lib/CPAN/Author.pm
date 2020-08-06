@@ -1,6 +1,6 @@
 # -*- Mode: cperl; coding: utf-8; cperl-indent-level: 4 -*-
 # vim: ts=4 sts=4 sw=4:
-package CPAN::Author;
+package CPAN::Author;use v5;
 use strict;
 
 use CPAN::InfoObj;
@@ -10,7 +10,7 @@ use vars qw(
 );
 $VERSION = "5.5002";
 
-package CPAN::Author;
+package CPAN::Author;use v5;
 use strict;
 
 #-> sub CPAN::Author::force

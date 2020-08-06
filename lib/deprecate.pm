@@ -1,4 +1,4 @@
-package deprecate;
+package deprecate;use v5;
 use strict;
 use warnings;
 our $VERSION = 0.04;

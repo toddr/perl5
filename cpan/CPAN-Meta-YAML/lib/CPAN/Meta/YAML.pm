@@ -1,7 +1,7 @@
 use 5.008001; # sane UTF-8 support
 use strict;
 use warnings;
-package CPAN::Meta::YAML; # git description: v1.68-2-gcc5324e
+package CPAN::Meta::YAML; # git description: v1.68-2-gcc5324euse v5;
 # XXX-INGY is 5.8.1 too old/broken for utf8?
 # XXX-XDG Lancaster consensus was that it was sufficient until
 # proven otherwise

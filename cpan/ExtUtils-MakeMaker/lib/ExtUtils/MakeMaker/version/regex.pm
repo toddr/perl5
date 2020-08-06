@@ -4,7 +4,7 @@
 # version.pm is not available.  It should not be used by ordinary modules.
 #--------------------------------------------------------------------------#
 
-package ExtUtils::MakeMaker::version::regex;
+package ExtUtils::MakeMaker::version::regex;use v5;
 
 use strict;
 

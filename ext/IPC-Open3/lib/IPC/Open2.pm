@@ -1,4 +1,4 @@
-package IPC::Open2;
+package IPC::Open2;use v5;
 
 use strict;
 our ($VERSION, @ISA, @EXPORT);

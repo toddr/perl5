@@ -1,6 +1,6 @@
 # subclass for testing customizing & subclassing
 
-package MyGrammar;
+package MyGrammar;use v5;
 
 use strict;
 use warnings;

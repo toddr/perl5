@@ -1,7 +1,7 @@
 # Devel::Peek - A data debugging tool for the XS programmer
 # The documentation is after the __END__
 
-package Devel::Peek;
+package Devel::Peek;use v5;
 
 $VERSION = '1.29';
 $XS_VERSION = $VERSION;

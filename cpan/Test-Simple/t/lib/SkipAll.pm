@@ -1,4 +1,4 @@
-package SkipAll;
+package SkipAll;use v5;
 use strict;
 use warnings;
 

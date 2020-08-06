@@ -1,4 +1,4 @@
-package autodie::skip;
+package autodie::skip;use v5;
 use strict;
 use warnings;
 

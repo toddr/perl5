@@ -1,4 +1,4 @@
-package ExtUtils::Embed;
+package ExtUtils::Embed;use v5;
 require Exporter;
 use Config;
 require File::Spec;

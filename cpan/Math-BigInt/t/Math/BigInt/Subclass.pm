@@ -1,6 +1,6 @@
 #!perl
 
-package Math::BigInt::Subclass;
+package Math::BigInt::Subclass;use v5;
 
 require 5.005_02;
 

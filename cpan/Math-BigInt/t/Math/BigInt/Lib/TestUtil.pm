@@ -1,6 +1,6 @@
 #!perl
 
-package Math::BigInt::Lib::TestUtil;
+package Math::BigInt::Lib::TestUtil;use v5;
 
 use strict;
 use warnings;

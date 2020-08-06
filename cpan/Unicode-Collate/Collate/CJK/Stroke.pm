@@ -1,4 +1,4 @@
-package Unicode::Collate::CJK::Stroke;
+package Unicode::Collate::CJK::Stroke;use v5;
 
 use 5.006;
 use strict;

@@ -1,6 +1,6 @@
 
 require 5;
-package Pod::Simple::SimpleTree;
+package Pod::Simple::SimpleTree;use v5;
 use strict;
 use Carp ();
 use Pod::Simple ();

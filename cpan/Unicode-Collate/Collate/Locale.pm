@@ -1,4 +1,4 @@
-package Unicode::Collate::Locale;
+package Unicode::Collate::Locale;use v5;
 
 use strict;
 use warnings;

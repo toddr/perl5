@@ -1,4 +1,4 @@
-package IO::Compress::Deflate ;
+package IO::Compress::Deflate ;use v5;
 
 require 5.006 ;
 

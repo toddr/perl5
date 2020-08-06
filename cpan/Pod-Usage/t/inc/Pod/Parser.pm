@@ -7,7 +7,7 @@
 # as Perl itself.
 #############################################################################
 
-package Pod::Parser;
+package Pod::Parser;use v5;
 use strict;
 
 ## These "variables" are used as local "glob aliases" for performance

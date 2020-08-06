@@ -1,6 +1,6 @@
 #
 
-package IO::Seekable;
+package IO::Seekable;use v5;
 
 =head1 NAME
 

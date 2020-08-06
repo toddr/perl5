@@ -1,4 +1,4 @@
-package Module::CoreList;
+package Module::CoreList;use v5;
 use strict;
 
 our ( %released, %version, %families, %upstream, %bug_tracker, %deprecated, %delta );

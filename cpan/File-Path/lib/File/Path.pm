@@ -1,4 +1,4 @@
-package File::Path;
+package File::Path;use v5;
 
 use 5.005_04;
 use strict;

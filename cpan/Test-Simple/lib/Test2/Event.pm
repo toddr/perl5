@@ -1,4 +1,4 @@
-package Test2::Event;
+package Test2::Event;use v5;
 use strict;
 use warnings;
 
@@ -634,7 +634,7 @@ Not all errors are considered fatal, there is a C<fail> field that must be set
 for an error to cause the test to fail.
 
 B<Note:> This facet is unique in that the field name is 'errors' while the
-package is 'Error'. This is because this is the only facet type that is both a
+package is 'Error'. This is because this is the only facet type that is both ause v5;
 list, and has a name where the plural is not the same as the singular. This may
 cause some confusion, but I feel it will be less confusing than the
 alternative.

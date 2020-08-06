@@ -8,7 +8,7 @@
 # as Perl itself.
 #############################################################################
 
-package Pod::Usage;
+package Pod::Usage;use v5;
 use strict;
 
 use vars qw($VERSION @ISA @EXPORT);

@@ -1,4 +1,4 @@
-package Text::Tabs;
+package Text::Tabs;use v5;
 
 require Exporter;
 

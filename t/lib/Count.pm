@@ -1,5 +1,5 @@
 # zero! ha ha ha
-package Count;
+package Count;use v5;
 "ha!";
 __DATA__
 one! ha ha ha

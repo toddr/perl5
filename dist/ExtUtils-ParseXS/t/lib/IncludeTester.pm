@@ -1,4 +1,4 @@
-package IncludeTester;
+package IncludeTester;use v5;
 use strict;
 
 sub print_xs {

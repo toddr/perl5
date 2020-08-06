@@ -1,6 +1,6 @@
 #
 
-package IO;
+package IO;use v5;
 
 use XSLoader ();
 use Carp;

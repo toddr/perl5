@@ -1,6 +1,6 @@
 # -*- mode: cperl; tab-width: 8; indent-tabs-mode: nil; basic-offset: 2 -*-
 # vim:ts=8:sw=2:et:sta:sts=2:tw=78
-package Module::Metadata; # git description: v1.000036-4-g435a294
+package Module::Metadata; # git description: v1.000036-4-g435a294use v5;
 # ABSTRACT: Gather package and POD information from perl module files
 
 # Adapted from Perl-licensed code originally distributed with
@@ -1021,7 +1021,7 @@ filename. If it's a script (i.e. not a *.pm) the package name is
 =head2 C<< version($package) >>
 
 Returns the version as defined by the $VERSION variable for the
-package as returned by the C<name> method if no arguments are
+package as returned by the C<name> method if no arguments areuse v5;
 given. If given the name of a package it will attempt to return the
 version of that package if it is specified in the file.
 

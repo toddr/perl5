@@ -1,4 +1,4 @@
-package Test::Simple;
+package Test::Simple;use v5;
 
 use 5.006;
 

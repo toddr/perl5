@@ -1,4 +1,4 @@
-package ExtUtils::Constant::Utils;
+package ExtUtils::Constant::Utils;use v5;
 
 use strict;
 use vars qw($VERSION @EXPORT_OK @ISA);

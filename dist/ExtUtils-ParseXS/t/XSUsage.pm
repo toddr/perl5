@@ -1,4 +1,4 @@
-package XSUsage;
+package XSUsage;use v5;
 
 require DynaLoader;
 @ISA = qw(Exporter DynaLoader);

@@ -1,4 +1,4 @@
-package Pod::Simple::BlackBox;
+package Pod::Simple::BlackBox;use v5;
 #
 # "What's in the box?"  "Pain."
 #

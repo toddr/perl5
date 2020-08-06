@@ -1,4 +1,4 @@
-package Test2::EventFacet::Trace;
+package Test2::EventFacet::Trace;use v5;
 use strict;
 use warnings;
 

@@ -1,4 +1,4 @@
-package Test::Builder::IO::Scalar;
+package Test::Builder::IO::Scalar;use v5;
 
 
 =head1 NAME

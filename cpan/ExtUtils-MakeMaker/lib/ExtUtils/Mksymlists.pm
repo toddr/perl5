@@ -1,4 +1,4 @@
-package ExtUtils::Mksymlists;
+package ExtUtils::Mksymlists;use v5;
 
 use 5.006;
 use strict qw[ subs refs ];

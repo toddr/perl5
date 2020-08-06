@@ -1,4 +1,4 @@
-package PerlIO::mmap;
+package PerlIO::mmap;use v5;
 use strict;
 use warnings;
 our $VERSION = '0.017';

@@ -1,4 +1,4 @@
-package autodie::test::au::exception;
+package autodie::test::au::exception;use v5;
 use strict;
 use warnings;
 

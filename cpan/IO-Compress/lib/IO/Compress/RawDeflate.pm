@@ -1,4 +1,4 @@
-package IO::Compress::RawDeflate ;
+package IO::Compress::RawDeflate ;use v5;
 
 # create RFC1951
 #

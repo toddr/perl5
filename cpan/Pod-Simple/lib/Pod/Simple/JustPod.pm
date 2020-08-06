@@ -1,5 +1,5 @@
 use 5;
-package Pod::Simple::JustPod;
+package Pod::Simple::JustPod;use v5;
 # ABSTRACT: Pod::Simple formatter that extracts POD from a file containing
 #           other things as well
 use strict;

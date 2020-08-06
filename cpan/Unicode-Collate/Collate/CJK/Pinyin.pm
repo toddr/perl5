@@ -1,4 +1,4 @@
-package Unicode::Collate::CJK::Pinyin;
+package Unicode::Collate::CJK::Pinyin;use v5;
 
 use 5.006;
 use strict;

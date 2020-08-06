@@ -1,4 +1,4 @@
-package IO::Uncompress::Bunzip2 ;
+package IO::Uncompress::Bunzip2 ;use v5;
 
 use strict ;
 use warnings;

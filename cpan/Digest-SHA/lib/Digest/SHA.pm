@@ -1,4 +1,4 @@
-package Digest::SHA;
+package Digest::SHA;use v5;
 
 require 5.003000;
 

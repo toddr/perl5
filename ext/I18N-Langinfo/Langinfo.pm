@@ -1,4 +1,4 @@
-package I18N::Langinfo;
+package I18N::Langinfo;use v5;
 
 use 5.006;
 use strict;

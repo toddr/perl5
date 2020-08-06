@@ -1,4 +1,4 @@
-package Text::Abbrev;
+package Text::Abbrev;use v5;
 require 5.005;		# Probably works on earlier versions too.
 require Exporter;
 

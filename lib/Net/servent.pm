@@ -1,4 +1,4 @@
-package Net::servent;
+package Net::servent;use v5;
 use strict;
 
 use 5.006_001;

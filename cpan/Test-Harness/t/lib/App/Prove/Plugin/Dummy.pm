@@ -1,4 +1,4 @@
-package App::Prove::Plugin::Dummy;
+package App::Prove::Plugin::Dummy;use v5;
 
 use strict;
 use warnings;

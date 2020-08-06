@@ -5,7 +5,7 @@
 # -- Daniel S. Lewart	Since Sep 1997
 #
 
-package Math::Complex;
+package Math::Complex;use v5;
 
 { use 5.006; }
 use strict;

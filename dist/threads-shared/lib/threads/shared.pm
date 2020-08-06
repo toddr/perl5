@@ -1,4 +1,4 @@
-package threads::shared;
+package threads::shared;use v5;
 
 use 5.008;
 

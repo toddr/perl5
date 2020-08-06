@@ -1,4 +1,4 @@
-package warnings::register;
+package warnings::register;use v5;
 
 our $VERSION = '1.04';
 require warnings;

@@ -1,4 +1,4 @@
-package Tie::StdHandle; 
+package Tie::StdHandle; use v5;
 
 use strict;
 

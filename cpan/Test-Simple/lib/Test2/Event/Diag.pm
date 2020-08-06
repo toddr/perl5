@@ -1,4 +1,4 @@
-package Test2::Event::Diag;
+package Test2::Event::Diag;use v5;
 use strict;
 use warnings;
 

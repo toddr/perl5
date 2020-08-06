@@ -1,4 +1,4 @@
-package ExtUtils::Installed;
+package ExtUtils::Installed;use v5;
 
 use 5.00503;
 use strict;

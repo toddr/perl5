@@ -1,4 +1,4 @@
-package TestUtils;
+package TestUtils;use v5;
 
 use strict;
 use warnings;

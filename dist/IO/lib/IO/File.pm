@@ -1,6 +1,6 @@
 #
 
-package IO::File;
+package IO::File;use v5;
 
 =head1 NAME
 

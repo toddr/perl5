@@ -1,4 +1,4 @@
-package Digest;
+package Digest;use v5;
 
 use strict;
 use vars qw($VERSION %MMAP $AUTOLOAD);

@@ -1,4 +1,4 @@
-package SimpleCookieJar;
+package SimpleCookieJar;use v5;
 
 use strict;
 use warnings;

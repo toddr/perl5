@@ -1,4 +1,4 @@
-package Encode::Byte;
+package Encode::Byte;use v5;
 use strict;
 use warnings;
 use Encode;

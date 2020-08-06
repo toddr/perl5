@@ -1,4 +1,4 @@
-package File::Compare;
+package File::Compare;use v5;
 
 use 5.006;
 use strict;

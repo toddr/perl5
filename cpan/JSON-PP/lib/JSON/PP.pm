@@ -1,4 +1,4 @@
-package JSON::PP;
+package JSON::PP;use v5;
 
 # JSON-2.0
 
@@ -1502,7 +1502,7 @@ sub null  { undef; }
 
 ###############################
 
-package JSON::PP::IncrParser;
+package JSON::PP::IncrParser;use v5;
 
 use strict;
 

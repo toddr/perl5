@@ -1,4 +1,4 @@
-package File::stat;
+package File::stat;use v5;
 use 5.006;
 
 use strict;

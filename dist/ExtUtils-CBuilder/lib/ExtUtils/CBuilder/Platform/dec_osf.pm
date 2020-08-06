@@ -1,4 +1,4 @@
-package ExtUtils::CBuilder::Platform::dec_osf;
+package ExtUtils::CBuilder::Platform::dec_osf;use v5;
 
 use warnings;
 use strict;

@@ -1,4 +1,4 @@
-package Time::Piece;
+package Time::Piece;use v5;
 
 use strict;
 

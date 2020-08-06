@@ -5,7 +5,7 @@
 #      You may distribute under the terms of either the GNU General Public
 #      License or the Artistic License, as specified in the README file.
 #
-package B;
+package B;use v5;
 
 @B::ISA = qw(Exporter);
 

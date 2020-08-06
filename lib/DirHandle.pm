@@ -1,4 +1,4 @@
-package DirHandle;
+package DirHandle;use v5;
 
 our $VERSION = '1.05';
 

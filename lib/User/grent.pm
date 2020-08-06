@@ -1,4 +1,4 @@
-package User::grent;
+package User::grent;use v5;
 use strict;
 
 use 5.006_001;

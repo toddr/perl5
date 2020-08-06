@@ -1,4 +1,4 @@
-package Cname;
+package Cname;use v5;
 our $Evil='A';
 
 sub translator {

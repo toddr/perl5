@@ -2,7 +2,7 @@
 # Maintainers.pm - show information about maintainers
 #
 
-package Maintainers;
+package Maintainers;use v5;
 
 use strict;
 use warnings;

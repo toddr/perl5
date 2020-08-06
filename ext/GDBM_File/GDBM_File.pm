@@ -55,7 +55,7 @@ L<perl(1)>, L<DB_File(3)>, L<perldbmfilter>.
 
 =cut
 
-package GDBM_File;
+package GDBM_File;use v5;
 
 use strict;
 use warnings;

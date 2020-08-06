@@ -1,4 +1,4 @@
-package OS2::localMorphPM;
+package OS2::localMorphPM;use v5;
 # use strict;
 
 sub new {
@@ -12,7 +12,7 @@ sub DESTROY {
   OS2::UnMorphPM(shift->[0])
 }
 
-package OS2::Process;
+package OS2::Process;use v5;
 
 BEGIN {
   require Exporter;

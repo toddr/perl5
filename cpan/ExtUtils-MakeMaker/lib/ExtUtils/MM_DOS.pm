@@ -1,4 +1,4 @@
-package ExtUtils::MM_DOS;
+package ExtUtils::MM_DOS;use v5;
 
 use strict;
 

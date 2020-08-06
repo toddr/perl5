@@ -1,4 +1,4 @@
-package Unicode::Collate::CJK::Big5;
+package Unicode::Collate::CJK::Big5;use v5;
 
 use 5.006;
 use strict;

@@ -1,4 +1,4 @@
-package File::Spec::Functions;
+package File::Spec::Functions;use v5;
 
 use File::Spec;
 use strict;

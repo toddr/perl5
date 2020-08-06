@@ -1,4 +1,4 @@
-package Haiku;
+package Haiku;use v5;
 
 BEGIN {
     use strict;

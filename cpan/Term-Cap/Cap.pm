@@ -1,4 +1,4 @@
-package Term::Cap;
+package Term::Cap;use v5;
 
 # Since the debugger uses Term::ReadLine which uses Term::Cap, we want
 # to load as few modules as possible.  This includes Carp.pm.

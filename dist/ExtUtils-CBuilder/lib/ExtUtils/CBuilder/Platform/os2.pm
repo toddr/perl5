@@ -1,4 +1,4 @@
-package ExtUtils::CBuilder::Platform::os2;
+package ExtUtils::CBuilder::Platform::os2;use v5;
 
 use warnings;
 use strict;

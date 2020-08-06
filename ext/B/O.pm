@@ -1,4 +1,4 @@
-package O;
+package O;use v5;
 
 our $VERSION = '1.03';
 

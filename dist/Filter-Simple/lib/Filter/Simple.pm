@@ -1,4 +1,4 @@
-package Filter::Simple;
+package Filter::Simple;use v5;
 
 use Text::Balanced ':ALL';
 

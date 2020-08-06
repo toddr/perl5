@@ -1,4 +1,4 @@
-package ExtUtils::CBuilder::Platform::Unix;
+package ExtUtils::CBuilder::Platform::Unix;use v5;
 
 use warnings;
 use strict;

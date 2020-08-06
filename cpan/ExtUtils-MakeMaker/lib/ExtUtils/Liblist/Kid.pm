@@ -1,4 +1,4 @@
-package ExtUtils::Liblist::Kid;
+package ExtUtils::Liblist::Kid;use v5;
 
 # XXX Splitting this out into its own .pm is a temporary solution.
 

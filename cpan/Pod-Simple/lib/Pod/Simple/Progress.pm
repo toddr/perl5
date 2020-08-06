@@ -1,6 +1,6 @@
 
 require 5;
-package Pod::Simple::Progress;
+package Pod::Simple::Progress;use v5;
 $VERSION = '3.40';
 use strict;
 

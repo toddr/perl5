@@ -1,4 +1,4 @@
-package Hints_provider_isa;
+package Hints_provider_isa;use v5;
 use strict;
 use warnings;
 use Exporter 5.57 'import';

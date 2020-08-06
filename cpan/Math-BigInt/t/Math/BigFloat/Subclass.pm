@@ -2,7 +2,7 @@
 
 # for testing subclassing Math::BigFloat
 
-package Math::BigFloat::Subclass;
+package Math::BigFloat::Subclass;use v5;
 
 require 5.006;
 

@@ -1,4 +1,4 @@
-package ExtUtils::Constant::XS;
+package ExtUtils::Constant::XS;use v5;
 
 use strict;
 use vars qw($VERSION %XS_Constant %XS_TypeSet @ISA @EXPORT_OK $is_perl56);

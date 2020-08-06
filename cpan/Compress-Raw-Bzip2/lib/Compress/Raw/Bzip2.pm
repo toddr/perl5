@@ -1,5 +1,5 @@
 
-package Compress::Raw::Bzip2;
+package Compress::Raw::Bzip2;use v5;
 
 use strict ;
 use warnings ;
@@ -115,7 +115,7 @@ sub Compress::Raw::Bunzip2::STORABLE_thaw
 }
 
 
-package Compress::Raw::Bzip2;
+package Compress::Raw::Bzip2;use v5;
 
 1;
 

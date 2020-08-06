@@ -1,4 +1,4 @@
-package ExtUtils::MM_UWIN;
+package ExtUtils::MM_UWIN;use v5;
 
 use strict;
 our $VERSION = '7.44';

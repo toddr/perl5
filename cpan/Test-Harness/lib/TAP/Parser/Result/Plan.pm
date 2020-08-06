@@ -1,4 +1,4 @@
-package TAP::Parser::Result::Plan;
+package TAP::Parser::Result::Plan;use v5;
 
 use strict;
 use warnings;

@@ -1,4 +1,4 @@
-package Search::Dict;
+package Search::Dict;use v5;
 require 5.000;
 require Exporter;
 

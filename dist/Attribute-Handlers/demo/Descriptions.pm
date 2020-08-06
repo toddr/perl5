@@ -1,4 +1,4 @@
-package Descriptions;
+package Descriptions;use v5;
 $VERSION = '1.00';
 
 use Attribute::Handlers;

@@ -1,4 +1,4 @@
-package autodie::hints;
+package autodie::hints;use v5;
 
 use strict;
 use warnings;

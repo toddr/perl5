@@ -1,4 +1,4 @@
-package ExtUtils::MM_VMS;
+package ExtUtils::MM_VMS;use v5;
 
 use strict;
 
@@ -99,7 +99,7 @@ of the current directory.  Since VMS filenames are case-insensitive,
 however, we look for a F<.pm> file whose name matches that of the current
 directory (presumably the 'main' F<.pm> file for this extension), and try
 to find a C<package> statement from which to obtain the Mixed::Case
-package name.
+package name.use v5;
 
 =cut
 

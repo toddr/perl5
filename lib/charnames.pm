@@ -1,4 +1,4 @@
-package charnames;
+package charnames;use v5;
 use strict;
 use warnings;
 our $VERSION = '1.48';

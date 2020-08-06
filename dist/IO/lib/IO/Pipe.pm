@@ -4,7 +4,7 @@
 # This program is free software; you can redistribute it and/or
 # modify it under the same terms as Perl itself.
 
-package IO::Pipe;
+package IO::Pipe;use v5;
 
 use 5.008_001;
 
@@ -137,7 +137,7 @@ sub writer {
     $me;
 }
 
-package IO::Pipe::End;
+package IO::Pipe::End;use v5;
 
 our(@ISA);
 

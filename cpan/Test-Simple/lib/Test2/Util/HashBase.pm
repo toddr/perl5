@@ -1,4 +1,4 @@
-package Test2::Util::HashBase;
+package Test2::Util::HashBase;use v5;
 use strict;
 use warnings;
 

@@ -1,4 +1,4 @@
-package MakeMaker::Test::Setup::BFD;
+package MakeMaker::Test::Setup::BFD;use v5;
 
 @ISA = qw(Exporter);
 require Exporter;
@@ -13,7 +13,7 @@ my $Is_VMS = $^O eq 'VMS';
 
 my %Files = (
              'Big-Dummy/lib/Big/Dummy.pm'     => <<'END',
-package Big::Dummy;
+package Big::Dummy;use v5;
 
 $VERSION = 0.01;
 
@@ -78,7 +78,7 @@ print "ok 3 - TEST_VERBOSE\n";
 END
 
              'Big-Dummy/Liar/lib/Big/Liar.pm' => <<'END',
-package Big::Liar;
+package Big::Liar;use v5;
 
 $VERSION = 0.01;
 

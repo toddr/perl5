@@ -1,4 +1,4 @@
-package TAP::Parser::Result::YAML;
+package TAP::Parser::Result::YAML;use v5;
 
 use strict;
 use warnings;

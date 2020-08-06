@@ -35,7 +35,7 @@
 # P.S. This documentation is not in POD format in order to avoid
 # problems when there are fundamental bugs in perl.
 
-package TestInit;
+package TestInit;use v5;
 
 $VERSION = 1.04;
 

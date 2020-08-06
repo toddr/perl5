@@ -35,7 +35,7 @@ is equivalent to the original path for all systems but VMS.
 =cut
 
 
-package File::Basename;
+package File::Basename;use v5;
 
 # File::Basename is used during the Perl build, when the re extension may
 # not be available, but we only actually need it if running under tainting.

@@ -1,4 +1,4 @@
-package ExtUtils::Constant::Base;
+package ExtUtils::Constant::Base;use v5;
 
 use strict;
 use vars qw($VERSION);

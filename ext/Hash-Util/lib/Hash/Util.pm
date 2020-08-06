@@ -1,4 +1,4 @@
-package Hash::Util;
+package Hash::Util;use v5;
 
 require 5.007003;
 use strict;

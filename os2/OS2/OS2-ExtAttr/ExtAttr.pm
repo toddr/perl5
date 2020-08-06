@@ -1,4 +1,4 @@
-package OS2::ExtAttr;
+package OS2::ExtAttr;use v5;
 
 use strict;
 use XSLoader;

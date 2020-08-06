@@ -1,4 +1,4 @@
-package Pod::Perldoc::GetOptsOO;
+package Pod::Perldoc::GetOptsOO;use v5;
 use strict;
 
 use vars qw($VERSION);

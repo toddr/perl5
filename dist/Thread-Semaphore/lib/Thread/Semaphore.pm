@@ -1,4 +1,4 @@
-package Thread::Semaphore;
+package Thread::Semaphore;use v5;
 
 use strict;
 use warnings;

@@ -1,4 +1,4 @@
-package TAP::Parser::Multiplexer;
+package TAP::Parser::Multiplexer;use v5;
 
 use strict;
 use warnings;

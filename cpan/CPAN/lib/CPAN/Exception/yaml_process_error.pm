@@ -1,6 +1,6 @@
 # -*- Mode: cperl; coding: utf-8; cperl-indent-level: 4 -*-
 # vim: ts=4 sts=4 sw=4:
-package CPAN::Exception::yaml_process_error;
+package CPAN::Exception::yaml_process_error;use v5;
 use strict;
 use overload '""' => "as_string";
 

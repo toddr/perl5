@@ -1,6 +1,6 @@
 #!perl
 
-package Math::BigInt::BareCalc;
+package Math::BigInt::BareCalc;use v5;
 
 use strict;
 use warnings;

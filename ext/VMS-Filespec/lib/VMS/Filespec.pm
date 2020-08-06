@@ -220,7 +220,7 @@ This document was last revised 8-DEC-2007, for Perl 5.10.0
 
 =cut
 
-package VMS::Filespec;
+package VMS::Filespec;use v5;
 require 5.002;
 
 our $VERSION = '1.12';

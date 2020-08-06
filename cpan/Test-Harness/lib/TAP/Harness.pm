@@ -1,4 +1,4 @@
-package TAP::Harness;
+package TAP::Harness;use v5;
 
 use strict;
 use warnings;

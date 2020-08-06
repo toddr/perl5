@@ -1,4 +1,4 @@
-package TAP::Harness::TestSubclass;
+package TAP::Harness::TestSubclass;use v5;
 use strict;
 use warnings;
 use base 'TAP::Harness';

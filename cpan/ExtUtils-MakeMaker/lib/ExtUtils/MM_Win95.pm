@@ -1,4 +1,4 @@
-package ExtUtils::MM_Win95;
+package ExtUtils::MM_Win95;use v5;
 
 use strict;
 

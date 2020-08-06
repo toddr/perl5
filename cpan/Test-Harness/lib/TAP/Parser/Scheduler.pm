@@ -1,4 +1,4 @@
-package TAP::Parser::Scheduler;
+package TAP::Parser::Scheduler;use v5;
 
 use strict;
 use warnings;

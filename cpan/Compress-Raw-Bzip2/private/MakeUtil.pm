@@ -1,5 +1,5 @@
-package MakeUtil ;
-package main ;
+package MakeUtil ;use v5;
+package main ;use v5;
 
 use strict ;
 
@@ -376,7 +376,7 @@ sub getInstalledVersion
     return $version;
 }
 
-package MakeUtil ;
+package MakeUtil ;use v5;
 
 1;
 

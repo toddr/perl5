@@ -1,4 +1,4 @@
-package ExtUtils::MM_BeOS;
+package ExtUtils::MM_BeOS;use v5;
 
 use strict;
 

@@ -1,4 +1,4 @@
-package ODBM_File;
+package ODBM_File;use v5;
 
 use strict;
 use warnings;
@@ -52,7 +52,7 @@ The hash variable you want to tie.
 =item 2. 
 
 The string C<"ODBM_File">.  (Ths tells Perl to use the C<ODBM_File>
-package to perform the functions of the hash.)
+package to perform the functions of the hash.)use v5;
 
 =item 3. 
 

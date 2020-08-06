@@ -1,4 +1,4 @@
-package Test2::Util::Facets2Legacy;
+package Test2::Util::Facets2Legacy;use v5;
 use strict;
 use warnings;
 

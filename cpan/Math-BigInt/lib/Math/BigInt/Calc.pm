@@ -1,4 +1,4 @@
-package Math::BigInt::Calc;
+package Math::BigInt::Calc;use v5;
 
 use 5.006001;
 use strict;

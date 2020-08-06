@@ -10,7 +10,7 @@
 # Modules and declarations
 ##############################################################################
 
-package Pod::Text::Color;
+package Pod::Text::Color;use v5;
 
 use 5.008;
 use strict;

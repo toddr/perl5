@@ -1,4 +1,4 @@
-package File::Glob;
+package File::Glob;use v5;
 
 use strict;
 our($VERSION, @ISA, @EXPORT_OK, @EXPORT_FAIL, %EXPORT_TAGS, $DEFAULT_FLAGS);

@@ -5,7 +5,7 @@
 # This program is free software; you can redistribute it and/or
 # modify it under the same terms as Perl itself.
 
-package IO::Poll;
+package IO::Poll;use v5;
 
 use strict;
 use IO::Handle;

@@ -11,7 +11,7 @@
 # This file is built by regen/overload.pl.
 # Any changes made here will be lost!
 
-package overload::numbers;
+package overload::numbers;use v5;
 
 our @names = qw#
     ()

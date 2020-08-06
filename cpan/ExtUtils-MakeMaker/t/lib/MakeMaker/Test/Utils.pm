@@ -1,4 +1,4 @@
-package MakeMaker::Test::Utils;
+package MakeMaker::Test::Utils;use v5;
 
 use File::Spec;
 use strict;

@@ -1,4 +1,4 @@
-package Net::FTP::E;
+package Net::FTP::E;use v5;
 
 use 5.008001;
 

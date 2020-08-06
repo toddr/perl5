@@ -1,4 +1,4 @@
-package Test2::EventFacet::Amnesty;
+package Test2::EventFacet::Amnesty;use v5;
 use strict;
 use warnings;
 

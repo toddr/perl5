@@ -1,4 +1,4 @@
-package # hide from indexers
+package # hide from indexersuse v5;
   TypemapTest::Foo;
 use strict;
 use warnings;

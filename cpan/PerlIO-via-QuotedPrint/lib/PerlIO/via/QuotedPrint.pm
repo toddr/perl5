@@ -1,4 +1,4 @@
-package PerlIO::via::QuotedPrint;
+package PerlIO::via::QuotedPrint;use v5;
 
 $VERSION= '0.08';
 

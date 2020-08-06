@@ -1,4 +1,4 @@
-package diagnostics;
+package diagnostics;use v5;
 
 =head1 NAME
 

@@ -1,5 +1,5 @@
 require 5.006;
-package Pod::Perldoc::ToMan;
+package Pod::Perldoc::ToMan;use v5;
 use strict;
 use warnings;
 use parent qw(Pod::Perldoc::BaseTo);

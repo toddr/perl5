@@ -1,4 +1,4 @@
-package POSIX;
+package POSIX;use v5;
 use strict;
 use warnings;
 
@@ -485,7 +485,7 @@ my %other_export_tags = ( # cf. exports policy below
 require Exporter;
 }
 
-package POSIX::SigAction;
+package POSIX::SigAction;use v5;
 
 sub new { bless {HANDLER => $_[1], MASK => $_[2], FLAGS => $_[3] || 0, SAFE => 0}, $_[0] }
 sub handler { $_[0]->{HANDLER} = $_[1] if @_ > 1; $_[0]->{HANDLER} };
@@ -494,14 +494,14 @@ sub flags   { $_[0]->{FLAGS}   = $_[1] if @_ > 1; $_[0]->{FLAGS} };
 sub safe    { $_[0]->{SAFE}    = $_[1] if @_ > 1; $_[0]->{SAFE} };
 
 {
-package POSIX::SigSet;
+package POSIX::SigSet;use v5;
 # This package is here entirely to make sure that POSIX::SigSet is seen by the
 # PAUSE indexer, so that it will always be clearly indexed in core.  This is to
 # prevent the accidental case where a third-party distribution can accidentally
 # claim the POSIX::SigSet package, as occurred in 2011-12. -- rjbs, 2011-12-30
 }
 
-package POSIX::SigRt;
+package POSIX::SigRt;use v5;
 
 require Tie::Hash;
 

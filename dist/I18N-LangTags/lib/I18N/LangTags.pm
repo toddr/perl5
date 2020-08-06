@@ -3,7 +3,7 @@
 # Sean M. Burke <sburke@cpan.org>
 
 require 5.000;
-package I18N::LangTags;
+package I18N::LangTags;use v5;
 use strict;
 require Exporter;
 our @ISA = qw(Exporter);

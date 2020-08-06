@@ -1,4 +1,4 @@
-package ExtUtils::testlib;
+package ExtUtils::testlib;use v5;
 
 use strict;
 use warnings;

@@ -1,4 +1,4 @@
-package Time::Seconds;
+package Time::Seconds;use v5;
 use strict;
 
 our $VERSION = '1.3401';

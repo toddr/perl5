@@ -1,4 +1,4 @@
-package NDBM_File;
+package NDBM_File;use v5;
 
 use strict;
 use warnings;
@@ -55,7 +55,7 @@ The hash variable you want to tie.
 =item 2.
 
 The string C<"NDBM_File">.  (Ths tells Perl to use the C<NDBM_File>
-package to perform the functions of the hash.)
+package to perform the functions of the hash.)use v5;
 
 =item 3.
 

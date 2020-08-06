@@ -1,4 +1,4 @@
-package Tie::Array;
+package Tie::Array;use v5;
 
 use 5.006_001;
 use strict;
@@ -82,7 +82,7 @@ sub DELETE {
     croak "$pkg doesn't define a DELETE method";
 }
 
-package Tie::StdArray;
+package Tie::StdArray;use v5;
 our @ISA = 'Tie::Array';
 
 sub TIEARRAY  { bless [], $_[0] }

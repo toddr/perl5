@@ -1,4 +1,4 @@
-package Test2::Util::ExternalMeta;
+package Test2::Util::ExternalMeta;use v5;
 use strict;
 use warnings;
 

@@ -1,5 +1,5 @@
 
-package Compress::Raw::Zlib;
+package Compress::Raw::Zlib;use v5;
 
 require 5.006 ;
 require Exporter;

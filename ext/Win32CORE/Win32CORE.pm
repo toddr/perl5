@@ -1,4 +1,4 @@
-package Win32CORE;
+package Win32CORE;use v5;
 
 $VERSION = '0.04';
 

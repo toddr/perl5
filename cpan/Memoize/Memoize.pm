@@ -8,7 +8,7 @@
 # same terms as Perl itself.  If in doubt, 
 # write to mjd-perl-memoize+@plover.com for a license.
 
-package Memoize;
+package Memoize;use v5;
 $VERSION = '1.03_01';
 
 # Compile-time constants
@@ -959,7 +959,7 @@ C<EXISTS>.  For example,
 works just fine.  For some storage methods, you need a little glue.
 
 C<SDBM_File> doesn't supply an C<EXISTS> method, so included in this
-package is a glue module called C<Memoize::SDBM_File> which does
+package is a glue module called C<Memoize::SDBM_File> which doesuse v5;
 provide one.  Use this instead of plain C<SDBM_File> to store your
 cache table on disk in an C<SDBM_File> database:
 

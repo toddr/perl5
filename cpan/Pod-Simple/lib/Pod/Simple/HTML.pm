@@ -1,5 +1,5 @@
 require 5;
-package Pod::Simple::HTML;
+package Pod::Simple::HTML;use v5;
 use strict;
 use Pod::Simple::PullParser ();
 use vars qw(

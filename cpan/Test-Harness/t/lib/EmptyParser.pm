@@ -1,4 +1,4 @@
-package EmptyParser;
+package EmptyParser;use v5;
 
 use strict;
 use warnings;

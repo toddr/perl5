@@ -1,4 +1,4 @@
-package DBM_Filter::encode ;
+package DBM_Filter::encode ;use v5;
 
 use strict;
 use warnings;

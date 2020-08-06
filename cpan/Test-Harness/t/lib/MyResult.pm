@@ -1,6 +1,6 @@
 # subclass for testing customizing & subclassing
 
-package MyResult;
+package MyResult;use v5;
 
 use strict;
 use warnings;

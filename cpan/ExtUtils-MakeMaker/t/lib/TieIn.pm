@@ -1,4 +1,4 @@
-package TieIn;
+package TieIn;use v5;
 
 sub TIEHANDLE {
     bless( \(my $scalar), $_[0]);

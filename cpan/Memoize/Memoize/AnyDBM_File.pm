@@ -1,4 +1,4 @@
-package Memoize::AnyDBM_File;
+package Memoize::AnyDBM_File;use v5;
 
 =head1 NAME
 

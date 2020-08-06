@@ -1,4 +1,4 @@
-package Getopt::Std;
+package Getopt::Std;use v5;
 require 5.000;
 require Exporter;
 

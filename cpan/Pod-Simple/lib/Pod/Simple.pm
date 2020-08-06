@@ -1,6 +1,6 @@
 
 require 5;
-package Pod::Simple;
+package Pod::Simple;use v5;
 use strict;
 use Carp ();
 BEGIN           { *DEBUG = sub () {0} unless defined &DEBUG }

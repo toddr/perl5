@@ -1,5 +1,5 @@
 
-package IO::Uncompress::Gunzip ;
+package IO::Uncompress::Gunzip ;use v5;
 
 require 5.006 ;
 

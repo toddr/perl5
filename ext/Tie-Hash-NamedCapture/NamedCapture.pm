@@ -1,5 +1,5 @@
 use strict;
-package Tie::Hash::NamedCapture;
+package Tie::Hash::NamedCapture;use v5;
 
 our $VERSION = "0.13";
 

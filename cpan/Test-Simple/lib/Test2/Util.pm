@@ -1,4 +1,4 @@
-package Test2::Util;
+package Test2::Util;use v5;
 use strict;
 use warnings;
 

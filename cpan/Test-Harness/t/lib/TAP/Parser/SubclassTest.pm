@@ -1,6 +1,6 @@
 # subclass for testing subclassing
 
-package TAP::Parser::SubclassTest;
+package TAP::Parser::SubclassTest;use v5;
 
 use strict;
 use warnings;

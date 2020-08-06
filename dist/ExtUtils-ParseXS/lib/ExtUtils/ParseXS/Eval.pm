@@ -1,4 +1,4 @@
-package ExtUtils::ParseXS::Eval;
+package ExtUtils::ParseXS::Eval;use v5;
 use strict;
 use warnings;
 

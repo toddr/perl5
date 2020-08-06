@@ -1,4 +1,4 @@
-package Env;
+package Env;use v5;
 
 our $VERSION = '1.05';
 
@@ -118,7 +118,7 @@ sub STORE {
 
 ######################################################################
 
-package Env::Array;
+package Env::Array;use v5;
  
 use Config;
 use Tie::Array;
@@ -224,7 +224,7 @@ sub SPLICE {
 
 ######################################################################
 
-package Env::Array::VMS;
+package Env::Array::VMS;use v5;
 use Tie::Array;
 
 @ISA = qw(Tie::Array);

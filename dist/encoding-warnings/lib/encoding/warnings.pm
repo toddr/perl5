@@ -1,4 +1,4 @@
-package encoding::warnings;
+package encoding::warnings;use v5;
 $encoding::warnings::VERSION = '0.13';
 
 use strict;

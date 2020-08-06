@@ -1,6 +1,6 @@
 #!perl
 
-package Math::BigFloat::Trace;
+package Math::BigFloat::Trace;use v5;
 
 require 5.010;
 use strict;

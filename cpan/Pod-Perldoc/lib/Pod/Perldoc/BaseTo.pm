@@ -1,4 +1,4 @@
-package Pod::Perldoc::BaseTo;
+package Pod::Perldoc::BaseTo;use v5;
 use strict;
 use warnings;
 

@@ -1,4 +1,4 @@
-package sort;
+package sort;use v5;
 
 our $VERSION = '2.04';
 

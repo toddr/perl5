@@ -1,4 +1,4 @@
-package Math::BigInt::Lib;
+package Math::BigInt::Lib;use v5;
 
 use 5.006001;
 use strict;

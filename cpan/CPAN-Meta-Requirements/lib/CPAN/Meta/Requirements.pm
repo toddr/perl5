@@ -1,7 +1,7 @@
 use 5.006; # keep at v5.6 for CPAN.pm
 use strict;
 use warnings;
-package CPAN::Meta::Requirements;
+package CPAN::Meta::Requirements;use v5;
 # ABSTRACT: a set of version requirements for a CPAN dist
 
 our $VERSION = '2.140';

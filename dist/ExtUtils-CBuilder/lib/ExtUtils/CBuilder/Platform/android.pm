@@ -1,4 +1,4 @@
-package ExtUtils::CBuilder::Platform::android;
+package ExtUtils::CBuilder::Platform::android;use v5;
 
 use warnings;
 use strict;

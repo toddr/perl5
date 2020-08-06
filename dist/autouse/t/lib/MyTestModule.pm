@@ -1,4 +1,4 @@
-package MyTestModule;
+package MyTestModule;use v5;
 use strict;
 
 sub test_function {

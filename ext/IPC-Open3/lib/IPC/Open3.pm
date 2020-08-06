@@ -1,4 +1,4 @@
-package IPC::Open3;
+package IPC::Open3;use v5;
 
 use strict;
 no strict 'refs'; # because users pass me bareword filehandles

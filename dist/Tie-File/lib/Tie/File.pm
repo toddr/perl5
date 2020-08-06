@@ -1,4 +1,4 @@
-package Tie::File;
+package Tie::File;use v5;
 
 require 5.005;
 
@@ -1447,7 +1447,7 @@ sub _check_integrity {
 #
 # Read cache
 
-package Tie::File::Cache;
+package Tie::File::Cache;use v5;
 $Tie::File::Cache::VERSION = $Tie::File::VERSION;
 use Carp ':DEFAULT', 'confess';
 
@@ -1737,7 +1737,7 @@ sub delink {
 #
 # Heap data structure for use by cache LRU routines
 
-package Tie::File::Heap;
+package Tie::File::Heap;use v5;
 use Carp ':DEFAULT', 'confess';
 $Tie::File::Heap::VERSION = $Tie::File::Cache::VERSION;
 sub SEQ () { 0 };

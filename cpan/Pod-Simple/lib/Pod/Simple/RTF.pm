@@ -1,6 +1,6 @@
 
 require 5;
-package Pod::Simple::RTF;
+package Pod::Simple::RTF;use v5;
 
 #sub DEBUG () {4};
 #sub Pod::Simple::DEBUG () {4};

@@ -1,4 +1,4 @@
-package Time::HiRes;
+package Time::HiRes;use v5;
 
 { use 5.006; }
 use strict;

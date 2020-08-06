@@ -1,4 +1,4 @@
-package Pod::Perldoc::ToTk;
+package Pod::Perldoc::ToTk;use v5;
 use strict;
 use warnings;
 

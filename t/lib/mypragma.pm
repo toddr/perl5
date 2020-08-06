@@ -24,7 +24,7 @@ Rafael Garcia-Suarez
 
 =cut
 
-package mypragma;
+package mypragma;use v5;
 
 use strict;
 use warnings;

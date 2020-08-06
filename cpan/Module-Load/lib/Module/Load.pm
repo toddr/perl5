@@ -1,4 +1,4 @@
-package Module::Load;
+package Module::Load;use v5;
 
 $VERSION = '0.34';
 

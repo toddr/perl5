@@ -1,4 +1,4 @@
-package main;
+package main;use v5;
 use strict;
 use warnings;
 
@@ -26,7 +26,7 @@ sub slurp_leak_open {
     open(1,2,3,4,5);
 }
 
-package autodie_test_module;
+package autodie_test_module;use v5;
 
 # This should be calling CORE::open
 sub your_open {

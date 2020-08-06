@@ -1,4 +1,4 @@
-package my::pragma;
+package my::pragma;use v5;
 
 require autodie;
 use Import::Into qw(into);

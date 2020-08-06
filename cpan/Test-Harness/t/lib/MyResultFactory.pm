@@ -1,6 +1,6 @@
 # subclass for testing customizing & subclassing
 
-package MyResultFactory;
+package MyResultFactory;use v5;
 
 use strict;
 use warnings;

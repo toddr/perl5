@@ -1,6 +1,6 @@
 # -*- coding: utf-8-unix -*-
 
-package Math::BigInt;
+package Math::BigInt;use v5;
 
 #
 # "Mike had an infinite amount to do and a negative amount of time in which

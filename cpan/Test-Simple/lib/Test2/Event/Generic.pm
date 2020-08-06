@@ -1,4 +1,4 @@
-package Test2::Event::Generic;
+package Test2::Event::Generic;use v5;
 use strict;
 use warnings;
 

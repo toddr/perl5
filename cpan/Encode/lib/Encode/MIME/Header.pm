@@ -1,4 +1,4 @@
-package Encode::MIME::Header;
+package Encode::MIME::Header;use v5;
 use strict;
 use warnings;
 

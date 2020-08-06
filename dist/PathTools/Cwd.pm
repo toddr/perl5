@@ -1,4 +1,4 @@
-package Cwd;
+package Cwd;use v5;
 use strict;
 use Exporter;
 

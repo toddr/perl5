@@ -76,7 +76,7 @@ under the same terms as Perl itself.
 
 =cut
 
-package FindBin;
+package FindBin;use v5;
 use Carp;
 require 5.000;
 require Exporter;

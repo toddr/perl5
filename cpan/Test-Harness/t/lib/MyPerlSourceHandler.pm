@@ -1,6 +1,6 @@
 # subclass for testing customizing & subclassing
 
-package MyPerlSourceHandler;
+package MyPerlSourceHandler;use v5;
 
 use strict;
 use warnings;

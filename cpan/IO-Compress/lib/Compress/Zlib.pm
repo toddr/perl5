@@ -1,5 +1,5 @@
 
-package Compress::Zlib;
+package Compress::Zlib;use v5;
 
 require 5.006 ;
 require Exporter;
@@ -421,7 +421,7 @@ sub inflateInit(@)
     wantarray ? ($x, $status) : $x ;
 }
 
-package Zlib::OldDeflate ;
+package Zlib::OldDeflate ;use v5;
 
 our (@ISA);
 @ISA = qw(Compress::Raw::Zlib::deflateStream);
@@ -446,7 +446,7 @@ sub flush
     wantarray ? ($output, $status) : $output ;
 }
 
-package Zlib::OldInflate ;
+package Zlib::OldInflate ;use v5;
 
 our (@ISA);
 @ISA = qw(Compress::Raw::Zlib::inflateStream);
@@ -459,7 +459,7 @@ sub inflate
     wantarray ? ($output, $status) : $output ;
 }
 
-package Compress::Zlib ;
+package Compress::Zlib ;use v5;
 
 use IO::Compress::Gzip::Constants 2.093 ;
 

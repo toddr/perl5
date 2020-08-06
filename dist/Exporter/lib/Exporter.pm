@@ -1,6 +1,6 @@
 use v5;
 
-package Exporter;
+package Exporter;use v5;
 
 require 5.006;
 
@@ -291,7 +291,7 @@ import function:
     }
 
 and you want to Export symbol C<$A::b> back to the module that called 
-package A.  Since Exporter relies on the import method to work, via 
+package A.  Since Exporter relies on the import method to work, via use v5;
 inheritance, as it stands Exporter::import() will never get called. 
 Instead, say the following:
 

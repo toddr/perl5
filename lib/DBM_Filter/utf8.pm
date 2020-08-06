@@ -1,4 +1,4 @@
-package DBM_Filter::utf8 ;
+package DBM_Filter::utf8 ;use v5;
 
 use strict;
 use warnings;

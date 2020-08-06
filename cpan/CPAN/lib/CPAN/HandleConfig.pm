@@ -1,4 +1,4 @@
-package CPAN::HandleConfig;
+package CPAN::HandleConfig;use v5;
 use strict;
 use vars qw(%can %keys $loading $VERSION);
 use File::Path ();

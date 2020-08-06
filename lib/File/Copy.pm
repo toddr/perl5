@@ -5,7 +5,7 @@
 # Additions copyright 1996 by Charles Bailey.  Permission is granted
 # to distribute the revised code under the same terms as Perl itself.
 
-package File::Copy;
+package File::Copy;use v5;
 
 use 5.006;
 use strict;

@@ -1,4 +1,4 @@
-package Time::tm;
+package Time::tm;use v5;
 use strict;
 
 our $VERSION = '1.00';

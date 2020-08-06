@@ -1,7 +1,7 @@
 # This is a rather minimalistic library, whose purpose is to test inheritance
 # from its parent class.
 
-package Math::BigInt::Lib::Minimal;
+package Math::BigInt::Lib::Minimal;use v5;
 
 use 5.006001;
 use strict;

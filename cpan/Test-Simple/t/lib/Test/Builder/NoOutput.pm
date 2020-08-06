@@ -1,4 +1,4 @@
-package Test::Builder::NoOutput;
+package Test::Builder::NoOutput;use v5;
 
 use strict;
 use warnings;
@@ -95,7 +95,7 @@ sub read {
 }
 
 
-package Test::Builder::NoOutput::Tee;
+package Test::Builder::NoOutput::Tee;use v5;
 
 # A cheap implementation of IO::Tee.
 

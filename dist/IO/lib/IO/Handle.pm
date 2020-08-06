@@ -1,4 +1,4 @@
-package IO::Handle;
+package IO::Handle;use v5;
 
 =head1 NAME
 
