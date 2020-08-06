@@ -7624,6 +7624,7 @@ sitelib_stem=`echo "$sitelibexp" | sed "s,/$version$,,"`
 : Determine list of previous versions to include in @INC
 $cat > getverlist <<EOPL
 #!$perl5 -w
+use v5;
 use File::Basename;
 \$api_versionstring = "$api_versionstring";
 \$version = "$version";
