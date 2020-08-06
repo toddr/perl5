@@ -1,7 +1,7 @@
 # This -*- perl -*- script makes the Makefile
 
 BEGIN { require 5.008_001 }
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker;use v5;
 use Config qw(%Config);
 my $PERL_CORE = grep { $_ eq 'PERL_CORE=1' } @ARGV;
 

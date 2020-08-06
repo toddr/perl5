@@ -8,7 +8,7 @@
 
 use strict;
 use warnings;
-use ExtUtils::MakeMaker 6.31;
+use ExtUtils::MakeMaker 6.31;use v5;
 use Config;
 
 WriteMakefile(

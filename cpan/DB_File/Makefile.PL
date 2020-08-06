@@ -2,7 +2,7 @@
 use v5;
 
 use strict ;
-use ExtUtils::MakeMaker 5.16 ;
+use ExtUtils::MakeMaker 5.16 ;use v5;
 use Config ;
 
 die "DB_File needs Perl 5.8.3 or better. This is $]\n" 

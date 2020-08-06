@@ -8,7 +8,7 @@
 BEGIN { @INC = grep { $_ ne "blib/arch" and $_ ne "blib/lib" } @INC }
 
 require 5.005;
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker;use v5;
 
 my @extra;
 push @extra, 'LICENSE' => 'perl_5'

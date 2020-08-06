@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use Config;
 use File::Spec;
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker;use v5;
 my $PERL_CORE = grep { $_ eq 'PERL_CORE=1' } @ARGV;
 my $defines = $ENV{PERL_CORE} ? q[-DPERL_EXT] : q[-DPERL_EXT -DUSE_PPPORT_H];
 

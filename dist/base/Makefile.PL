@@ -1,6 +1,6 @@
 use 5.008;
 use strict;
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker;use v5;
 
 WriteMakefile(
     NAME            => 'base',

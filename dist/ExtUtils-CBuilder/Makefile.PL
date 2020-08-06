@@ -4,7 +4,7 @@ use warnings;
 
 
 
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker;use v5;
 
 my %WriteMakefileArgs = (
   "ABSTRACT" => "Compile and link C code for Perl modules",

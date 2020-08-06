@@ -1,4 +1,4 @@
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker;use v5;
 WriteMakefile(
     NAME	=> 'NDBM_File',
     LIBS => ["-L/usr/local/lib -lndbm", "-ldbm -lucb"],

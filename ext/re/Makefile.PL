@@ -1,4 +1,4 @@
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker;use v5;
 use File::Spec;
 use Config;
 

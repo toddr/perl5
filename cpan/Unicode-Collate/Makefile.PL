@@ -1,5 +1,5 @@
 require 5.006001;
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker;use v5;
 
 my $clean = {};
 

@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker;use v5;
 
 my %WriteMakefileArgs = (
   "NAME" => "Search::Dict",

@@ -1,4 +1,4 @@
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker;use v5;
 
 WriteMakefile(
 	      NAME => 'OS2::DLL',

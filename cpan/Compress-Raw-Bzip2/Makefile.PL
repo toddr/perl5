@@ -6,7 +6,7 @@ require 5.006 ;
 
 use lib '.';
 use private::MakeUtil;
-use ExtUtils::MakeMaker 5.16 ;
+use ExtUtils::MakeMaker 5.16 ;use v5;
 
 my $WALL= '';
 $WALL = ' -Wall -Wno-comment ' if $Config{'cc'} =~ /gcc/ ;

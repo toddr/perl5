@@ -5,7 +5,7 @@ use 5.007003;
 use strict;
 use warnings;
 use utf8;
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker;use v5;
 use File::Spec;
 use Config;
 
