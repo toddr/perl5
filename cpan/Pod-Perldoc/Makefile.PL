@@ -56,7 +56,7 @@ WriteMakefile(
     test => {TESTS => 't/*.t t/*/*.t'}
 );
 
-package MY;
+package MY;use v5;
 
 sub libscan
 { # Determine things that should *not* be installed

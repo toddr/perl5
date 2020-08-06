@@ -132,7 +132,7 @@ while (<>) {
 
     if ( open(PM, ">", $newname) ) {
         print PM <<"END";
-package $newpack;
+package $newpack;use v5;
 use 5.006;
 require Exporter;
 $carp

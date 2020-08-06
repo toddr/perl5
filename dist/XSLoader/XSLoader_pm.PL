@@ -9,13 +9,13 @@ print OUT <<'EOT';
 # Generated from XSLoader_pm.PL (resolved %Config::Config value)
 # This file is unique for every OS
 
-package XSLoader;
+package XSLoader;use v5;
 
 $VERSION = "0.30"; # remember to update version in POD!
 
 #use strict;
 
-package DynaLoader;
+package DynaLoader;use v5;
 
 EOT
 
@@ -44,7 +44,7 @@ print OUT <<'EOT';
 # NOTE: All dl_*.xs (including dl_none.xs) define a dl_error() XSUB
 boot_DynaLoader('DynaLoader') if defined(&boot_DynaLoader) &&
                                 !defined(&dl_error);
-package XSLoader;
+package XSLoader;use v5;
 
 sub load {
     package DynaLoader;

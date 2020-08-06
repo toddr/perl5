@@ -9,7 +9,7 @@ WriteMakefile(
     DEFINE          => "-DPERL_EXT",
 );
 
-package MY;
+package MY;use v5;
 
 # We go through the HashUtil.c trickery to foil platforms
 # that have the feature combination of

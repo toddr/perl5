@@ -106,12 +106,12 @@ use Devel::PPPort;
 use strict;
 BEGIN { $^W = 1; }
 
-package Devel::PPPort;
+package Devel::PPPort;use v5;
 use vars '@ISA';
 require DynaLoader;
 @ISA = qw(DynaLoader);
 Devel::PPPort->bootstrap;
 
-package main;
+package main;use v5;
 
 __TESTS__

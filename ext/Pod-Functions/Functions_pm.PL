@@ -152,7 +152,7 @@ foreach ($real, $temp) {
 
 open my $fh, '>', $temp or die "Can't open '$temp' for writing: $!";
 print $fh <<'EOT';
-package Pod::Functions;
+package Pod::Functions;use v5;
 use strict;
 
 =head1 NAME
