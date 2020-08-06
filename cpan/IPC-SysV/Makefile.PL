@@ -11,7 +11,7 @@
 require 5.004_05;
 
 use strict;
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker;use v5;
 
 unless ($ENV{'PERL_CORE'}) {
   $ENV{'PERL_CORE'} = 1 if grep { $_ eq 'PERL_CORE=1' } @ARGV;

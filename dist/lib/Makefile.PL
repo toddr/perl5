@@ -4,7 +4,7 @@
 
 require 5.006_001;
 use strict;
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker;use v5;
 
 my $lib_version = '0.62';
 

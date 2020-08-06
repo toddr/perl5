@@ -9,7 +9,7 @@ use v5;
 { use 5.006; }
 
 use Config;
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker;use v5;
 use strict;
 
 use File::Spec;

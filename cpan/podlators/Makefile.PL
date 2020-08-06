@@ -17,7 +17,7 @@ use strict;
 use warnings;
 
 use Config;
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker;use v5;
 use File::Spec;
 
 # Determine the version of the distribution so that we can construct the

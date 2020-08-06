@@ -1,6 +1,6 @@
 use 5.7.2;
 use strict;
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker;use v5;
 use strict;
 
 my %tables = (big5_t	=> ['big5-eten.ucm',

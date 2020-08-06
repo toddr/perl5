@@ -1,4 +1,4 @@
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker;use v5;
 use ExtUtils::Constant 0.23 'WriteConstants';
 WriteMakefile(
     NAME 	=> 'Fcntl',

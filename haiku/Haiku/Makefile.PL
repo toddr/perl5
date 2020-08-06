@@ -1,5 +1,5 @@
 use 5.006;
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker;use v5;
 
 unless ($^O eq "haiku") {
     die "OS unsupported\n";

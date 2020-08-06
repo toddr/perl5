@@ -1,6 +1,6 @@
 use 5.005;
 use strict;
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker;use v5;
 use File::Copy;
 use File::Spec;
 use Config;

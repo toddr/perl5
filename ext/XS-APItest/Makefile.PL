@@ -1,5 +1,5 @@
 use 5.008;
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker;use v5;
 use ExtUtils::Constant 0.11 'WriteConstants';
 use Config;
 

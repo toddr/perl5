@@ -1,4 +1,4 @@
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker;use v5;
 use Config;
 
 my $arch = "$Config{'archname'}-$Config{'osvers'}";

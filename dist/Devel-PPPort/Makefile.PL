@@ -18,7 +18,7 @@ require 5.003;
 use strict;
 BEGIN { $^W = 1; }
 
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker;use v5;
 use Config;
 
 use vars '%opt';  # needs to be global, and we can't use 'our'

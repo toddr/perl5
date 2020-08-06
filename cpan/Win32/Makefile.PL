@@ -1,7 +1,7 @@
 use 5.006;
 use strict;
 use warnings;
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker;use v5;
 
 unless ($^O eq "MSWin32" || $^O eq "cygwin") {
     die "OS unsupported\n";

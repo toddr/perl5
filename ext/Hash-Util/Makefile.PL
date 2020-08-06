@@ -1,4 +1,4 @@
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker;use v5;
 
 # this file was templated from ext/List/Util/Makefile.PL
 # thanks to Graham Barr who wrote that module.

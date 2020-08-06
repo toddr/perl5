@@ -1,4 +1,4 @@
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker;use v5;
 
 my $core = grep { $_ eq 'PERL_CORE=1' } @ARGV;
 

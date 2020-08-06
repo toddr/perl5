@@ -1,7 +1,7 @@
 require 5.003000;
 
 use strict;
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker;use v5;
 use Getopt::Std;
 use Config qw(%Config);
 

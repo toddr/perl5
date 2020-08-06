@@ -8,7 +8,7 @@
 use strict;
 use warnings;
 
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker;use v5;
 use ExtUtils::MM_Unix;
 
 eval 'use ExtUtils::MakeMaker::Coverage';

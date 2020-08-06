@@ -1,7 +1,7 @@
 use warnings;
 use strict;
 
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker;use v5;
 
 WriteMakefile(
 	NAME => "Carp",

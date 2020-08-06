@@ -2,7 +2,7 @@
 use v5;
 
 use strict;
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker;use v5;
 use File::Spec::Functions;
 
 WriteMakefile(NAME => 'Pod::Functions',

@@ -23,8 +23,8 @@ use 5.008001;
 use strict;
 use warnings;
 
-use ExtUtils::MakeMaker 6.64;
-use ExtUtils::MakeMaker qw(WriteMakefile);
+use ExtUtils::MakeMaker 6.64;use v5;
+use ExtUtils::MakeMaker qw(WriteMakefile);use v5;
 
 ## no critic (Subroutines::ProhibitSubroutinePrototypes)
 

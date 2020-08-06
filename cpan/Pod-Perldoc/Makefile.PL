@@ -2,7 +2,7 @@ use 5.006;
 use strict;
 use warnings;
 
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker;use v5;
 
 my $EUMM_VERSION = $ExtUtils::MakeMaker::VERSION;
 

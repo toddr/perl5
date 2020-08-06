@@ -1,7 +1,7 @@
 #!/usr/bin/perl -w
 use v5;
 use 5.001; #not tested
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker;use v5;
 use Config;
 use strict;
 # See lib/ExtUtils/MakeMaker.pm for details of how to influence

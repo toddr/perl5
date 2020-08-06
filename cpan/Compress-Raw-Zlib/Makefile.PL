@@ -6,7 +6,7 @@ require 5.006 ;
 
 use lib '.';
 use private::MakeUtil;
-use ExtUtils::MakeMaker 5.16 ;
+use ExtUtils::MakeMaker 5.16 ;use v5;
 use ExtUtils::Install (); # only needed to check for version
 use Config;
 

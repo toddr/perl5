@@ -3,7 +3,7 @@ use v5;
 
 use strict;
 use Config qw(%Config);
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker;use v5;
 
 my @extra;
 push(@extra, INSTALLDIRS => 'perl') if $] >= 5.008 && $] < 5.012;
