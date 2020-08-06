@@ -751,7 +751,7 @@ See L<h2xs>, L<ppport.h>.
 
 =cut
 
-package Devel::PPPort;
+package Devel::PPPort;use v5;
 
 use strict;
 use vars qw($VERSION $data);

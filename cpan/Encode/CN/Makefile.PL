@@ -44,7 +44,7 @@ WriteMakefile(
               XSPROTOARG => '-noprototypes',
           );
 
-package MY;
+package MY;use v5;
 
 sub post_initialize
 {

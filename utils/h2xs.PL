@@ -1100,7 +1100,7 @@ $" = "\n\t";
 warn "Writing $ext$modpname/$modpmname\n";
 
 print PM <<"END";
-package $module;
+package $module;use v5;
 
 use $compat_version;
 END

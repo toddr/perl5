@@ -30,7 +30,7 @@ WriteMakefile(
           XSOPT => '-nolinenumbers',
           );
 
-package MY;
+package MY;use v5;
 
 sub post_initialize
 {

@@ -1107,7 +1107,7 @@ see L<https://www.cpan.org/SITES> or L<ftp://www.cpan.org/SITES>.
 file, available at your nearest CPAN site.)
 
 Perl implements a class using a package, but the presence of a
-package doesn't imply the presence of a class.  A package is just a
+package doesn't imply the presence of a class.  A package is just ause v5;
 namespace.  A class is a package that provides subroutines that can be
 used as methods.  A method is just a subroutine that expects, as its
 first argument, either the name of a package (for "static" methods),

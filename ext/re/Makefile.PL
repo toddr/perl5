@@ -20,7 +20,7 @@ WriteMakefile(
     clean		=> { FILES => '*$(OBJ_EXT) invlist_inline.h *.c ../../lib/re.pm' },
 );
 
-package MY;
+package MY;use v5;
 
 sub upupfile {
     File::Spec->catfile(File::Spec->updir, File::Spec->updir, $_[0]);

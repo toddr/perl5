@@ -72,7 +72,7 @@ in the Storable documentation for instructions on how to read your data.
 EOM
 }
 
-package MY;
+package MY;use v5;
 
 sub depend {
     "

@@ -276,7 +276,7 @@ sub write_errno_pm {
 # ***ANY*** changes here will be lost.
 #
 
-package Errno;
+package Errno;use v5;
 require Exporter;
 use strict;
 
