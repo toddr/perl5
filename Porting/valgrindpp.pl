@@ -1,4 +1,5 @@
 #!/usr/bin/perl
+use v5;
 use IO::File ();
 use File::Find qw(find);
 use Text::Wrap qw(wrap);

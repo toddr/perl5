@@ -1,4 +1,5 @@
 #!perl
+use v5;
 
 # Initialisation code and subroutines shared between installperl and installman
 # Probably installhtml needs to join the club.

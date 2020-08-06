@@ -1,4 +1,5 @@
 #!/opt/bin/perl
+use v5;
 use strict;
 use warnings;
 

@@ -1,4 +1,5 @@
 #!/usr/bin/perl -w
+use v5;
 
 #
 # sisify.pl - package Perl scripts or Perl libraries into SIS files

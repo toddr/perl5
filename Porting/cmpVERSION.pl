@@ -1,4 +1,5 @@
 #!/usr/bin/perl -w
+use v5;
 
 #
 # cmpVERSION - compare the current Perl source tree and a given tag

@@ -1,4 +1,5 @@
 #!/usr/bin/perl
+use v5;
 
 print <<'END_TESTS';
 1..1

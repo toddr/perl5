@@ -1,4 +1,5 @@
 #!/usr/bin/perl -w
+use v5;
 ################################################################################
 #
 #  buildperl.pl -- build various versions of perl automatically

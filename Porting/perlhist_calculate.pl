@@ -1,4 +1,5 @@
 #!perl
+use v5;
 # Generates info for perlhist from this perl tree
 # run this from the root of a perl tree
 #

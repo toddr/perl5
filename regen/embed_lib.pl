@@ -1,4 +1,5 @@
 #!/usr/bin/perl -w
+use v5;
 use strict;
 
 # read embed.fnc and regen/opcodes, needed by regen/embed.pl and makedef.pl

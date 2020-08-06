@@ -1,4 +1,5 @@
 #!../miniperl
+use v5;
 # Habit . . .
 #
 # Extract info from config.h, and add extra data here, to generate config.sh

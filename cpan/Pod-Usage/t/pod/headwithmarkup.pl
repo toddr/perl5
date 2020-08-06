@@ -1,4 +1,5 @@
 #!/usr/bin/env perl
+use v5;
 use strict;
 use warnings;
 use Pod::Usage;

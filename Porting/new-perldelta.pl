@@ -1,4 +1,5 @@
 #!/usr/bin/perl -w
+use v5;
 use strict;
 
 # This needs to be able to run from a clean checkout, hence assume only system

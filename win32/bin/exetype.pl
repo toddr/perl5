@@ -1,4 +1,5 @@
 #!perl -w
+use v5;
 use strict;
 
 # All the IMAGE_* structures are defined in the WINNT.H file

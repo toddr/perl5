@@ -1,4 +1,5 @@
 #!/usr/local/bin/perl
+use v5;
 
 # Copy the cpan/Encode/bin/enc2xs script to utils/, while
 # prepending a suitable #! invocation.

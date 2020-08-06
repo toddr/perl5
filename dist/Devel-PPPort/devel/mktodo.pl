@@ -1,4 +1,5 @@
 #!/usr/bin/perl -w
+use v5;
 ################################################################################
 #
 #  mktodo.pl -- generate baseline and todo files

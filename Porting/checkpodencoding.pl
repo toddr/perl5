@@ -1,4 +1,5 @@
 #!/usr/bin/env perl
+use v5;
 use 5.010;
 use open qw< :encoding(utf8) :std >;
 use autodie;

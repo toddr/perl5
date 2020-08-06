@@ -1,4 +1,5 @@
 #!/usr/bin/perl -w
+use v5;
 
 use strict;
 
@@ -423,6 +424,7 @@ sub patch_config {
     if (open(RSCRIPT, '>', $config_restore_script)) {
         print RSCRIPT <<__EOF__;
 #!perl -pi.bak
+use v5;
 s:\\Q$V:$R_V_SV:
 __EOF__
         close RSCRIPT;

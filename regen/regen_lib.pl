@@ -1,4 +1,5 @@
 #!/usr/bin/perl -w
+use v5;
 use strict;
 our (@Changed, $TAP);
 use File::Compare;

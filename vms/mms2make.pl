@@ -1,4 +1,5 @@
 #!/usr/bin/perl
+use v5;
 #
 #  mms2make.pl - convert Descrip.MMS file to Makefile
 #  Version 2.2 29-Jan-1996

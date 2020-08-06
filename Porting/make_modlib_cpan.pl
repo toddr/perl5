@@ -1,4 +1,5 @@
 #!perl
+use v5;
 #
 # This program generates the list of registered CPAN sites in perlmodlib.PL
 #

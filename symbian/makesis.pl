@@ -1,4 +1,5 @@
 #!/usr/bin/perl -w
+use v5;
 
 # Copyright (c) 2004-2005 Nokia.  All rights reserved.
 

@@ -1,4 +1,5 @@
 #!perl
+use v5;
 # Reports, in a perl source tree, which dual-lived core modules have not the
 # same version than the corresponding module on CPAN.
 # with -t option, can compare multiple source trees in tabular form.

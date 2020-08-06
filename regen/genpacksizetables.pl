@@ -1,4 +1,5 @@
 #!/usr/bin/perl -w
+use v5;
 # I'm assuming that you're running this on some kind of ASCII system, but
 # it will generate EBCDIC too. (TODO)
 use strict;

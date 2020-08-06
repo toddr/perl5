@@ -1,4 +1,5 @@
 #!perl -w
+use v5;
 
 # This is a base file to be used by various .t's in its directory
 # It tests various malformed UTF-8 sequences and some code points that are

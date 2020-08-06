@@ -1,4 +1,5 @@
 #!/usr/bin/perl
+use v5;
 #
 # In general we trust %Config, but for nanosleep() this trust
 # may be misplaced (it may be linkable but not really functional).

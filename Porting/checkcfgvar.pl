@@ -1,4 +1,5 @@
 #!/usr/bin/perl
+use v5;
 
 # Check that the various config.sh-clones have (at least) all the
 # same symbols as the top-level config_h.SH so that the (potentially)

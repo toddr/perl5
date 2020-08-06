@@ -1,4 +1,5 @@
 #!/usr/bin/perl -w
+use v5;
 
 #
 # find_writeable_data - find non-const data in Symbian object files

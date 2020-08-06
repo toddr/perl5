@@ -1,4 +1,5 @@
 #!/usr/bin/perl
+use v5;
 
 # This script reorders config_h.SH after metaconfig
 # Changing metaconfig is too complicated

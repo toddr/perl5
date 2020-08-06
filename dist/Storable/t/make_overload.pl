@@ -1,4 +1,5 @@
 #!/usr/local/bin/perl -w
+use v5;
 use strict;
 
 use Storable qw(nfreeze);

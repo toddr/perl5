@@ -1,4 +1,5 @@
 #!perl -w
+use v5;
 $0 =~ s|\.bat||i;
 unless (-f $0) {
     $0 =~ s|.*[/\\]||;

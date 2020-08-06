@@ -1,4 +1,5 @@
 #!perl -w
+use v5;
 
 BEGIN {
     require 'loc_tools.pl';   # Contains locales_enabled() and

@@ -1,4 +1,5 @@
 #!/usr/bin/env perl
+use v5;
 use Pod::Usage;
 
 my @tests = (
