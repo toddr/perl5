@@ -5338,32 +5338,32 @@ typedef enum {
 #define HINT_EXPLICIT_STRICT_SUBS	0x00000040 /* strict.pm */
 #define HINT_EXPLICIT_STRICT_VARS	0x00000080 /* strict.pm */
 
-#define HINT_BLOCK_SCOPE	0x00000100
-#define HINT_STRICT_SUBS	0x00000200 /* strict pragma */
-#define HINT_STRICT_VARS	0x00000400 /* strict pragma */
-#define HINT_UNI_8_BIT		0x00000800 /* unicode_strings feature */
+#define HINT_BLOCK_SCOPE	    0x00000100
+#define HINT_STRICT_SUBS	    0x00000200 /* strict pragma */
+#define HINT_STRICT_VARS	    0x00000400 /* strict pragma */
+#define HINT_UNI_8_BIT		    0x00000800 /* unicode_strings feature */
 
 /* The HINT_NEW_* constants are used by the overload pragma */
-#define HINT_NEW_INTEGER	0x00001000
-#define HINT_NEW_FLOAT		0x00002000
-#define HINT_NEW_BINARY		0x00004000
-#define HINT_NEW_STRING		0x00008000
-#define HINT_NEW_RE		0x00010000
-#define HINT_LOCALIZE_HH	0x00020000 /* %^H needs to be copied */
-#define HINT_LEXICAL_IO_IN	0x00040000 /* ${^OPEN} is set for input */
-#define HINT_LEXICAL_IO_OUT	0x00080000 /* ${^OPEN} is set for output */
+#define HINT_NEW_INTEGER	    0x00001000
+#define HINT_NEW_FLOAT		    0x00002000
+#define HINT_NEW_BINARY		    0x00004000
+#define HINT_NEW_STRING		    0x00008000
+#define HINT_NEW_RE             0x00010000
+#define HINT_LOCALIZE_HH	    0x00020000 /* %^H needs to be copied */
+#define HINT_LEXICAL_IO_IN	    0x00040000 /* ${^OPEN} is set for input */
+#define HINT_LEXICAL_IO_OUT	    0x00080000 /* ${^OPEN} is set for output */
 
-#define HINT_RE_TAINT		0x00100000 /* re pragma */
-#define HINT_RE_EVAL		0x00200000 /* re pragma */
+#define HINT_RE_TAINT		    0x00100000 /* re pragma */
+#define HINT_RE_EVAL		    0x00200000 /* re pragma */
 
 #define HINT_FILETEST_ACCESS	0x00400000 /* filetest pragma */
-#define HINT_UTF8		0x00800000 /* utf8 pragma */
+#define HINT_UTF8               0x00800000 /* utf8 pragma */
 
-#define HINT_NO_AMAGIC		0x01000000 /* overloading pragma */
+#define HINT_NO_AMAGIC		    0x01000000 /* overloading pragma */
 
-#define HINT_RE_FLAGS		0x02000000 /* re '/xism' pragma */
+#define HINT_RE_FLAGS		    0x02000000 /* re '/xism' pragma */
 
-#define HINT_FEATURE_MASK	0x1c000000 /* 3 bits for feature bundles */
+#define HINT_FEATURE_MASK	    0x1c000000 /* 3 bits for feature bundles */
 
 				/* Note: Used for HINT_M_VMSISH_*,
 				   currently defined by vms/vmsish.h:
@@ -5375,10 +5375,8 @@ typedef enum {
 #define HINT_SORT_STABLE	0x00000100 /* sort styles */
 #define HINT_SORT_UNSTABLE	0x00000200
 
-#define HINT_ALL_STRICT       HINT_EXPLICIT_STRICT_REFS \
-                            | HINT_EXPLICIT_STRICT_SUBS \
-                            | HINT_EXPLICIT_STRICT_VARS \
-                            | HINT_STRICT_REFS \
+/* no explicit settings here so use v5 can drop them */
+#define HINT_ALL_STRICT       HINT_STRICT_REFS \
                             | HINT_STRICT_SUBS \
                             | HINT_STRICT_VARS
 
