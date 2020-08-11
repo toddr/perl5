@@ -5371,6 +5371,9 @@ typedef enum {
 				0x80000000
 				 */
 
+/* maybe HINT_EXPLICIT_DEFAULT_BUNDLE */
+/* #define HINT_EXPLICIT_V7        0x40000000 */
+
 /* The following are stored in $^H{sort}, not in PL_hints */
 #define HINT_SORT_STABLE	0x00000100 /* sort styles */
 #define HINT_SORT_UNSTABLE	0x00000200
