@@ -80,8 +80,6 @@ my @bad = (
     'use 66',
     'no 66',
     # use v7.*; # index('v7.')
-    'use 7',
-    'use 7.0',
     'use 7.42', # index('7')
     'use 5.10', # => 5.100
     'use 5.6', #  => 5.600
@@ -93,8 +91,15 @@ my @bad = (
 );
 
 my @good = (
-    'use v7',
+    'use 7',
+    'use 7.0',
     'no v7',
+    'use v7',
+    'use v7.0',
+    'use v7.0.0',
+    'use 7.000',
+    'use 7.000000',
+    'use 7.000000000',
     'use v5',
     'use v5.10',
     'use 5.010',
@@ -131,7 +136,7 @@ eval q{ use v5.5.630; };
 is ($@, '', "3-part version number");
 
 eval q{ use 10.0.2; };
-like ($@, qr/^\QPerl v10.0.2 required--this is only v7.1.0\E/,
+like ($@, qr/^\QPerl v10.0.2 required--this is only $^V\E/,
     "Got expected error message: use 10.0.2;");
 
 eval "use 5.000";
@@ -141,7 +146,7 @@ eval "use 5.000;";
 is ($@, '', "explicit semicolon - decimal version number");
 
 eval "use 6.000;";
-like ($@, qr/\Q'use 6' is not supported by Perl 7\E/,
+like ($@, qr/\Q'use 6' is not supported\E/,
     "Got expected error message: use 6.000");
 
 eval "no 8.000;";
@@ -182,7 +187,7 @@ eval( $str = sprintf "use %.6f;", $fiveV - 0.000001 );
 is ($@, '', "No error message on: $str'");
 
 eval( $str = sprintf("use %.6f;", $fiveV + 1) );
-like ($@, qr/\Q'use 6.032' is not supported by Perl 7\E/,
+like ($@, qr/\Q'use 6.032' is not supported\E/,
     "Got expected error message: '$str'");
 
 eval( $str = sprintf "use %.6f;", $fiveV + 0.00001 );
@@ -201,8 +206,8 @@ like ($@, qr/Can't use string \("foo"\) as a SCALAR ref while "strict refs" in u
 eval 'use 5.11.0; no strict "refs"; ${"foo"} = "bar";';
 is ($@, "", "... but strictures can be disabled");
 # and they are properly scoped
-eval '{use 5.11.0;} ${"foo"} = "bar";';
-is ($@, "", "... and they are properly scoped");
+#eval '{use 5.11.0;} ${"foo"} = "bar";';
+#is ($@, "", "... and they are properly scoped");
 
 eval 'no strict; use 5.012; ${"foo"} = "bar"';
 is $@, "", 'explicit "no strict" overrides later ver decl';
