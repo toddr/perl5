@@ -10,7 +10,7 @@ package Module::Metadata; # git description: v1.000036-4-g435a294use v5;
 # perl modules (assuming this may be expanded in the distant
 # parrot future to look at other types of modules).
 
-sub __clean_eval { eval $_[0] }
+sub __clean_eval { no strict; no warnings; eval $_[0] }
 use strict;
 use warnings;
 
