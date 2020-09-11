@@ -234,6 +234,7 @@ useopcode=''
 useposix=''
 extras=''
 d_bsd=''
+d_enhanced_defaults=''
 d_eunice=''
 d_xenix=''
 eunicefix=''
@@ -4423,6 +4424,27 @@ EOM
 	;;
 esac
 set usemultiplicity
+eval $setvar
+
+: Ask about enhanced defaults.
+cat <<EOM
+
+EXPERIMENTAL: Perl can now be built with enhanced defaults. Currently it is
+possible to build perl so that strict is enabled by default except when run
+via -e or -E.
+
+Unless you are familiar with this feature, you should probably answer 'no'.
+
+EOM
+
+dflt='n'
+rp='Would you like to build perl with strict enabled by default?'
+. ./myread
+case "$ans" in
+y|Y) val="$define" ;;
+*)   val="$undef"  ;;
+esac
+set d_enhanced_defaults
 eval $setvar
 
 : Check if morebits is requested
@@ -24168,6 +24190,7 @@ d_eofnblk='$d_eofnblk'
 d_erf='$d_erf'
 d_erfc='$d_erfc'
 d_eunice='$d_eunice'
+d_enhanced_defaults='$d_enhanced_defaults'
 d_exp2='$d_exp2'
 d_expm1='$d_expm1'
 d_faststdio='$d_faststdio'

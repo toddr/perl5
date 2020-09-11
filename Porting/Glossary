@@ -812,6 +812,12 @@ d_endservent_r (d_endservent_r.U):
 	which indicates to the C program that the endservent_r()
 	routine is available.
 
+d_enhanced_defaults (d_enhanced_defaults.U)
+    This setting provides a mechanism for perl developers to enable
+	enhanced defaults. Currently only implicit strict is enabled but
+	more may be included in the future. These defaults do not apply
+	when perl is run via -e or -E.
+
 d_eofnblk (nblock_io.U):
 	This variable conditionally defines EOF_NONBLOCK if EOF can be seen
 	when reading from a non-blocking I/O source.

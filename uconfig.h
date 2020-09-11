@@ -3568,6 +3568,12 @@
  */
 /*#define DEFAULT_INC_EXCLUDES_DOT	/ **/
 
+/* USE_ENHANCED_DEFAULTS
+ *	This symbol, if defined, enables additional defaults.
+ *	At this time it only enables implicit strict by default.
+ */
+/*#define USE_ENHANCED_DEFAULTS	/* use strict by default */
+
 /* USE_DYNAMIC_LOADING:
  *	This symbol, if defined, indicates that dynamic loading of
  *	some sort is available.
