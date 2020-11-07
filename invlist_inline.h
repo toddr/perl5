@@ -15,7 +15,8 @@
  || defined(PERL_IN_TOKE_C)             \
  || defined(PERL_IN_PP_C)               \
  || defined(PERL_IN_OP_C)               \
- || defined(PERL_IN_DOOP_C)
+ || defined(PERL_IN_DOOP_C)             \
+ || defined(PERL_IN_B_XS)
 
 /* An element is in an inversion list iff its index is even numbered: 0, 2, 4,
  * etc */
