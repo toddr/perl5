@@ -199,7 +199,7 @@ use File::Glob qw(:case);
     },
 
     'Compress::Raw::Bzip2' => {
-        'DISTRIBUTION' => 'PMQS/Compress-Raw-Bzip2-2.096.tar.gz',
+        'DISTRIBUTION' => 'PMQS/Compress-Raw-Bzip2-2.100.tar.gz',
         'FILES'        => q[cpan/Compress-Raw-Bzip2],
         'EXCLUDED'     => [
             qr{^t/Test/},
@@ -211,7 +211,7 @@ use File::Glob qw(:case);
     },
 
     'Compress::Raw::Zlib' => {
-        'DISTRIBUTION' => 'PMQS/Compress-Raw-Zlib-2.096.tar.gz',
+        'DISTRIBUTION' => 'PMQS/Compress-Raw-Zlib-2.100.tar.gz',
         'FILES'    => q[cpan/Compress-Raw-Zlib],
         'EXCLUDED' => [
             qr{^examples/},
@@ -224,12 +224,11 @@ use File::Glob qw(:case);
     },
 
     'Config::Perl::V' => {
-        'DISTRIBUTION' => 'HMBRAND/Config-Perl-V-0.31.tgz',
+        'DISTRIBUTION' => 'HMBRAND/Config-Perl-V-0.33.tgz',
         'FILES'        => q[cpan/Config-Perl-V],
         'EXCLUDED'     => [qw(
 		examples/show-v.pl
 		)],
-        'CUSTOMIZED'   => [ qw(V.pm) ],
     },
 
     'constant' => {
@@ -340,7 +339,7 @@ use File::Glob qw(:case);
     },
 
     'Devel::PPPort' => {
-        'DISTRIBUTION' => 'ATOOMIC/Devel-PPPort-3.57.tar.gz',
+        'DISTRIBUTION' => 'ATOOMIC/Devel-PPPort-3.62.tar.gz',
         'FILES'        => q[dist/Devel-PPPort],
         'EXCLUDED'     => [
             'PPPort.pm',    # we use PPPort_pm.PL instead
@@ -383,7 +382,7 @@ use File::Glob qw(:case);
     },
 
     'Encode' => {
-        'DISTRIBUTION' => 'DANKOGAI/Encode-3.07.tar.gz',
+        'DISTRIBUTION' => 'DANKOGAI/Encode-3.08.tar.gz',
         'FILES'        => q[cpan/Encode],
         'EXCLUDED'     => [
             qw( t/whatwg-aliases.json
@@ -428,7 +427,7 @@ use File::Glob qw(:case);
     },
 
     'ExtUtils::CBuilder' => {
-        'DISTRIBUTION' => 'AMBS/ExtUtils-CBuilder-0.280234.tar.gz',
+        'DISTRIBUTION' => 'AMBS/ExtUtils-CBuilder-0.280235.tar.gz',
         'FILES'        => q[dist/ExtUtils-CBuilder],
         'EXCLUDED'     => [
             qw(README.mkdn),
@@ -453,7 +452,7 @@ use File::Glob qw(:case);
     },
 
     'ExtUtils::Install' => {
-        'DISTRIBUTION' => 'BINGOS/ExtUtils-Install-2.18.tar.gz',
+        'DISTRIBUTION' => 'BINGOS/ExtUtils-Install-2.20.tar.gz',
         'FILES'        => q[cpan/ExtUtils-Install],
         'EXCLUDED'     => [
             qw( t/lib/Test/Builder.pm
@@ -467,7 +466,7 @@ use File::Glob qw(:case);
     },
 
     'ExtUtils::MakeMaker' => {
-        'DISTRIBUTION' => 'BINGOS/ExtUtils-MakeMaker-7.52.tar.gz',
+        'DISTRIBUTION' => 'BINGOS/ExtUtils-MakeMaker-7.58.tar.gz',
         'FILES'        => q[cpan/ExtUtils-MakeMaker],
         'EXCLUDED'     => [
             qr{^t/lib/Test/},
@@ -494,7 +493,7 @@ use File::Glob qw(:case);
     },
 
     'ExtUtils::Manifest' => {
-        'DISTRIBUTION' => 'ETHER/ExtUtils-Manifest-1.72.tar.gz',
+        'DISTRIBUTION' => 'ETHER/ExtUtils-Manifest-1.73.tar.gz',
         'FILES'        => q[cpan/ExtUtils-Manifest],
         'EXCLUDED'     => [
             qr(^t/00-report-prereqs),
@@ -508,7 +507,7 @@ use File::Glob qw(:case);
     },
 
     'File::Fetch' => {
-        'DISTRIBUTION' => 'BINGOS/File-Fetch-0.56.tar.gz',
+        'DISTRIBUTION' => 'BINGOS/File-Fetch-1.00.tar.gz',
         'FILES'        => q[cpan/File-Fetch],
     },
 
@@ -637,7 +636,7 @@ use File::Glob qw(:case);
     },
 
     'IO-Compress' => {
-        'DISTRIBUTION' => 'PMQS/IO-Compress-2.096.tar.gz',
+        'DISTRIBUTION' => 'PMQS/IO-Compress-2.100.tar.gz',
         'FILES'        => q[cpan/IO-Compress],
         'EXCLUDED'     => [
             qr{^examples/},
@@ -668,7 +667,7 @@ use File::Glob qw(:case);
     },
 
     'IPC::SysV' => {
-        'DISTRIBUTION' => 'MHX/IPC-SysV-2.08.tar.gz',
+        'DISTRIBUTION' => 'MHX/IPC-SysV-2.09.tar.gz',
         'FILES'        => q[cpan/IPC-SysV],
         'EXCLUDED'     => [
             qw( const-c.inc
@@ -693,7 +692,7 @@ use File::Glob qw(:case);
     },
 
     'libnet' => {
-        'DISTRIBUTION' => 'SHAY/libnet-3.11.tar.gz',
+        'DISTRIBUTION' => 'SHAY/libnet-3.13.tar.gz',
         'FILES'        => q[cpan/libnet],
         'EXCLUDED'     => [
             qw( Configure
@@ -812,7 +811,7 @@ use File::Glob qw(:case);
     },
 
     'Module::CoreList' => {
-        'DISTRIBUTION' => 'BINGOS/Module-CoreList-5.20201020.tar.gz',
+        'DISTRIBUTION' => 'BINGOS/Module-CoreList-5.20210120.tar.gz',
         'FILES'        => q[dist/Module-CoreList],
     },
 
@@ -843,13 +842,19 @@ use File::Glob qw(:case);
     },
 
     'Net::Ping' => {
-        'DISTRIBUTION' => 'RURBAN/Net-Ping-2.73.tar.gz',
+        'DISTRIBUTION' => 'RURBAN/Net-Ping-2.74.tar.gz',
         'FILES'        => q[dist/Net-Ping],
         'EXCLUDED'     => [
+            qr{^\.[awc]},
             qw(README.md.PL),
             qw(t/020_external.t),
             qw(t/600_pod.t),
             qw(t/601_pod-coverage.t),
+            qw(t/602_kwalitee.t),
+            qw(t/603_meta.t),
+            qw(t/604_manifest.t),
+            qw(t/appveyor-test.bat),
+
         ],
         'CUSTOMIZED' => [
             qw{
@@ -905,7 +910,7 @@ use File::Glob qw(:case);
     },
 
     'PerlIO::via::QuotedPrint' => {
-        'DISTRIBUTION' => 'SHAY/PerlIO-via-QuotedPrint-0.08.tar.gz',
+        'DISTRIBUTION' => 'SHAY/PerlIO-via-QuotedPrint-0.09.tar.gz',
         'FILES'        => q[cpan/PerlIO-via-QuotedPrint],
     },
 
@@ -944,7 +949,7 @@ use File::Glob qw(:case);
     },
 
     'Pod::Simple' => {
-        'DISTRIBUTION' => 'KHW/Pod-Simple-3.41.tar.gz',
+        'DISTRIBUTION' => 'KHW/Pod-Simple-3.42.tar.gz',
         'FILES'        => q[cpan/Pod-Simple],
         'EXCLUDED' => [
             qw{.ChangeLog.swp},
@@ -997,7 +1002,7 @@ use File::Glob qw(:case);
     },
 
     'Socket' => {
-        'DISTRIBUTION' => 'PEVANS/Socket-2.030.tar.gz',
+        'DISTRIBUTION' => 'PEVANS/Socket-2.031.tar.gz',
         'FILES'        => q[cpan/Socket],
     },
 
@@ -1075,10 +1080,15 @@ use File::Glob qw(:case);
                 t/lib/if.pm
                 ),
         ],
+        'CUSTOMIZED'   => [
+             # https://github.com/Perl-Toolchain-Gang/Test-Harness/pull/103
+             # applied but not released
+             't/source.t'
+        ],
     },
 
     'Test::Simple' => {
-        'DISTRIBUTION' => 'EXODIST/Test-Simple-1.302182.tar.gz',
+        'DISTRIBUTION' => 'EXODIST/Test-Simple-1.302183.tar.gz',
         'FILES'        => q[cpan/Test-Simple],
         'EXCLUDED'     => [
             qr{^examples/},
@@ -1098,7 +1108,7 @@ use File::Glob qw(:case);
     },
 
     'Text::Balanced' => {
-        'DISTRIBUTION' => 'SHAY/Text-Balanced-2.03.tar.gz',
+        'DISTRIBUTION' => 'SHAY/Text-Balanced-2.04.tar.gz',
         'FILES'        => q[cpan/Text-Balanced],
         'EXCLUDED'     => [
             qw( t/97_meta.t

@@ -38,9 +38,9 @@ use the variable.
 PERLVAR(G, op_mutex,	perl_mutex)	/* Mutex for op refcounting */
 #endif
 PERLVARI(G, curinterp,	PerlInterpreter *, NULL)
-					/* currently running interpreter
-					 * (initial parent interpreter under
-					 * useithreads) */
+                                        /* currently running interpreter
+                                         * (initial parent interpreter under
+                                         * useithreads) */
 #if defined(USE_ITHREADS)
 PERLVAR(G, thr_key,	perl_key)	/* key to retrieve per-thread struct */
 #endif
@@ -57,7 +57,7 @@ PERLVARI(G, sig_handlers_initted, int, 0)
 #endif
 #ifdef FAKE_PERSISTENT_SIGNAL_HANDLERS
 PERLVARA(G, sig_ignoring, SIG_SIZE, int)
-					/* which signals we are ignoring */
+                                        /* which signals we are ignoring */
 #endif
 #ifdef FAKE_DEFAULT_SIGNAL_HANDLERS
 PERLVARA(G, sig_defaulting, SIG_SIZE, int)
@@ -104,10 +104,8 @@ PERLVARI(G, mmap_page_size, IV, 0)
 
 #if defined(USE_ITHREADS)
 PERLVAR(G, hints_mutex, perl_mutex)    /* Mutex for refcounted he refcounting */
-PERLVAR(G, env_mutex, perl_mutex)      /* Mutex for accessing ENV */
-#  if ! defined(USE_THREAD_SAFE_LOCALE) || defined(TS_W32_BROKEN_LOCALECONV)
-PERLVAR(G, locale_mutex, perl_mutex)   /* Mutex for setlocale() changing */
-#  endif
+PERLVAR(G, env_mutex, perl_RnW1_mutex_t)      /* Mutex for accessing ENV */
+PERLVAR(G, locale_mutex, perl_mutex)   /* Mutex related to locale handling */
 #  ifndef USE_THREAD_SAFE_LOCALE
 PERLVAR(G, lc_numeric_mutex, perl_mutex)   /* Mutex for switching LC_NUMERIC */
 #  endif
@@ -192,9 +190,9 @@ PERLVARI(G, veto_cleanup, int, FALSE)	/* exit without cleanup */
 Function pointer, pointing at a function used to handle extended keywords.
 The function should be declared as
 
-	int keyword_plugin_function(pTHX_
-		char *keyword_ptr, STRLEN keyword_len,
-		OP **op_ptr)
+        int keyword_plugin_function(pTHX_
+                char *keyword_ptr, STRLEN keyword_len,
+                OP **op_ptr)
 
 The function is called from the tokeniser, whenever a possible keyword
 is seen.  C<keyword_ptr> points at the word in the parser's input
@@ -307,6 +305,3 @@ PERLVARI(G, strategy_socket,     int, 0)	/* doio.c */
 PERLVARI(G, strategy_accept,     int, 0)	/* doio.c */
 PERLVARI(G, strategy_pipe,       int, 0)	/* doio.c */
 PERLVARI(G, strategy_socketpair, int, 0)	/* doio.c */
-
-#ifdef PERL_IMPLICIT_CONTEXT
-#endif

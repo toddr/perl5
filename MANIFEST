@@ -1,4 +1,5 @@
 .dir-locals.el			Emacs control file
+.editorconfig			EditorConfig style file
 .lgtm.yml			LGTM.com configuration file
 .metaconf-exclusions.txt	Symbols that should ignored when generating Configure
 .travis.yml		continuous integration on github (where enabled)
@@ -248,6 +249,10 @@ cpan/Config-Perl-V/t/31_plv52511.t		Config::Perl::V
 cpan/Config-Perl-V/t/32_plv5261rc1.t		Config::Perl::V
 cpan/Config-Perl-V/t/33_plv52711r.t		Config::Perl::V
 cpan/Config-Perl-V/t/34_plv5280.t		Config::Perl::V
+cpan/Config-Perl-V/t/35_plv52910g.t		Config::Perl::V
+cpan/Config-Perl-V/t/36_plv5300.t		Config::Perl::V
+cpan/Config-Perl-V/t/37_plv53111qm.t		Config::Perl::V
+cpan/Config-Perl-V/t/38_plv5320tld.t		Config::Perl::V
 cpan/Config-Perl-V/V.pm				Config::Perl::V
 cpan/CPAN/lib/App/Cpan.pm		helper package for CPAN.pm
 cpan/CPAN/lib/CPAN.pm			Interface to Comprehensive Perl Archive Network
@@ -1275,7 +1280,6 @@ cpan/libnet/t/config.t		libnet
 cpan/libnet/t/datasend.t	libnet
 cpan/libnet/t/ftp.t		libnet
 cpan/libnet/t/hostname.t	libnet
-cpan/libnet/t/libnet_t.pl	libnet
 cpan/libnet/t/netrc.t		libnet
 cpan/libnet/t/nntp.t		libnet
 cpan/libnet/t/nntp_ipv6.t
@@ -1541,6 +1545,10 @@ cpan/perlfaq/lib/perlfaq8.pod	System Interaction
 cpan/perlfaq/lib/perlfaq9.pod	Networking
 cpan/perlfaq/lib/perlglossary.pod	Perl Glossary
 cpan/PerlIO-via-QuotedPrint/lib/PerlIO/via/QuotedPrint.pm	PerlIO::via::QuotedPrint
+cpan/PerlIO-via-QuotedPrint/t/changes.t
+cpan/PerlIO-via-QuotedPrint/t/critic.t
+cpan/PerlIO-via-QuotedPrint/t/pod.t
+cpan/PerlIO-via-QuotedPrint/t/pod_coverage.t
 cpan/PerlIO-via-QuotedPrint/t/QuotedPrint.t			PerlIO::via::QuotedPrint
 cpan/Pod-Checker/lib/Pod/Checker.pm
 cpan/Pod-Checker/scripts/podchecker.PL
@@ -2396,6 +2404,7 @@ cpan/Test-Simple/t/Legacy/Regression/6_cmp_ok.t
 cpan/Test-Simple/t/Legacy/Regression/736_use_ok.t
 cpan/Test-Simple/t/Legacy/Regression/789-read-only.t
 cpan/Test-Simple/t/Legacy/Regression/870-experimental-warnings.t
+cpan/Test-Simple/t/Legacy/Regression/is_capture.t
 cpan/Test-Simple/t/Legacy/require_ok.t
 cpan/Test-Simple/t/Legacy/run_test.t
 cpan/Test-Simple/t/Legacy/simple.t
@@ -2581,6 +2590,11 @@ cpan/Text-Balanced/t/06_extqlk.t	See if Text::Balanced works
 cpan/Text-Balanced/t/07_exttag.t	See if Text::Balanced works
 cpan/Text-Balanced/t/08_extvar.t	See if Text::Balanced works
 cpan/Text-Balanced/t/09_gentag.t	See if Text::Balanced works
+cpan/Text-Balanced/t/94_changes.t
+cpan/Text-Balanced/t/95_critic.t
+cpan/Text-Balanced/t/96_pmv.t
+cpan/Text-Balanced/t/97_pod.t
+cpan/Text-Balanced/t/98_pod_coverage.t
 cpan/Text-ParseWords/lib/Text/ParseWords.pm	Perl module to split words on arbitrary delimiter
 cpan/Text-ParseWords/t/ParseWords.t		See if Text::ParseWords works
 cpan/Text-ParseWords/t/taint.t			See if Text::ParseWords works with tainting
@@ -3703,6 +3717,7 @@ dist/IO/t/io_pipe.t		See if pipe()-related methods from IO work
 dist/IO/t/io_poll.t		See if poll()-related methods from IO work
 dist/IO/t/io_sel.t		See if select()-related methods from IO work
 dist/IO/t/io_sock.t		See if INET socket-related methods from IO work
+dist/IO/t/io_sock_errstr.t	See if socket constructors put error string in the right place
 dist/IO/t/io_taint.t		See if the untaint method from IO works
 dist/IO/t/io_tell.t		See if seek()/tell()-related methods from IO work
 dist/IO/t/io_udp.t		See if UDP socket-related methods from IO work
@@ -4207,8 +4222,10 @@ ext/GDBM_File/GDBM_File.pm	GDBM extension Perl module
 ext/GDBM_File/GDBM_File.xs	GDBM extension external subroutines
 ext/GDBM_File/hints/sco.pl	Hint for GDBM_File for named architecture
 ext/GDBM_File/Makefile.PL	GDBM extension makefile writer
+ext/GDBM_File/t/count.t		Test if the count method works
 ext/GDBM_File/t/fatal.t		Test the fatal_func argument to gdbm_open
 ext/GDBM_File/t/gdbm.t		See if GDBM_File works
+ext/GDBM_File/t/opt.t		Test if gdbm_setopt and derived methods work
 ext/GDBM_File/typemap		GDBM extension interface types
 ext/Hash-Util/Changes		Change history of Hash::Util
 ext/Hash-Util/lib/Hash/Util.pm	Hash::Util
@@ -4350,6 +4367,7 @@ ext/POSIX/Makefile.PL		POSIX extension makefile writer
 ext/POSIX/POSIX.xs		POSIX extension external subroutines
 ext/POSIX/t/export.t		Test @EXPORT and @EXPORT_OK
 ext/POSIX/t/iscrash		See if POSIX isxxx() crashes with threads on Win32
+ext/POSIX/t/iv_const.t		See if integer constants of POSIX are IV
 ext/POSIX/t/math.t		Basic math tests for POSIX
 ext/POSIX/t/mb.t		Multibyte function tests for POSIX
 ext/POSIX/t/posix.t		See if POSIX works
@@ -5209,10 +5227,14 @@ pod/perl5301delta.pod		Perl changes in version 5.30.1
 pod/perl5302delta.pod		Perl changes in version 5.30.2
 pod/perl5303delta.pod		Perl changes in version 5.30.3
 pod/perl5320delta.pod		Perl changes in version 5.32.0
+pod/perl5321delta.pod		Perl changes in version 5.32.1
 pod/perl5330delta.pod		Perl changes in version 5.33.0
 pod/perl5331delta.pod		Perl changes in version 5.33.1
 pod/perl5332delta.pod		Perl changes in version 5.33.2
 pod/perl5333delta.pod		Perl changes in version 5.33.3
+pod/perl5334delta.pod		Perl changes in version 5.33.4
+pod/perl5335delta.pod		Perl changes in version 5.33.5
+pod/perl5336delta.pod		Perl changes in version 5.33.6
 pod/perl561delta.pod		Perl changes in version 5.6.1
 pod/perl56delta.pod		Perl changes in version 5.6
 pod/perl581delta.pod		Perl changes in version 5.8.1
@@ -5242,6 +5264,7 @@ pod/perldebug.pod		Perl debugging
 pod/perldelta.pod		Perl changes since previous version
 pod/perldeprecation.pod		Perl deprecations
 pod/perldiag.pod		Perl diagnostic messages
+pod/perldocstyle.pod		Perl style guide for core docs
 pod/perldsc.pod			Perl data structures intro
 pod/perldtrace.pod		Perl's support for DTrace
 pod/perlebcdic.pod		Considerations for running Perl on EBCDIC platforms
@@ -5252,6 +5275,7 @@ pod/perlfork.pod		Perl fork() information
 pod/perlform.pod		Perl formats
 pod/perlfunc.pod		Perl built-in functions
 pod/perlgit.pod			Using git with the Perl repository
+pod/perlgov.pod			Perl Rules of Governance
 pod/perlgpl.pod			GNU General Public License
 pod/perlguts.pod		Perl internal functions for those doing extensions
 pod/perlhack.pod		Perl hackers guide
@@ -5336,7 +5360,6 @@ Porting/checkcfgvar.pl		Check that config scripts define all symbols
 Porting/checkpodencoding.pl	Check POD encoding
 Porting/checkURL.pl		Check whether we have working URLs
 Porting/checkVERSION.pl		Check whether we have $VERSIONs
-Porting/cherrymaint		Command line tool for updating cherrymaint
 Porting/cmpVERSION.pl		Compare whether two trees have changed modules
 Porting/config.sh		Sample config.sh
 Porting/config_H		Sample config.h
@@ -5556,6 +5579,7 @@ t/io/inplace.t			See if inplace editing works
 t/io/iofile.t			See if we can load IO::File on demand
 t/io/iprefix.t			See if inplace editing works with prefixes
 t/io/layers.t			See if PerlIO layers work
+t/io/msg.t			See if SysV message queues work
 t/io/nargv.t			See if nested ARGV stuff works
 t/io/open.t			See if open works
 t/io/openpid.t			See if open works for subprocesses
@@ -5604,6 +5628,7 @@ t/lib/Devel/nodb.pm		Module for t/run/switchd.t
 t/lib/Devel/switchd.pm		Module for t/run/switchd.t
 t/lib/Devel/switchd_empty.pm	Module for t/run/switchd.t
 t/lib/Devel/switchd_goto.pm	Module for t/run/switchd.t
+t/lib/feature/bareword_filehandles	Tests for enabling/disabling bareword_filehandles feature
 t/lib/feature/bits		Tests for feature bit handling
 t/lib/feature/bundle		Tests for feature bundles
 t/lib/feature/implicit		Tests for implicit loading of feature.pm
@@ -5936,6 +5961,7 @@ t/op/time.t			See if time functions work
 t/op/time_loop.t		Test that very large values don't hang gmtime and localtime.
 t/op/tr.t			See if tr works
 t/op/tr_latin1.t		See if tr works, but file isn't encoded in UTF-8
+t/op/try.t			See if try works
 t/op/undef.t			See if undef works
 t/op/universal.t		See if UNIVERSAL class works
 t/op/unlink.t			See if unlink works
@@ -6022,6 +6048,7 @@ t/re/fold_grind_T.t		Wrapper for fold_grind.pl for /l testing with a Turkic loca
 t/re/fold_grind_u.t		Wrapper for fold_grind.pl for /u testing
 t/re/keep_tabs.t		Tests where \t can't be expanded.
 t/re/no_utf8_pm.t		Verify utf8.pm doesn't get loaded unless required
+t/re/opt.t				Test regexp optimizations
 t/re/overload.t		Test against string corruption in pattern matches on overloaded objects
 t/re/pat.t			See if esoteric patterns work
 t/re/pat_advanced.t		See if advanced esoteric patterns work
@@ -6161,6 +6188,8 @@ t/win32/fs.t			Test Win32 link for compatibility
 t/win32/popen.t			Test for stdout races in backticks, etc
 t/win32/runenv.t		Test if Win* perl honors its env variables
 t/win32/signal.t		Test Win32 signal emulation
+t/win32/stat.t			Test Win32 stat emulation
+t/win32/symlink.t		Test Win32 symlink
 t/win32/system.t		See if system works in Win*
 t/win32/system_tests		Test runner for system.t
 taint.c				Tainting code
@@ -6252,7 +6281,6 @@ win32/include/sys/errno2.h	Win32 port
 win32/include/sys/socket.h	Win32 port
 win32/list_static_libs.pl	prints libraries for static linking
 win32/Makefile			Win32 makefile for NMAKE (Visual C++ build)
-win32/makefile.mk		Win32 makefile for DMAKE (BC++, VC++ builds)
 win32/perlexe.ico		perlexe.ico image file
 win32/perlexe.manifest		Assembly manifest file
 win32/perlexe.rc		associated perl binary with icon

@@ -366,6 +366,7 @@ my %n2a;    # Inversion of a2n, for each character set
 sub new {
     my $class= shift;
     my %opt= @_;
+    my %hash_return;
     for ( qw(op txt) ) {
         die "in " . __PACKAGE__ . " constructor '$_;' is a mandatory field"
           if !exists $opt{$_};
@@ -437,19 +438,31 @@ sub new {
             die "eval '$1' failed: $@" if $@;
             push @{$opt{txt}}, @results;
             next;
+        } elsif ($str =~ / ^ % \s* ( .* ) /x) { # user-furnished sub() call
+            %hash_return = eval "$1";
+            die "eval '$1' failed: $@" if $@;
+            push @{$opt{txt}}, keys %hash_return;
+            die "Only one multi character expansion currently allowed per rule"
+                                                        if  $self->{multi_maps};
+            next;
         } else {
             die "Unparsable line: $txt\n";
         }
         my ( $cp, $cp_high, $low, $latin1, $utf8 )
                                         = __uni_latin1($charset, $a2n, $str );
+        my $from;
+        if (defined $hash_return{"\"$str\""}) {
+            $from = $hash_return{"\"$str\""};
+            $from = $a2n->[$from] if $from < 256;
+        }
         my $UTF8= $low   || $utf8;
         my $LATIN1= $low || $latin1;
         my $high = (scalar grep { $_ < 256 } @$cp) ? 0 : $utf8;
         #die Dumper($txt,$cp,$low,$latin1,$utf8)
         #    if $txt=~/NEL/ or $utf8 and @$utf8>3;
 
-        @{ $self->{strs}{$str} }{qw( str txt low utf8 latin1 high cp cp_high UTF8 LATIN1 )}=
-          ( $str, $txt, $low, $utf8, $latin1, $high, $cp, $cp_high, $UTF8, $LATIN1 );
+        @{ $self->{strs}{$str} }{qw( str txt low utf8 latin1 high cp cp_high UTF8 LATIN1 from )}=
+          ( $str, $txt, $low, $utf8, $latin1, $high, $cp, $cp_high, $UTF8, $LATIN1, $from );
         my $rec= $self->{strs}{$str};
         foreach my $key ( qw(low utf8 latin1 high cp cp_high UTF8 LATIN1) ) {
             $self->{size}{$key}{ 0 + @{ $self->{strs}{$str}{$key} } }++
@@ -522,9 +535,6 @@ sub pop_count ($) {
 sub _optree {
     my ( $self, $trie, $test_type, $ret_type, $else, $depth )= @_;
     return unless defined $trie;
-    if ( $self->{has_multi} and $ret_type =~ /cp|both/ ) {
-        die "Can't do 'cp' optree from multi-codepoint strings";
-    }
     $ret_type ||= 'len';
     $else= 0  unless defined $else;
     $depth= 0 unless defined $depth;
@@ -535,13 +545,16 @@ sub _optree {
     if (exists $trie->{''} ) {
         # we can now update the "else" value, anything failing to match
         # after this point should return the value from this.
+        my $prefix = $self->{strs}{ $trie->{''} };
         if ( $ret_type eq 'cp' ) {
-            $else= $self->{strs}{ $trie->{''} }{cp}[0];
+            $else= $prefix->{from};
+            $else= $self->{strs}{ $trie->{''} }{cp}[0] unless defined $else;
             $else= $self->val_fmt($else) if $else > 9;
         } elsif ( $ret_type eq 'len' ) {
             $else= $depth;
         } elsif ( $ret_type eq 'both') {
-            $else= $self->{strs}{ $trie->{''} }{cp}[0];
+            $else= $prefix->{from};
+            $else= $self->{strs}{ $trie->{''} }{cp}[0] unless defined $else;
             $else= $self->val_fmt($else) if $else > 9;
             $else= "len=$depth, $else";
         }
@@ -1049,25 +1062,26 @@ sub _cond_as_str {
     my $is_cp_ret = $opts_ref->{ret_type} eq "cp";
     return "( $test )" if !defined $cond;
 
-    # rangify the list.
+    # rangify the list.  As we encounter a new value, it is placed in a new
+    # subarray by itself.  If the next value is adjacent to it, the end point
+    # of the subarray is merely incremented; and so on.  When the next value
+    # that isn't adjacent to the previous one is encountered, Update() is
+    # called to hoist any single-element subarray to be a scalar.
     my @ranges;
     my $Update= sub {
         # We skip this if there are optimizations that
         # we can apply (below) to the individual ranges
         if ( ($is_cp_ret || $combine) && @ranges && ref $ranges[-1]) {
-            if ( $ranges[-1][0] == $ranges[-1][1] ) {
-                $ranges[-1]= $ranges[-1][0];
-            } elsif ( $ranges[-1][0] + 1 == $ranges[-1][1] ) {
-                $ranges[-1]= $ranges[-1][0];
-                push @ranges, $ranges[-1] + 1;
-            }
+            $ranges[-1] = $ranges[-1][0] if $ranges[-1][0] == $ranges[-1][1];
         }
     };
     for my $condition ( @$cond ) {
         if ( !@ranges || $condition != $ranges[-1][1] + 1 ) {
+            # Not adjacent to the existing range.  Remove that from being a
+            # range if only a single value;
             $Update->();
             push @ranges, [ $condition, $condition ];
-        } else {
+        } else {    # Adjacent to the existing range; add to the range
             $ranges[-1][1]++;
         }
     }
@@ -1076,22 +1090,8 @@ sub _cond_as_str {
     return $self->_combine( $test, @ranges )
       if $combine;
 
-    if ($is_cp_ret) {
-        @ranges= map {
-            ref $_
-            ?   "isRANGE( $test, "
-              . $self->val_fmt($_[0]) . ", "
-              . $self->val_fmt($_[1]) . " )"
-            : $self->val_fmt($_) . " == $test";
-        } @ranges;
-
-        return "( " . join( " || ", @ranges ) . " )";
-    }
-
     # If the input set has certain characteristics, we can optimize tests
-    # for it.  This doesn't apply if returning the code point, as we want
-    # each element of the set individually.  The code above is for this
-    # simpler case.
+    # for it.
 
     return 1 if @$cond == 256;  # If all bytes match, is trivially true
 
@@ -1182,7 +1182,7 @@ sub _cond_as_str {
             # bounds.  But inRANGE() allows us to have a single conditional,
             # so the only cost of making sure it's a legal UTF-8 continuation
             # byte is an extra subtraction instruction, a trivial expense.
-            $ranges[$i] = "inRANGE($test, "
+            $ranges[$i] = "inRANGE_helper_(U8, $test, "
                         . $self->val_fmt($ranges[$i]->[0]) .", "
                         . $self->val_fmt($ranges[$i]->[1]) . ")";
         }
@@ -1215,7 +1215,7 @@ sub _combine {
             $cstr= "$test <= " . $self->val_fmt($item->[1]);
         }
         else {
-            $cstr = "inRANGE($test, "
+            $cstr = "inRANGE_helper_(UV, $test, "
                   . $self->val_fmt($item->[0]) . ", "
                   . $self->val_fmt($item->[1]) . ")";
         }
@@ -1270,11 +1270,11 @@ sub _render {
     my $str= "$lb$cond ?$yes$ind: $no$rb";
     if (length $str > 6000) {
         push @$submacros, sprintf "#define $def\n( %s )", "_part"
-                                  . (my $yes_idx= 0+@$submacros), $yes;
+                                  . (my $yes_idx= 0+@$submacros) . "_", $yes;
         push @$submacros, sprintf "#define $def\n( %s )", "_part"
-                                  . (my $no_idx= 0+@$submacros), $no;
-        return sprintf "%s%s ? $def : $def%s", $lb, $cond, "_part$yes_idx",
-                                                            "_part$no_idx", $rb;
+                                  . (my $no_idx= 0+@$submacros) . "_", $no;
+        return sprintf "%s%s ? $def : $def%s", $lb, $cond,
+                                    "_part${yes_idx}_", "_part${no_idx}_", $rb;
     }
     return $str;
 }
@@ -1375,11 +1375,11 @@ if ( !caller ) {
     if ( $path eq '-' ) {
         $out_fh= \*STDOUT;
     } else {
-	$out_fh = open_new( $path );
+        $out_fh = open_new( $path );
     }
     print $out_fh read_only_top( lang => 'C', by => $0,
-				 file => 'regcharclass.h', style => '*',
-				 copyright => [2007, 2011],
+                                 file => 'regcharclass.h', style => '*',
+                                 copyright => [2007, 2011],
                                  final => <<EOF,
 WARNING: These macros are for internal Perl core use only, and may be
 changed or removed without notice.
@@ -1478,7 +1478,7 @@ EOF
     print $out_fh "\n#endif /* PERL_REGCHARCLASS_H_ */\n";
 
     if($path eq '-') {
-	print $out_fh "/* ex: set ro: */\n";
+        print $out_fh "/* ex: set ro: */\n";
     } else {
         # Some of the sources for these macros come from Unicode tables
         my $sources_list = "lib/unicore/mktables.lst";
@@ -1661,36 +1661,36 @@ QUOTEMETA: Meta-characters that \Q should quote
 \p{_Perl_Quotemeta}
 
 MULTI_CHAR_FOLD: multi-char strings that are folded to by a single character
-=> UTF8 :safe
-&regcharclass_multi_char_folds::multi_char_folds('u', 'a')
+=> UTF8 UTF8-cp :safe
+%regcharclass_multi_char_folds::multi_char_folds('u', 'a')
 
 MULTI_CHAR_FOLD: multi-char strings that are folded to by a single character
-=> LATIN1 : safe
-&regcharclass_multi_char_folds::multi_char_folds('l', 'a')
+=> LATIN1 LATIN1-cp : safe
+%regcharclass_multi_char_folds::multi_char_folds('l', 'a')
 
 THREE_CHAR_FOLD: A three-character multi-char fold
 => UTF8 :safe
-&regcharclass_multi_char_folds::multi_char_folds('u', '3')
+%regcharclass_multi_char_folds::multi_char_folds('u', '3')
 
 THREE_CHAR_FOLD: A three-character multi-char fold
 => LATIN1 :safe
-&regcharclass_multi_char_folds::multi_char_folds('l', '3')
+%regcharclass_multi_char_folds::multi_char_folds('l', '3')
 
 THREE_CHAR_FOLD_HEAD: The first two of three-character multi-char folds
 => UTF8 :safe
-&regcharclass_multi_char_folds::multi_char_folds('u', 'h')
+%regcharclass_multi_char_folds::multi_char_folds('u', 'h')
 
 THREE_CHAR_FOLD_HEAD: The first two of three-character multi-char folds
 => LATIN1 :safe
-&regcharclass_multi_char_folds::multi_char_folds('l', 'h')
+%regcharclass_multi_char_folds::multi_char_folds('l', 'h')
 #
 #THREE_CHAR_FOLD_NON_FINAL: The first or middle character of multi-char folds
 #=> UTF8 :safe
-#&regcharclass_multi_char_folds::multi_char_folds('u', 'fm')
+#%regcharclass_multi_char_folds::multi_char_folds('u', 'fm')
 #
 #THREE_CHAR_FOLD_NON_FINAL: The first or middle character of multi-char folds
 #=> LATIN1 :safe
-#&regcharclass_multi_char_folds::multi_char_folds('l', 'fm')
+#%regcharclass_multi_char_folds::multi_char_folds('l', 'fm')
 
 FOLDS_TO_MULTI: characters that fold to multi-char strings
 => UTF8 :fast

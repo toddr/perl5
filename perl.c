@@ -3,7 +3,8 @@
  *
  *    Copyright (C) 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001
  *    2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012
- *    2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020 by Larry Wall and others
+ *    2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021 by Larry Wall
+ *    and others
  *
  *    You may distribute under the terms of either the GNU General Public
  *    License or the Artistic License, as specified in the README file.
@@ -2831,17 +2832,24 @@ Perl_get_hv(pTHX_ const char *name, I32 flags)
 /*
 =for apidoc_section $CV
 
-=for apidoc get_cvn_flags
+=for apidoc get_cv
+=for apidoc_item |CV *|get_cvs|"string"|I32 flags
+=for apidoc_item get_cvn_flags
 
-Returns the CV of the specified Perl subroutine.  C<flags> are passed to
+These return the CV of the specified Perl subroutine.  C<flags> are passed to
 C<gv_fetchpvn_flags>.  If C<GV_ADD> is set and the Perl subroutine does not
 exist then it will be declared (which has the same effect as saying
-C<sub name;>).  If C<GV_ADD> is not set and the subroutine does not exist
+C<sub name;>).  If C<GV_ADD> is not set and the subroutine does not exist,
 then NULL is returned.
 
-=for apidoc get_cv
+The forms differ only in how the subroutine is specified..  With C<get_cvs>,
+the name is a literal C string, enclosed in double quotes.  With C<get_cv>, the
+name is given by the C<name> parameter, which must be a NUL-terminated C
+string.  With C<get_cvn_flags>, the name is also given by the C<name>
+parameter, but it is a Perl string (possibly containing embedded NUL bytes),
+and its length in bytes is contained in the C<len> parameter.
 
-Uses C<strlen> to get the length of C<name>, then calls C<get_cvn_flags>.
+=for apidoc Amnh||GV_ADD
 
 =cut
 */
@@ -3308,34 +3316,34 @@ S_usage(pTHX)		/* XXX move this out into a module ? */
     /* Grouped as 6 lines per C string literal, to keep under the ANSI C 89
        minimum of 509 character string literals.  */
     static const char * const usage_msg[] = {
-"  -0[octal]         specify record separator (\\0, if no argument)\n"
-"  -a                autosplit mode with -n or -p (splits $_ into @F)\n"
-"  -C[number/list]   enables the listed Unicode features\n"
-"  -c                check syntax only (runs BEGIN and CHECK blocks)\n"
-"  -d[:debugger]     run program under debugger\n"
-"  -D[number/list]   set debugging flags (argument is a bit mask or alphabets)\n",
-"  -e program        one line of program (several -e's allowed, omit programfile)\n"
-"  -E program        like -e, but enables all optional features\n"
-"  -f                don't do $sitelib/sitecustomize.pl at startup\n"
-"  -F/pattern/       split() pattern for -a switch (//'s are optional)\n"
-"  -i[extension]     edit <> files in place (makes backup if extension supplied)\n"
-"  -Idirectory       specify @INC/#include directory (several -I's allowed)\n",
-"  -l[octal]         enable line ending processing, specifies line terminator\n"
-"  -[mM][-]module    execute \"use/no module...\" before executing program\n"
-"  -n                assume \"while (<>) { ... }\" loop around program\n"
-"  -p                assume loop like -n but print line also, like sed\n"
-"  -s                enable rudimentary parsing for switches after programfile\n"
-"  -S                look for programfile using PATH environment variable\n",
-"  -t                enable tainting warnings\n"
-"  -T                enable tainting checks\n"
-"  -u                dump core after parsing program\n"
-"  -U                allow unsafe operations\n"
-"  -v                print version, patchlevel and license\n"
-"  -V[:variable]     print configuration summary (or a single Config.pm variable)\n",
-"  -w                enable many useful warnings\n"
-"  -W                enable all warnings\n"
-"  -x[directory]     ignore text before #!perl line (optionally cd to directory)\n"
-"  -X                disable all warnings\n"
+"  -0[octal/hexadecimal] specify record separator (\\0, if no argument)\n"
+"  -a                    autosplit mode with -n or -p (splits $_ into @F)\n"
+"  -C[number/list]       enables the listed Unicode features\n"
+"  -c                    check syntax only (runs BEGIN and CHECK blocks)\n"
+"  -d[t][:MOD]           run program under debugger or module Devel::MOD\n"
+"  -D[number/letters]    set debugging flags (argument is a bit mask or alphabets)\n",
+"  -e commandline        one line of program (several -e's allowed, omit programfile)\n"
+"  -E commandline        like -e, but enables all optional features\n"
+"  -f                    don't do $sitelib/sitecustomize.pl at startup\n"
+"  -F/pattern/           split() pattern for -a switch (//'s are optional)\n"
+"  -i[extension]         edit <> files in place (makes backup if extension supplied)\n"
+"  -Idirectory           specify @INC/#include directory (several -I's allowed)\n",
+"  -l[octnum]            enable line ending processing, specifies line terminator\n"
+"  -[mM][-]module        execute \"use/no module...\" before executing program\n"
+"  -n                    assume \"while (<>) { ... }\" loop around program\n"
+"  -p                    assume loop like -n but print line also, like sed\n"
+"  -s                    enable rudimentary parsing for switches after programfile\n"
+"  -S                    look for programfile using PATH environment variable\n",
+"  -t                    enable tainting warnings\n"
+"  -T                    enable tainting checks\n"
+"  -u                    dump core after parsing program\n"
+"  -U                    allow unsafe operations\n"
+"  -v                    print version, patchlevel and license\n"
+"  -V[:configvar]        print configuration summary (or a single Config.pm variable)\n",
+"  -w                    enable many useful warnings\n"
+"  -W                    enable all warnings\n"
+"  -x[directory]         ignore text before #!perl line (optionally cd to directory)\n"
+"  -X                    disable all warnings\n"
 "  \n"
 "Run 'perldoc perl' for more help with Perl.\n\n",
 NULL
@@ -3812,7 +3820,7 @@ S_minus_v(pTHX)
 #endif
 
 	PerlIO_printf(PIO_stdout,
-		      "\n\nCopyright 1987-2020, Larry Wall\n");
+		      "\n\nCopyright 1987-2021, Larry Wall\n");
 #ifdef MSDOS
 	PerlIO_printf(PIO_stdout,
 		      "\nMS-DOS port Copyright (c) 1989, 1990, Diomidis Spinellis\n");
@@ -4536,8 +4544,6 @@ Perl_init_argv_symbols(pTHX_ int argc, char **argv)
 STATIC void
 S_init_postdump_symbols(pTHX_ int argc, char **argv, char **env)
 {
-#ifdef USE_ITHREADS
-#endif
     GV* tmpgv;
 
     PERL_ARGS_ASSERT_INIT_POSTDUMP_SYMBOLS;

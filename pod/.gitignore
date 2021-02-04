@@ -29,7 +29,6 @@
 /perlsynology.pod
 /perltru64.pod
 /perltw.pod
-/perlvms.pod
 /perlvos.pod
 /perlwin32.pod
 
@@ -49,7 +48,7 @@
 /roffitall
 
 # generated
-/perl5334delta.pod
+/perl5337delta.pod
 /perlapi.pod
 /perlintern.pod
 /perlmodlib.pod

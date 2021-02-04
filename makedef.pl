@@ -455,9 +455,6 @@ unless ($define{'PERL_IMPLICIT_CONTEXT'}) {
 if ($define{USE_THREAD_SAFE_LOCALE}) {
     ++$skip{PL_lc_numeric_mutex};
     ++$skip{PL_lc_numeric_mutex_depth};
-    if (! $define{TS_W32_BROKEN_LOCALECONV}) {
-        ++$skip{PL_locale_mutex};
-    }
 }
 
 unless ($define{'USE_DTRACE'}) {
@@ -487,6 +484,10 @@ unless ($define{'PERL_USES_PL_PIDSTATUS'}) {
 
 unless ($define{'PERL_TRACK_MEMPOOL'}) {
     ++$skip{PL_memory_debug_header};
+}
+
+unless ($define{'PERL_MEM_LOG'}) {
+    ++$skip{PL_mem_log};
 }
 
 unless ($define{'MULTIPLICITY'}) {
@@ -910,6 +911,9 @@ if ($ARGS{PLATFORM} eq 'win32') {
 		    win32_puts
 		    win32_getchar
 		    win32_putchar
+                    win32_symlink
+                    win32_lstat
+                    win32_readlink
 		 ));
 }
 elsif ($ARGS{PLATFORM} eq 'vms') {

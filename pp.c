@@ -3099,8 +3099,12 @@ PP(pp_oct)
         flags |= PERL_SCAN_DISALLOW_PREFIX;
         result_uv = grok_bin (tmps, &len, &flags, &result_nv);
     }
-    else
+    else {
+        if (isALPHA_FOLD_EQ(*tmps, 'o')) {
+            tmps++, len--;
+        }
         result_uv = grok_oct (tmps, &len, &flags, &result_nv);
+    }
 
     if (flags & PERL_SCAN_GREATER_THAN_UV_MAX) {
         SETn(result_nv);
@@ -4809,7 +4813,7 @@ PP(pp_fc)
                         do {
                             extra++;
 
-                            s_peek = (U8 *) memchr(s_peek + 1, 'i',
+                            s_peek = (U8 *) memchr(s_peek + 1, 'I',
                                                    send - (s_peek + 1));
                         } while (s_peek != NULL);
                     }
@@ -4824,8 +4828,14 @@ PP(pp_fc)
                                               + 1 /* Trailing NUL */ );
                     d = (U8*)SvPVX(dest) + len;
 
-                    *d++ = UTF8_TWO_BYTE_HI(GREEK_SMALL_LETTER_MU);
-                    *d++ = UTF8_TWO_BYTE_LO(GREEK_SMALL_LETTER_MU);
+                    if (*s == 'I') {
+                        *d++ = UTF8_TWO_BYTE_HI(LATIN_SMALL_LETTER_DOTLESS_I);
+                        *d++ = UTF8_TWO_BYTE_LO(LATIN_SMALL_LETTER_DOTLESS_I);
+                    }
+                    else {
+                        *d++ = UTF8_TWO_BYTE_HI(GREEK_SMALL_LETTER_MU);
+                        *d++ = UTF8_TWO_BYTE_LO(GREEK_SMALL_LETTER_MU);
+                    }
                     s++;
 
                     for (; s < send; s++) {
@@ -6011,6 +6021,7 @@ PP(pp_split)
 
     /* handle @ary = split(...) optimisation */
     if (PL_op->op_private & OPpSPLIT_ASSIGN) {
+	realarray = 1;
         if (!(PL_op->op_flags & OPf_STACKED)) {
             if (PL_op->op_private & OPpSPLIT_LEX) {
                 if (PL_op->op_private & OPpLVAL_INTRO)
@@ -6033,30 +6044,13 @@ PP(pp_split)
             oldsave = PL_savestack_ix;
         }
 
-	realarray = 1;
-	PUTBACK;
-	av_extend(ary,0);
-	(void)sv_2mortal(SvREFCNT_inc_simple_NN(sv));
-	av_clear(ary);
-	SPAGAIN;
+	/* Some defence against stack-not-refcounted bugs */
+	(void)sv_2mortal(SvREFCNT_inc_simple_NN(ary));
+
 	if ((mg = SvTIED_mg((const SV *)ary, PERL_MAGIC_tied))) {
 	    PUSHMARK(SP);
 	    XPUSHs(SvTIED_obj(MUTABLE_SV(ary), mg));
-	}
-	else {
-	    if (!AvREAL(ary)) {
-		AvREAL_on(ary);
-		AvREIFY_off(ary);
-
-		/* Note: the above av_clear(ary) above should */
-		/* have set AvFILLp(ary) = -1, so this Zero() */
-		/* may well be superfluous.                   */
-
-		/* don't free mere refs */
-		Zero(AvARRAY(ary), AvFILLp(ary) + 1, SV*);
-	    }
-	    /* temporarily switch stacks */
-	    SAVESWITCHSTACK(PL_curstack, ary);
+	} else {
 	    make_mortal = 0;
 	}
     }
@@ -6375,32 +6369,59 @@ PP(pp_split)
     }
 
     PUTBACK;
-    LEAVE_SCOPE(oldsave); /* may undo an earlier SWITCHSTACK */
+    LEAVE_SCOPE(oldsave);
     SPAGAIN;
     if (realarray) {
-	if (!mg) {
-	    if (SvSMAGICAL(ary)) {
-		PUTBACK;
+        if (!mg) {
+            PUTBACK;
+            if(AvREAL(ary)) {
+                if (av_count(ary) > 0)
+                    av_clear(ary);
+            } else {
+                AvREAL_on(ary);
+                AvREIFY_off(ary);
+
+                if (AvMAX(ary) > -1) {
+                    /* don't free mere refs */
+                    Zero(AvARRAY(ary), AvMAX(ary), SV*);
+                }
+            }
+            if(AvMAX(ary) < iters)
+                av_extend(ary,iters);
+            SPAGAIN;
+
+            /* Need to copy the SV*s from the stack into ary */
+            Copy(SP + 1 - iters, AvARRAY(ary), iters, SV*);
+            AvFILLp(ary) = iters - 1;
+
+            if (SvSMAGICAL(ary)) {
+                PUTBACK;
 		mg_set(MUTABLE_SV(ary));
 		SPAGAIN;
-	    }
-	    if (gimme == G_ARRAY) {
-		EXTEND(SP, iters);
-		Copy(AvARRAY(ary), SP + 1, iters, SV*);
-		SP += iters;
-		RETURN;
-	    }
+            }
+
+            if (gimme != G_ARRAY) {
+                /* SP points to the final SV* pushed to the stack. But the SV*  */
+                /* are not going to be used from the stack. Point SP to below   */
+                /* the first of these SV*.                                      */
+                SP -= iters;
+                PUTBACK;
+            }
 	}
 	else {
-	    PUTBACK;
-	    ENTER_with_name("call_PUSH");
-	    call_sv(SV_CONST(PUSH),G_SCALAR|G_DISCARD|G_METHOD_NAMED);
-	    LEAVE_with_name("call_PUSH");
-	    SPAGAIN;
+            PUTBACK;
+            av_extend(ary,iters);
+            av_clear(ary);
+
+            ENTER_with_name("call_PUSH");
+            call_sv(SV_CONST(PUSH),G_SCALAR|G_DISCARD|G_METHOD_NAMED);
+            LEAVE_with_name("call_PUSH");
+            SPAGAIN;
+
 	    if (gimme == G_ARRAY) {
 		SSize_t i;
 		/* EXTEND should not be needed - we just popped them */
-		EXTEND(SP, iters);
+		EXTEND_SKIP(SP, iters);
 		for (i=0; i < iters; i++) {
 		    SV **svp = av_fetch(ary, i, FALSE);
 		    PUSHs((svp) ? *svp : &PL_sv_undef);
@@ -6409,13 +6430,12 @@ PP(pp_split)
 	    }
 	}
     }
-    else {
-	if (gimme == G_ARRAY)
-	    RETURN;
-    }
 
-    GETTARGET;
-    XPUSHi(iters);
+    if (gimme != G_ARRAY) {
+        GETTARGET;
+        XPUSHi(iters);
+     }
+
     RETURN;
 }
 
@@ -7131,10 +7151,17 @@ PP(pp_argcheck)
     too_few = (argc < (params - opt_params));
 
     if (UNLIKELY(too_few || (!slurpy && argc > params)))
-        /* diag_listed_as: Too few arguments for subroutine '%s' */
-        /* diag_listed_as: Too many arguments for subroutine '%s' */
-        Perl_croak_caller("Too %s arguments for subroutine '%" SVf "'",
-                          too_few ? "few" : "many", S_find_runcv_name());
+
+        /* diag_listed_as: Too few arguments for subroutine '%s' (got %d; expected %d) */
+        /* diag_listed_as: Too few arguments for subroutine '%s' (got %d; expected at least %d) */
+        /* diag_listed_as: Too many arguments for subroutine '%s' (got %d; expected %d) */
+        /* diag_listed_as: Too many arguments for subroutine '%s' (got %d; expected at most %d)*/
+        Perl_croak_caller("Too %s arguments for subroutine '%" SVf "' (got %" UVuf "; expected %s%" UVuf ")",
+                          too_few ? "few" : "many",
+                          S_find_runcv_name(),
+                          argc,
+                          too_few ? (slurpy || opt_params ? "at least " : "") : (opt_params ? "at most " : ""),
+                          too_few ? (params - opt_params) : params);
 
     if (UNLIKELY(slurpy == '%' && argc > params && (argc - params) % 2))
         /* diag_listed_as: Odd name/value argument for subroutine '%s' */

@@ -299,7 +299,7 @@ be stored with referential integrity, but will be coerced to strings.
     Perl_refcounted_he_new_pvn(aTHX_ cophh, keypv, keylen, hash, value, flags)
 
 /*
-=for apidoc Amx|COPHH *|cophh_store_pvs|const COPHH *cophh|"key"|SV *value|U32 flags
+=for apidoc Amx|COPHH *|cophh_store_pvs|COPHH *cophh|"key"|SV *value|U32 flags
 
 Like L</cophh_store_pvn>, but takes a literal string instead
 of a string/length pair, and no precomputed hash.
@@ -311,7 +311,7 @@ of a string/length pair, and no precomputed hash.
     Perl_refcounted_he_new_pvn(aTHX_ cophh, STR_WITH_LEN(key), 0, value, flags)
 
 /*
-=for apidoc Amx|COPHH *|cophh_store_pv|const COPHH *cophh|const char *key|U32 hash|SV *value|U32 flags
+=for apidoc Amx|COPHH *|cophh_store_pv|COPHH *cophh|const char *key|U32 hash|SV *value|U32 flags
 
 Like L</cophh_store_pvn>, but takes a nul-terminated string instead of
 a string/length pair.
@@ -323,7 +323,7 @@ a string/length pair.
     Perl_refcounted_he_new_pv(aTHX_ cophh, key, hash, value, flags)
 
 /*
-=for apidoc Amx|COPHH *|cophh_store_sv|const COPHH *cophh|SV *key|U32 hash|SV *value|U32 flags
+=for apidoc Amx|COPHH *|cophh_store_sv|COPHH *cophh|SV *key|U32 hash|SV *value|U32 flags
 
 Like L</cophh_store_pvn>, but takes a Perl scalar instead of a
 string/length pair.
@@ -356,7 +356,7 @@ hash of the key string, or zero if it has not been precomputed.
 	(SV *)NULL, flags)
 
 /*
-=for apidoc Amx|COPHH *|cophh_delete_pvs|const COPHH *cophh|"key"|U32 flags
+=for apidoc Amx|COPHH *|cophh_delete_pvs|COPHH *cophh|"key"|U32 flags
 
 Like L</cophh_delete_pvn>, but takes a literal string instead
 of a string/length pair, and no precomputed hash.
@@ -369,7 +369,7 @@ of a string/length pair, and no precomputed hash.
 	(SV *)NULL, flags)
 
 /*
-=for apidoc Amx|COPHH *|cophh_delete_pv|const COPHH *cophh|const char *key|U32 hash|U32 flags
+=for apidoc Amx|COPHH *|cophh_delete_pv|COPHH *cophh|char *key|U32 hash|U32 flags
 
 Like L</cophh_delete_pvn>, but takes a nul-terminated string instead of
 a string/length pair.
@@ -381,7 +381,7 @@ a string/length pair.
     Perl_refcounted_he_new_pv(aTHX_ cophh, key, hash, (SV *)NULL, flags)
 
 /*
-=for apidoc Amx|COPHH *|cophh_delete_sv|const COPHH *cophh|SV *key|U32 hash|U32 flags
+=for apidoc Amx|COPHH *|cophh_delete_sv|COPHH *cophh|SV *key|U32 hash|U32 flags
 
 Like L</cophh_delete_pvn>, but takes a Perl scalar instead of a
 string/length pair.
@@ -422,6 +422,49 @@ struct cop {
     */
     U32		cop_features;
 };
+
+/*
+=for apidoc Am|const char *|CopFILE|const COP * c
+Returns the name of the file associated with the C<COP> C<c>
+
+=for apidoc Am|STRLEN|CopLINE|const COP * c
+Returns the line number in the source code associated with the C<COP> C<c>
+
+=for apidoc Am|AV *|CopFILEAV|const COP * c
+Returns the AV associated with the C<COP> C<c>
+
+=for apidoc Am|SV *|CopFILESV|const COP * c
+Returns the SV associated with the C<COP> C<c>
+
+=for apidoc Am|void|CopFILE_set|COP * c|const char * pv
+Makes C<pv> the name of the file associated with the C<COP> C<c>
+
+=for apidoc Am|GV *|CopFILEGV|const COP * c
+Returns the GV associated with the C<COP> C<c>
+
+=for apidoc CopFILEGV_set
+Available only on unthreaded perls.  Makes C<pv> the name of the file
+associated with the C<COP> C<c>
+
+=for apidoc Am|HV *|CopSTASH|const COP * c
+Returns the stash associated with C<c>.
+
+=for apidoc Am|bool|CopSTASH_eq|const COP * c|const HV * hv
+Returns a boolean as to whether or not C<hv> is the stash associated with C<c>.
+
+=for apidoc Am|bool|CopSTASH_set|COP * c|HV * hv
+Set the stash associated with C<c> to C<hv>.
+
+=for apidoc Am|char *|CopSTASHPV|const COP * c
+Returns the package name of the stash associated with C<c>, or C<NULL> if no
+associated stash
+
+=for apidoc Am|void|CopSTASHPV_set|COP * c|const char * pv
+Set the package name of the stash associated with C<c>, to the NUL-terminated C
+string C<p>, creating the package if necessary.
+
+=cut
+*/
 
 #ifdef USE_ITHREADS
 #  define CopFILE(c)		((c)->cop_file)
@@ -818,6 +861,9 @@ struct subst {
     void *	sbu_rxres;
     REGEXP *	sbu_rx;
 };
+
+#ifdef PERL_CORE
+
 #define sb_iters	cx_u.cx_subst.sbu_iters
 #define sb_maxiters	cx_u.cx_subst.sbu_maxiters
 #define sb_rflags	cx_u.cx_subst.sbu_rflags
@@ -831,7 +877,6 @@ struct subst {
 #define sb_rxres	cx_u.cx_subst.sbu_rxres
 #define sb_rx		cx_u.cx_subst.sbu_rx
 
-#ifdef PERL_CORE
 #  define CX_PUSHSUBST(cx) CXINC, cx = CX_CUR(),		        \
 	cx->blk_oldsaveix = oldsave,				        \
 	cx->sb_iters		= iters,				\
@@ -895,7 +940,7 @@ struct context {
                              or plain block { ...; } */
 #define CXt_SUB		9
 #define CXt_FORMAT     10
-#define CXt_EVAL       11
+#define CXt_EVAL       11 /* eval'', eval{}, try{} */
 #define CXt_SUBST      12
 /* SUBST doesn't feature in all switch statements.  */
 
@@ -908,7 +953,8 @@ struct context {
 
 /* private flags for CXt_EVAL */
 #define CXp_REAL	0x20	/* truly eval'', not a lookalike */
-#define CXp_TRYBLOCK	0x40	/* eval{}, not eval'' or similar */
+#define CXp_EVALBLOCK	0x40	/* eval{}, not eval'' or similar */
+#define CXp_TRY         0x80    /* try {} block */
 
 /* private flags for CXt_LOOP */
 
@@ -930,10 +976,16 @@ struct context {
 #define CxMULTICALL(c)	((c)->cx_type & CXp_MULTICALL)
 #define CxREALEVAL(c)	(((c)->cx_type & (CXTYPEMASK|CXp_REAL))		\
 			 == (CXt_EVAL|CXp_REAL))
-#define CxTRYBLOCK(c)	(((c)->cx_type & (CXTYPEMASK|CXp_TRYBLOCK))	\
-			 == (CXt_EVAL|CXp_TRYBLOCK))
+#define CxEVALBLOCK(c)	(((c)->cx_type & (CXTYPEMASK|CXp_EVALBLOCK))	\
+			 == (CXt_EVAL|CXp_EVALBLOCK))
+#define CxTRY(c)        (((c)->cx_type & (CXTYPEMASK|CXp_TRY))          \
+                         == (CXt_EVAL|CXp_TRY))
 #define CxFOREACH(c)	(   CxTYPE(cx) >= CXt_LOOP_ARY                  \
                          && CxTYPE(cx) <= CXt_LOOP_LIST)
+
+/* deprecated old name before real try/catch was added */
+#define CXp_TRYBLOCK    CXp_EVALBLOCK
+#define CxTRYBLOCK(c)   CxEVALBLOCK(c)
 
 #define CXINC (cxstack_ix < cxstack_max ? ++cxstack_ix : (cxstack_ix = cxinc()))
 

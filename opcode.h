@@ -13,6 +13,8 @@
  * Any changes made here will be lost!
  */
 
+#if defined(PERL_CORE) || defined(PERL_EXT)
+
 #define Perl_pp_scalar Perl_pp_null
 #define Perl_pp_padany Perl_unimplemented_op
 #define Perl_pp_regcmaybe Perl_pp_null
@@ -138,6 +140,9 @@
 #define Perl_pp_sgrent Perl_pp_ehostent
 #define Perl_pp_egrent Perl_pp_ehostent
 #define Perl_pp_custom Perl_unimplemented_op
+
+#endif /* End of if defined(PERL_CORE) || defined(PERL_EXT) */
+
 START_EXTERN_C
 
 #ifndef DOINIT
@@ -544,7 +549,8 @@ EXTCONST char* const PL_op_name[] = {
 	"isa",
 	"cmpchain_and",
 	"cmpchain_dup",
-	"freed",
+	"catch",
+        "freed",
 };
 #endif
 
@@ -952,7 +958,8 @@ EXTCONST char* const PL_op_desc[] = {
 	"derived class test",
 	"comparison chaining",
 	"comparand shuffling",
-	"freed op",
+	"catch {} block",
+        "freed op",
 };
 #endif
 
@@ -1363,6 +1370,7 @@ EXT Perl_ppaddr_t PL_ppaddr[] /* or perlvars.h */
 	Perl_pp_isa,
 	Perl_pp_cmpchain_and,
 	Perl_pp_cmpchain_dup,
+	Perl_pp_catch,
 }
 #endif
 ;
@@ -1770,6 +1778,7 @@ EXT Perl_check_t PL_check[] /* or perlvars.h */
 	Perl_ck_isa,		/* isa */
 	Perl_ck_null,		/* cmpchain_and */
 	Perl_ck_null,		/* cmpchain_dup */
+	Perl_ck_null,		/* catch */
 }
 #endif
 ;
@@ -2178,6 +2187,7 @@ EXTCONST U32 PL_opargs[] = {
 	0x00000204,	/* isa */
 	0x00000300,	/* cmpchain_and */
 	0x00000100,	/* cmpchain_dup */
+	0x00000300,	/* catch */
 };
 #endif
 
@@ -2845,6 +2855,7 @@ EXTCONST I16  PL_op_private_bitdef_ix[] = {
       12, /* isa */
        0, /* cmpchain_and */
        0, /* cmpchain_dup */
+       0, /* catch */
 
 };
 
@@ -2863,7 +2874,7 @@ EXTCONST I16  PL_op_private_bitdef_ix[] = {
  */
 
 EXTCONST U16  PL_op_private_bitdefs[] = {
-    0x0003, /* scalar, prototype, refgen, srefgen, readline, regcmaybe, regcreset, regcomp, substcont, chop, schop, defined, undef, study, preinc, i_preinc, predec, i_predec, postinc, i_postinc, postdec, i_postdec, negate, i_negate, not, complement, ucfirst, lcfirst, uc, lc, quotemeta, aeach, avalues, each, pop, shift, grepstart, mapstart, mapwhile, range, and, or, dor, andassign, orassign, dorassign, argcheck, argdefelem, method, method_named, method_super, method_redir, method_redir_super, entergiven, leavegiven, enterwhen, leavewhen, untie, tied, dbmclose, getsockname, getpeername, lstat, stat, readlink, readdir, telldir, rewinddir, closedir, localtime, alarm, require, dofile, entertry, ghbyname, gnbyname, gpbyname, shostent, snetent, sprotoent, sservent, gpwnam, gpwuid, ggrnam, ggrgid, lock, once, fc, anonconst, cmpchain_and, cmpchain_dup */
+    0x0003, /* scalar, prototype, refgen, srefgen, readline, regcmaybe, regcreset, regcomp, substcont, chop, schop, defined, undef, study, preinc, i_preinc, predec, i_predec, postinc, i_postinc, postdec, i_postdec, negate, i_negate, not, complement, ucfirst, lcfirst, uc, lc, quotemeta, aeach, avalues, each, pop, shift, grepstart, mapstart, mapwhile, range, and, or, dor, andassign, orassign, dorassign, argcheck, argdefelem, method, method_named, method_super, method_redir, method_redir_super, entergiven, leavegiven, enterwhen, leavewhen, untie, tied, dbmclose, getsockname, getpeername, lstat, stat, readlink, readdir, telldir, rewinddir, closedir, localtime, alarm, require, dofile, entertry, ghbyname, gnbyname, gpbyname, shostent, snetent, sprotoent, sservent, gpwnam, gpwuid, ggrnam, ggrgid, lock, once, fc, anonconst, cmpchain_and, cmpchain_dup, catch */
     0x2fdc, 0x41b9, /* pushmark */
     0x00bd, /* wantarray, runcv */
     0x0438, 0x1a50, 0x426c, 0x3d28, 0x3505, /* const */
@@ -3341,6 +3352,7 @@ EXTCONST U8 PL_op_private_valid[] = {
     /* ISA        */ (OPpARG2_MASK),
     /* CMPCHAIN_AND */ (OPpARG1_MASK),
     /* CMPCHAIN_DUP */ (OPpARG1_MASK),
+    /* CATCH      */ (OPpARG1_MASK),
 
 };
 

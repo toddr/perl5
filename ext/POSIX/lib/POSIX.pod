@@ -32,6 +32,11 @@ and other miscellaneous objects.  The remaining sections list various
 constants and macros in an organization which roughly follows IEEE Std
 1003.1b-1993.
 
+The notation C<[C99]> indicates functions that were added in the ISO/IEC
+9899:1999 version of the C language standard.  Some may not be available
+on your system if it adheres to an earlier standard.  Attempts to use
+any missing one will result in a fatal runtime error message.
+
 =head1 CAVEATS
 
 I<Everything is exported by default> (with a handful of exceptions).
@@ -138,6 +143,10 @@ and it is called thusly
 The C<$mon> is zero-based: January equals C<0>.  The C<$year> is
 1900-based: 2001 equals C<101>.  C<$wday> and C<$yday> default to zero
 (and are usually ignored anyway), and C<$isdst> defaults to -1.
+
+Note the result is always in English.  Use C<L</strftime>> instead to
+get a result suitable for the current locale.  That function's C<%c>
+format yields the locale's preferred representation.
 
 =item C<asin>
 

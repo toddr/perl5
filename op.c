@@ -724,12 +724,28 @@ S_no_bareword_allowed(pTHX_ OP *o)
     o->op_private &= ~OPpCONST_STRICT; /* prevent warning twice about the same OP */
 }
 
+void
+Perl_no_bareword_filehandle(pTHX_ const char *fhname) {
+    PERL_ARGS_ASSERT_NO_BAREWORD_FILEHANDLE;
+
+    if (strNE(fhname, "STDERR")
+        && strNE(fhname, "STDOUT")
+        && strNE(fhname, "STDIN")
+        && strNE(fhname, "_")
+        && strNE(fhname, "ARGV")
+        && strNE(fhname, "ARGVOUT")
+        && strNE(fhname, "DATA")) {
+        qerror(Perl_mess(aTHX_ "Bareword filehandle \"%s\" not allowed under 'no feature \"bareword_filehandles\"'", fhname));
+    }
+}
+
 /* "register" allocation */
 
 PADOFFSET
 Perl_allocmy(pTHX_ const char *const name, const STRLEN len, const U32 flags)
 {
     PADOFFSET off;
+    bool is_idfirst, is_default;
     const bool is_our = (PL_parser->in_my == KEY_our);
 
     PERL_ARGS_ASSERT_ALLOCMY;
@@ -738,14 +754,15 @@ Perl_allocmy(pTHX_ const char *const name, const STRLEN len, const U32 flags)
 	Perl_croak(aTHX_ "panic: allocmy illegal flag bits 0x%" UVxf,
 		   (UV)flags);
 
+    is_idfirst = flags & SVf_UTF8
+        ? isIDFIRST_utf8_safe((U8*)name + 1, name + len)
+        : isIDFIRST_A(name[1]);
+
+    /* $_, @_, etc. */
+    is_default = len == 2 && name[1] == '_';
+
     /* complain about "my $<special_var>" etc etc */
-    if (   len
-        && !(  is_our
-            || isALPHA(name[1])
-            || (   (flags & SVf_UTF8)
-                && isIDFIRST_utf8_safe((U8 *)name+1, name + len))
-            || (name[1] == '_' && len > 2)))
-    {
+    if (!is_our && (!is_idfirst || is_default)) {
         const char * const type =
               PL_parser->in_my == KEY_sigvar ? "subroutine signature" :
               PL_parser->in_my == KEY_state  ? "\"state\""     : "\"my\"";
@@ -1406,8 +1423,6 @@ void
 Perl_op_refcnt_lock(pTHX)
   PERL_TSA_ACQUIRE(PL_op_mutex)
 {
-#ifdef USE_ITHREADS
-#endif
     PERL_UNUSED_CONTEXT;
     OP_REFCNT_LOCK;
 }
@@ -1416,8 +1431,6 @@ void
 Perl_op_refcnt_unlock(pTHX)
   PERL_TSA_RELEASE(PL_op_mutex)
 {
-#ifdef USE_ITHREADS
-#endif
     PERL_UNUSED_CONTEXT;
     OP_REFCNT_UNLOCK;
 }
@@ -5595,7 +5608,7 @@ Perl_cmpchain_finish(pTHX_ OP *ch)
 	    cmpop->op_private = 2;
 	    cmpop = CHECKOP(cmpoptype, cmpop);
 	    if(!cmpop->op_next && cmpop->op_type == cmpoptype)
-		cmpop = fold_constants(op_integerize(op_std_init(cmpop)));
+		cmpop = op_integerize(op_std_init(cmpop));
 	    condop = condop ? newLOGOP(OP_CMPCHAIN_AND, 0, cmpop, condop) :
 			cmpop;
 	    if (!nextrightarg)
@@ -12740,6 +12753,8 @@ Perl_ck_eval(pTHX_ OP *o)
 	    op_free(o);
 
             enter = alloc_LOGOP(OP_ENTERTRY, NULL, NULL);
+            if(o->op_flags & OPf_SPECIAL)
+                enter->op_flags |= OPf_SPECIAL;
 
 	    /* establish postfix order */
 	    enter->op_next = (OP*)enter;
@@ -13092,6 +13107,11 @@ Perl_ck_fun(pTHX_ OP *o)
 		    {
 			OP * const newop = newGVOP(OP_GV, 0,
 			    gv_fetchsv(((SVOP*)kid)->op_sv, GV_ADD, SVt_PVIO));
+                        /* a first argument is handled by toke.c, ideally we'd
+                         just check here but several ops don't use ck_fun() */
+                        if (!FEATURE_BAREWORD_FILEHANDLES_IS_ENABLED && numargs > 1) {
+                            no_bareword_filehandle(SvPVX(cSVOPx_sv((SVOP*)kid)));
+                        }
                         /* replace kid with newop in chain */
                         op_sibling_splice(o, prev_kid, 1, newop);
 			op_free(kid);
@@ -15161,6 +15181,9 @@ Perl_ck_trunc(pTHX_ OP *o)
 	{
 	    o->op_flags |= OPf_SPECIAL;
 	    kid->op_private &= ~OPpCONST_STRICT;
+            if (!FEATURE_BAREWORD_FILEHANDLES_IS_ENABLED) {
+                no_bareword_filehandle(SvPVX(cSVOPx_sv(kid)));
+            }
 	}
     }
     return ck_fun(o);
@@ -17880,7 +17903,7 @@ Perl_rpeep(pTHX_ OP *o)
                 || !r                      /* .... = (); */
                 || !(l & ~AAS_SAFE_SCALAR) /* (undef, pos()) = ...; */
                 || !(r & ~AAS_SAFE_SCALAR) /* ... = (1,2,length,undef); */
-                || (lscalars < 2)          /* ($x, undef) = ... */
+                || (lscalars < 2)          /* (undef, $x) = ... */
             ) {
                 NOOP; /* always safe */
             }

@@ -797,15 +797,19 @@ SKIP: {
 	env_is(__NoNeLoCaL => '');
 
     SKIP: {
-	    skip("\$0 check only on Linux and FreeBSD", 2)
-		unless $^O =~ /^(linux|android|freebsd)$/
-		    && open CMDLINE, "/proc/$$/cmdline";
+	    skip("\$0 check only on Linux, Dragonfly BSD and FreeBSD", 2)
+		unless $^O =~ /^(linux|android|dragonfly|freebsd)$/;
 
-	    chomp(my $line = scalar <CMDLINE>);
-	    my $me = (split /\0/, $line)[0];
-	    is $me, $0, 'altering $0 is effective (testing with /proc/)';
-	    close CMDLINE;
-            skip("\$0 check with 'ps' only on Linux (but not Android) and FreeBSD", 1) if $^O eq 'android';
+            SKIP: {
+                skip("No procfs cmdline support", 1)
+                    unless open CMDLINE, "/proc/$$/cmdline";
+
+                chomp(my $line = scalar <CMDLINE>);
+                my $me = (split /\0/, $line)[0];
+                is $me, $0, 'altering $0 is effective (testing with /proc/)';
+                close CMDLINE;
+            }
+            skip("No \$0 check with 'ps' on Android", 1) if $^O eq 'android';
             # perlbug #22811
             my $mydollarzero = sub {
               my($arg) = shift;
@@ -815,23 +819,25 @@ SKIP: {
               my $ps = (`ps -o command= -p $$`)[-1];
               return if $?;
               chomp $ps;
-              printf "# 0[%s]ps[%s]\n", $0, $ps;
               $ps;
             };
             my $ps = $mydollarzero->("x");
-            ok(!$ps  # we allow that something goes wrong with the ps command
-	       # In Linux 2.4 we would get an exact match ($ps eq 'x') but
-	       # in Linux 2.2 there seems to be something funny going on:
-	       # it seems as if the original length of the argv[] would
-	       # be stored in the proc struct and then used by ps(1),
-	       # no matter what characters we use to pad the argv[].
-	       # (And if we use \0:s, they are shown as spaces.)  Sigh.
-               || $ps =~ /^x\s*$/
-	       # FreeBSD cannot get rid of both the leading "perl :"
-	       # and the trailing " (perl)": some FreeBSD versions
-	       # can get rid of the first one.
-	       || ($^O eq 'freebsd' && $ps =~ m/^(?:perl: )?x(?: \(perl\))?$/),
-		       'altering $0 is effective (testing with `ps`)');
+            # we allow that something goes wrong with the ps command
+            !$ps && skip("The ps command failed", 1);
+            my $ps_re = ( $^O =~ /^(dragonfly|freebsd)$/ )
+                # FreeBSD cannot get rid of both the leading "perl :"
+                # and the trailing " (perl)": some FreeBSD versions
+                # can get rid of the first one.
+                ? qr/^(?:perl: )?x(?: \(perl\))?$/
+                # In Linux 2.4 we would get an exact match ($ps eq 'x') but
+                # in Linux 2.2 there seems to be something funny going on:
+                # it seems as if the original length of the argv[] would
+                # be stored in the proc struct and then used by ps(1),
+                # no matter what characters we use to pad the argv[].
+                # (And if we use \0:s, they are shown as spaces.)  Sigh.
+               : qr/^x\s*$/
+            ;
+            like($ps, $ps_re, 'altering $0 is effective (testing with `ps`)');
 	}
 }
 

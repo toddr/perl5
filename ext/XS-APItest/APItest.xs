@@ -6853,10 +6853,21 @@ test_Gconvert(SV * number, SV * num_digits)
     PREINIT:
         char buffer[100];
         int len;
+        int extras;
     CODE:
         len = (int) SvIV(num_digits);
-        if (len > 99) croak("Too long a number for test_Gconvert");
-        if (len < 0) croak("Too short a number for test_Gconvert");
+        /* To silence a -Wformat-overflow compiler warning we     *
+         * make allowance for the following characters that may   *
+         * appear, in addition to the digits of the significand:  *
+         * a leading "-", a single byte radix point, "e-", the    *
+         * terminating NULL, and a 3 or 4 digit exponent.         *
+         * Ie, allow 8 bytes if nvtype is "double", otherwise 9   *
+         * bytes (as the exponent could then contain 4 digits ).  */
+        extras = sizeof(NV) == 8 ? 8 : 9;
+        if(len > 100 - extras)
+            croak("Too long a number for test_Gconvert");
+        if (len < 0)
+            croak("Too short a number for test_Gconvert");
         PERL_UNUSED_RESULT(Gconvert(SvNV(number), len,
                  0,    /* No trailing zeroes */
                  buffer));
@@ -6935,6 +6946,31 @@ Comctl32Version()
 
 #endif
 
+
+MODULE = XS::APItest                PACKAGE = XS::APItest::RWMacro
+
+#if defined(USE_ITHREADS)
+
+void
+compile_macros()
+    PREINIT:
+        perl_RnW1_mutex_t m;
+	perl_RnW1_mutex_t *pm = &m;
+    CODE:
+        PERL_RW_MUTEX_INIT(&m);
+        PERL_WRITE_LOCK(&m);
+        PERL_WRITE_UNLOCK(&m);
+        PERL_READ_LOCK(&m);
+        PERL_READ_UNLOCK(&m);
+        PERL_RW_MUTEX_DESTROY(&m);
+        PERL_RW_MUTEX_INIT(pm);
+        PERL_WRITE_LOCK(pm);
+        PERL_WRITE_UNLOCK(pm);
+        PERL_READ_LOCK(pm);
+        PERL_READ_UNLOCK(pm);
+        PERL_RW_MUTEX_DESTROY(pm);
+
+#endif
 
 MODULE = XS::APItest                PACKAGE = XS::APItest::HvMacro
 

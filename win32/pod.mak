@@ -63,11 +63,15 @@ POD = perl.pod	\
 	perl5302delta.pod	\
 	perl5303delta.pod	\
 	perl5320delta.pod	\
+	perl5321delta.pod	\
 	perl5330delta.pod	\
 	perl5331delta.pod	\
 	perl5332delta.pod	\
 	perl5333delta.pod	\
 	perl5334delta.pod	\
+	perl5335delta.pod	\
+	perl5336delta.pod	\
+	perl5337delta.pod	\
 	perl561delta.pod	\
 	perl56delta.pod	\
 	perl581delta.pod	\
@@ -98,6 +102,7 @@ POD = perl.pod	\
 	perldelta.pod	\
 	perldeprecation.pod	\
 	perldiag.pod	\
+	perldocstyle.pod	\
 	perldsc.pod	\
 	perldtrace.pod	\
 	perlebcdic.pod	\
@@ -108,6 +113,7 @@ POD = perl.pod	\
 	perlform.pod	\
 	perlfunc.pod	\
 	perlgit.pod	\
+	perlgov.pod	\
 	perlgpl.pod	\
 	perlguts.pod	\
 	perlhack.pod	\
@@ -227,11 +233,15 @@ MAN = perl.man	\
 	perl5302delta.man	\
 	perl5303delta.man	\
 	perl5320delta.man	\
+	perl5321delta.man	\
 	perl5330delta.man	\
 	perl5331delta.man	\
 	perl5332delta.man	\
 	perl5333delta.man	\
 	perl5334delta.man	\
+	perl5335delta.man	\
+	perl5336delta.man	\
+	perl5337delta.man	\
 	perl561delta.man	\
 	perl56delta.man	\
 	perl581delta.man	\
@@ -262,6 +272,7 @@ MAN = perl.man	\
 	perldelta.man	\
 	perldeprecation.man	\
 	perldiag.man	\
+	perldocstyle.man	\
 	perldsc.man	\
 	perldtrace.man	\
 	perlebcdic.man	\
@@ -272,6 +283,7 @@ MAN = perl.man	\
 	perlform.man	\
 	perlfunc.man	\
 	perlgit.man	\
+	perlgov.man	\
 	perlgpl.man	\
 	perlguts.man	\
 	perlhack.man	\
@@ -391,11 +403,15 @@ HTML = perl.html	\
 	perl5302delta.html	\
 	perl5303delta.html	\
 	perl5320delta.html	\
+	perl5321delta.html	\
 	perl5330delta.html	\
 	perl5331delta.html	\
 	perl5332delta.html	\
 	perl5333delta.html	\
 	perl5334delta.html	\
+	perl5335delta.html	\
+	perl5336delta.html	\
+	perl5337delta.html	\
 	perl561delta.html	\
 	perl56delta.html	\
 	perl581delta.html	\
@@ -426,6 +442,7 @@ HTML = perl.html	\
 	perldelta.html	\
 	perldeprecation.html	\
 	perldiag.html	\
+	perldocstyle.html	\
 	perldsc.html	\
 	perldtrace.html	\
 	perlebcdic.html	\
@@ -436,6 +453,7 @@ HTML = perl.html	\
 	perlform.html	\
 	perlfunc.html	\
 	perlgit.html	\
+	perlgov.html	\
 	perlgpl.html	\
 	perlguts.html	\
 	perlhack.html	\
@@ -555,11 +573,15 @@ TEX = perl.tex	\
 	perl5302delta.tex	\
 	perl5303delta.tex	\
 	perl5320delta.tex	\
+	perl5321delta.tex	\
 	perl5330delta.tex	\
 	perl5331delta.tex	\
 	perl5332delta.tex	\
 	perl5333delta.tex	\
 	perl5334delta.tex	\
+	perl5335delta.tex	\
+	perl5336delta.tex	\
+	perl5337delta.tex	\
 	perl561delta.tex	\
 	perl56delta.tex	\
 	perl581delta.tex	\
@@ -590,6 +612,7 @@ TEX = perl.tex	\
 	perldelta.tex	\
 	perldeprecation.tex	\
 	perldiag.tex	\
+	perldocstyle.tex	\
 	perldsc.tex	\
 	perldtrace.tex	\
 	perlebcdic.tex	\
@@ -600,6 +623,7 @@ TEX = perl.tex	\
 	perlform.tex	\
 	perlfunc.tex	\
 	perlgit.tex	\
+	perlgov.tex	\
 	perlgpl.tex	\
 	perlguts.tex	\
 	perlhack.tex	\

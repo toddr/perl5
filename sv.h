@@ -281,52 +281,50 @@ Returns the value of the object's reference count. Exposed
 to perl code via Internals::SvREFCNT().
 
 =for apidoc SvREFCNT_inc
-Increments the reference count of the given SV, returning the SV.
+=for apidoc_item SvREFCNT_inc_NN
+=for apidoc_item SvREFCNT_inc_void
+=for apidoc_item |void|SvREFCNT_inc_void_NN|SV* sv
+=for apidoc_item |SV*|SvREFCNT_inc_simple|SV* sv
+=for apidoc_item |SV*|SvREFCNT_inc_simple_NN|SV* sv
+=for apidoc_item |void|SvREFCNT_inc_simple_void|SV* sv
+=for apidoc_item |void|SvREFCNT_inc_simple_void_NN|SV* sv
 
-All of the following C<SvREFCNT_inc>* are optimized versions of
-C<SvREFCNT_inc>, and can be replaced with C<SvREFCNT_inc>.
+These all increment the reference count of the given SV.
+The ones without C<void> in their names return the SV.
 
-=for apidoc SvREFCNT_inc_NN
-Same as C<SvREFCNT_inc>, but can only be used if you know C<sv>
-is not C<NULL>.  Since we don't have to check the NULLness, it's faster
-and smaller.
+C<SvREFCNT_inc> is the base operation; the rest are optimizations if various
+input constraints are known to be true; hence, all can be replaced with
+C<SvREFCNT_inc>.
 
-=for apidoc SvREFCNT_inc_void
-Same as C<SvREFCNT_inc>, but can only be used if you don't need the
+C<SvREFCNT_inc_NN> can only be used if you know C<sv> is not C<NULL>.  Since we
+don't have to check the NULLness, it's faster and smaller.
+
+C<SvREFCNT_inc_void> can only be used if you don't need the
 return value.  The macro doesn't need to return a meaningful value.
 
-=for apidoc Am|void|SvREFCNT_inc_void_NN|SV* sv
-Same as C<SvREFCNT_inc>, but can only be used if you don't need the return
-value, and you know that C<sv> is not C<NULL>.  The macro doesn't need
-to return a meaningful value, or check for NULLness, so it's smaller
-and faster.
+C<SvREFCNT_inc_void_NN> can only be used if you both don't need the return
+value, and you know that C<sv> is not C<NULL>.  The macro doesn't need to
+return a meaningful value, or check for NULLness, so it's smaller and faster.
 
-=for apidoc Am|SV*|SvREFCNT_inc_simple|SV* sv
-Same as C<SvREFCNT_inc>, but can only be used with expressions without side
+C<SvREFCNT_inc_simple> can only be used with expressions without side
 effects.  Since we don't have to store a temporary value, it's faster.
 
-=for apidoc Am|SV*|SvREFCNT_inc_simple_NN|SV* sv
-Same as C<SvREFCNT_inc_simple>, but can only be used if you know C<sv>
-is not C<NULL>.  Since we don't have to check the NULLness, it's faster
-and smaller.
+C<SvREFCNT_inc_simple_NN> can only be used with expressions without side
+effects and you know C<sv> is not C<NULL>.  Since we don't have to store a
+temporary value, nor check for NULLness, it's faster and smaller.
 
-=for apidoc Am|void|SvREFCNT_inc_simple_void|SV* sv
-Same as C<SvREFCNT_inc_simple>, but can only be used if you don't need the
-return value.  The macro doesn't need to return a meaningful value.
+C<SvREFCNT_inc_simple_void> can only be used with expressions without side
+effects and you don't need the return value.
 
-=for apidoc Am|void|SvREFCNT_inc_simple_void_NN|SV* sv
-Same as C<SvREFCNT_inc>, but can only be used if you don't need the return
-value, and you know that C<sv> is not C<NULL>.  The macro doesn't need
-to return a meaningful value, or check for NULLness, so it's smaller
-and faster.
+C<SvREFCNT_inc_simple_void_NN> can only be used with expressions without side
+effects, you don't need the return value, and you know C<sv> is not C<NULL>.
 
 =for apidoc SvREFCNT_dec
-Decrements the reference count of the given SV.  C<sv> may be C<NULL>.
+=for apidoc_item SvREFCNT_dec_NN
 
-=for apidoc SvREFCNT_dec_NN
-Same as C<SvREFCNT_dec>, but can only be used if you know C<sv>
-is not C<NULL>.  Since we don't have to check the NULLness, it's faster
-and smaller.
+These decrement the reference count of the given SV.
+
+C<SvREFCNT_dec_NN> may only be used when C<sv> is known to not be C<NULL>.
 
 =for apidoc Am|svtype|SvTYPE|SV* sv
 Returns the type of the SV.  See C<L</svtype>>.
@@ -749,7 +747,7 @@ Returns a boolean indicating whether the SV contains a v-string.
 =for apidoc Am|U32|SvOOK|SV* sv
 Returns a U32 indicating whether the pointer to the string buffer is offset.
 This hack is used internally to speed up removal of characters from the
-beginning of a C<SvPV>.  When C<SvOOK> is true, then the start of the
+beginning of a C<L</SvPV>>.  When C<SvOOK> is true, then the start of the
 allocated string buffer is actually C<SvOOK_offset()> bytes before C<SvPVX>.
 This offset used to be stored in C<SvIVX>, but is now stored within the spare
 part of the buffer.
@@ -782,13 +780,25 @@ Returns the raw value in the SV's NV slot, without checks or conversions.
 Only use when you are sure C<SvNOK> is true.  See also C<L</SvNV>>.
 
 =for apidoc Am|char*|SvPVX|SV* sv
-Returns a pointer to the physical string in the SV.  The SV must contain a
-string.  Prior to 5.9.3 it is not safe
-to execute this macro unless the SV's
+=for apidoc_item |char*|SvPVXx|SV* sv
+=for apidoc_item |const char*|SvPVX_const|SV* sv
+=for apidoc_item |char*|SvPVX_mutable|SV* sv
+
+These return a pointer to the physical string in the SV.  The SV must contain a
+string.  Prior to 5.9.3 it is not safe to execute these unless the SV's
 type >= C<SVt_PV>.
 
-This is also used to store the name of an autoloaded subroutine in an XS
+These are also used to store the name of an autoloaded subroutine in an XS
 AUTOLOAD routine.  See L<perlguts/Autoloading with XSUBs>.
+
+C<SvPVXx> is identical to C<SvPVX>.
+
+C<SvPVX_mutable> is merely a synonym for C<SvPVX>, but its name emphasizes that
+the string is modifiable by the caller.
+
+C<SvPVX_const> differs in that the return value has been cast so that the
+compiler will complain if you were to try to modify the contents of the string,
+(unless you cast away const yourself).
 
 =for apidoc Am|STRLEN|SvCUR|SV* sv
 Returns the length of the string which is in the SV.  See C<L</SvLEN>>.
@@ -912,7 +922,7 @@ Set the size of the string buffer for the SV. See C<L</SvLEN>>.
 =for apidoc Am|U32|SvUTF8|SV* sv
 Returns a U32 value indicating the UTF-8 status of an SV.  If things are set-up
 properly, this indicates whether or not the SV contains UTF-8 encoded data.
-You should use this I<after> a call to C<SvPV()> or one of its variants, in
+You should use this I<after> a call to C<L</SvPV>> or one of its variants, in
 case any call to string overloading updates the internal flag.
 
 If you want to take into account the L<bytes> pragma, use C<L</DO_UTF8>>
@@ -1196,7 +1206,7 @@ object type. Exposed to perl code via Internals::SvREADONLY().
 
 #  define SvMAGIC(sv)	(0 + *(assert_(SvTYPE(sv) >= SVt_PVMG) &((XPVMG*)  SvANY(sv))->xmg_u.xmg_magic))
 #  define SvSTASH(sv)	(0 + *(assert_(SvTYPE(sv) >= SVt_PVMG) &((XPVMG*)  SvANY(sv))->xmg_stash))
-#else
+#else   /* Below is not PERL_DEBUG_COW */
 # ifdef PERL_CORE
 #  define SvLEN(sv) (0 + ((XPV*) SvANY(sv))->xpv_len)
 # else
@@ -1277,7 +1287,7 @@ object type. Exposed to perl code via Internals::SvREADONLY().
 	    assert(SvTYPE(_svstash) >= SVt_PVMG);			\
 	    &(((XPVMG*) MUTABLE_PTR(SvANY(_svstash)))->xmg_stash);	\
 	  }))
-#  else
+#  else     /* Below is not DEBUGGING or can't use brace groups */
 #    define SvPVX(sv) ((sv)->sv_u.svu_pv)
 #    define SvCUR(sv) ((XPV*) SvANY(sv))->xpv_cur
 #    define SvIVX(sv) ((XPVIV*) SvANY(sv))->xiv_iv
@@ -1373,6 +1383,17 @@ object type. Exposed to perl code via Internals::SvREADONLY().
 	STMT_START { assert(SvTYPE(sv) >= SVt_PV); \
 		SvCUR_set(sv, (val) - SvPVX(sv)); } STMT_END
 
+/*
+=for apidoc Am|void|SvPV_renew|SV* sv|STRLEN len
+Low level micro optimization of C<L</SvGROW>>.  It is generally better to use
+C<SvGROW> instead.  This is because C<SvPV_renew> ignores potential issues that
+C<SvGROW> handles.  C<sv> needs to have a real C<PV> that is unencombered by
+things like COW.  Using C<SV_CHECK_THINKFIRST> or
+C<SV_CHECK_THINKFIRST_COW_DROP> before calling this should clean it up, but
+why not just use C<SvGROW> if you're not sure about the provenance?
+
+=cut
+*/
 #define SvPV_renew(sv,n) \
 	STMT_START { SvLEN_set(sv, n); \
 		SvPV_set((sv), (MEM_WRAP_CHECK_(n,char)			\
@@ -1532,9 +1553,23 @@ attention to precisely which outputs are influenced by which inputs.
 
 /*
 =for apidoc Am|char*|SvPV_force|SV* sv|STRLEN len
-Like C<SvPV> but will force the SV into containing a string (C<SvPOK>), and
-only a string (C<SvPOK_only>), by hook or by crook.  You need force if you are
-going to update the C<SvPVX> directly.  Processes get magic.
+=for apidoc_item ||SvPV_force_nolen|SV* sv
+=for apidoc_item ||SvPVx_force|SV* sv|STRLEN len
+=for apidoc_item ||SvPV_force_nomg|SV* sv|STRLEN len
+=for apidoc_item ||SvPV_force_nomg_nolen|SV * sv
+=for apidoc_item ||SvPV_force_mutable|SV * sv|STRLEN len
+=for apidoc_item ||SvPV_force_flags|SV * sv|STRLEN len|U32 flags
+=for apidoc_item ||SvPV_force_flags_nolen|SV * sv|U32 flags
+=for apidoc_item ||SvPV_force_flags_mutable|SV * sv|STRLEN len|U32 flags
+=for apidoc_item ||SvPVbyte_force
+=for apidoc_item ||SvPVbytex_force
+=for apidoc_item ||SvPVutf8_force
+=for apidoc_item ||SvPVutf8x_force
+
+These are like C<L</SvPV>>, returning the string in the SV, but will force the
+SV into containing a string (C<L</SvPOK>>), and only a string
+(C<L</SvPOK_only>>), by hook or by crook.  You need to use one of these
+C<force> routines if you are going to update the C<L</SvPVX>> directly.
 
 Note that coercing an arbitrary scalar into a plain PV will potentially
 strip useful data from it.  For example if the SV was C<SvROK>, then the
@@ -1542,112 +1577,196 @@ referent will have its reference count decremented, and the SV itself may
 be converted to an C<SvPOK> scalar with a string buffer containing a value
 such as C<"ARRAY(0x1234)">.
 
-=for apidoc Am|char*|SvPV_force_nomg|SV* sv|STRLEN len
-Like C<SvPV_force>, but doesn't process get magic.
+The differences between the forms are:
+
+The forms with C<flags> in their names allow you to use the C<flags> parameter
+to specify to perform 'get' magic (by setting the C<SV_GMAGIC> flag) or to skip
+'get' magic (by clearing it).  The other forms do perform 'get' magic, except
+for the ones with C<nomg> in their names, which skip 'get' magic.
+
+The forms that take a C<len> parameter will set that variable to the byte
+length of the resultant string (these are macros, so don't use C<&len>).
+
+The forms with C<nolen> in their names indicate they don't have a C<len>
+parameter.  They should be used only when it is known that the PV is a C
+string, terminated by a NUL byte, and without intermediate NUL characters; or
+when you don't care about its length.
+
+The forms with C<mutable> in their names are effectively the same as those without,
+but the name emphasizes that the string is modifiable by the caller, which it is
+in all the forms.
+
+C<SvPVutf8_force> is like C<SvPV_force>, but converts C<sv> to UTF-8 first if
+not already UTF-8.
+
+C<SvPVutf8x_force> is like C<SvPVutf8_force>, but guarantees to evaluate C<sv>
+only once; use the more efficient C<SvPVutf8_force> otherwise.
+
+C<SvPVbyte_force> is like C<SvPV_force>, but converts C<sv> to byte
+representation first if currently encoded as UTF-8.  If the SV cannot be
+downgraded from UTF-8, this croaks.
+
+C<SvPVbytex_force> is like C<SvPVbyte_force>, but guarantees to evaluate C<sv>
+only once; use the more efficient C<SvPVbyte_force> otherwise.
 
 =for apidoc Am|char*|SvPV|SV* sv|STRLEN len
-Returns a pointer to the string in the SV, or a stringified form of
-the SV if the SV does not contain a string.  The SV may cache the
-stringified version becoming C<SvPOK>.  Handles 'get' magic.  The
-C<len> variable will be set to the length of the string (this is a macro, so
-don't use C<&len>).  See also C<L</SvPVx>> for a version which guarantees to
-evaluate C<sv> only once.
+=for apidoc_item |char*|SvPVx|SV* sv|STRLEN len
+=for apidoc_item |char*|SvPV_nomg|SV* sv|STRLEN len
+=for apidoc_item |char*|SvPV_nolen|SV* sv
+=for apidoc_item |char*|SvPVx_nolen|SV* sv
+=for apidoc_item |char*|SvPV_nomg_nolen|SV* sv
+=for apidoc_item |char*|SvPV_mutable|SV* sv|STRLEN len
+=for apidoc_item |const char*|SvPV_const|SV* sv|STRLEN len
+=for apidoc_item |const char*|SvPVx_const|SV* sv|STRLEN len
+=for apidoc_item |const char*|SvPV_nolen_const|SV* sv
+=for apidoc_item |const char*|SvPVx_nolen_const|SV* sv
+=for apidoc_item |const char*|SvPV_nomg_const|SV* sv|STRLEN len
+=for apidoc_item |const char*|SvPV_nomg_const_nolen|SV* sv
+=for apidoc_item |char *|SvPV_flags|SV * sv|STRLEN len|U32 flags
+=for apidoc_item |const char *|SvPV_flags_const|SV * sv|STRLEN len|U32 flags
+=for apidoc_item |char *|SvPV_flags_mutable|SV * sv|STRLEN len|U32 flags
+=for apidoc_item |char*|SvPVbyte|SV* sv|STRLEN len
+=for apidoc_item |char*|SvPVbyte_nomg|SV* sv|STRLEN len
+=for apidoc_item |char*|SvPVbyte_nolen|SV* sv
+=for apidoc_item |char*|SvPVbytex_nolen|SV* sv
+=for apidoc_item |char*|SvPVbytex|SV* sv|STRLEN len
+=for apidoc_item |char*|SvPVbyte_or_null|SV* sv|STRLEN len
+=for apidoc_item |char*|SvPVbyte_or_null_nomg|SV* sv|STRLEN len
+=for apidoc_item |char*|SvPVutf8|SV* sv|STRLEN len
+=for apidoc_item |char*|SvPVutf8x|SV* sv|STRLEN len
+=for apidoc_item |char*|SvPVutf8_nomg|SV* sv|STRLEN len
+=for apidoc_item |char*|SvPVutf8_nolen|SV* sv
+=for apidoc_item |char*|SvPVutf8_or_null|SV* sv|STRLEN len
+=for apidoc_item |char*|SvPVutf8_or_null_nomg|SV* sv|STRLEN len
 
-Note that there is no guarantee that the return value of C<SvPV()> is
-equal to C<SvPVX(sv)>, or that C<SvPVX(sv)> contains valid data, or that
-successive calls to C<SvPV(sv)> will return the same pointer value each
-time.  This is due to the way that things like overloading and
-Copy-On-Write are handled.  In these cases, the return value may point to
-a temporary buffer or similar.  If you absolutely need the C<SvPVX> field to
-be valid (for example, if you intend to write to it), then see
-C<L</SvPV_force>>.
+All these return a pointer to the string in C<sv>, or a stringified form of
+C<sv> if it does not contain a string.  The SV may cache the stringified
+version becoming C<SvPOK>.
 
-=for apidoc Am|char*|SvPVx|SV* sv|STRLEN len
-A version of C<SvPV> which guarantees to evaluate C<sv> only once.
-Only use this if C<sv> is an expression with side effects, otherwise use the
-more efficient C<SvPV>.
+This is a very basic and common operation, so there are lots of slightly
+different versions of it.
 
-=for apidoc Am|char*|SvPV_nomg|SV* sv|STRLEN len
-Like C<SvPV> but doesn't process magic.
+Note that there is no guarantee that the return value of C<SvPV(sv)>, for
+example, is equal to C<SvPVX(sv)>, or that C<SvPVX(sv)> contains valid data, or
+that successive calls to C<SvPV(sv)> (or another of these forms) will return
+the same pointer value each time.  This is due to the way that things like
+overloading and Copy-On-Write are handled.  In these cases, the return value
+may point to a temporary buffer or similar.  If you absolutely need the
+C<SvPVX> field to be valid (for example, if you intend to write to it), then
+see C<L</SvPV_force>>.
 
-=for apidoc Am|char*|SvPV_nolen|SV* sv
-Like C<SvPV> but doesn't set a length variable.
+The differences between the forms are:
 
-=for apidoc Am|char*|SvPV_nomg_nolen|SV* sv
-Like C<SvPV_nolen> but doesn't process magic.
+The forms with C<flags> in their names allow you to use the C<flags> parameter
+to specify to process 'get' magic (by setting the C<SV_GMAGIC> flag) or to skip
+'get' magic (by clearing it).  The other forms process 'get' magic, except for
+the ones with C<nomg> in their names, which skip 'get' magic.
+
+The forms that take a C<len> parameter will set that variable to the byte
+length of the resultant string (these are macros, so don't use C<&len>).
+
+The forms with C<nolen> in their names indicate they don't have a C<len>
+parameter.  They should be used only when it is known that the PV is a C
+string, terminated by a NUL byte, and without intermediate NUL characters; or
+when you don't care about its length.
+
+The forms with C<const> in their names return S<C<const char *>> so that the
+compiler will hopefully complain if you were to try to modify the contents of
+the string (unless you cast away const yourself).
+
+The other forms return a mutable pointer so that the string is modifiable by
+the caller; this is emphasized for the ones with C<mutable> in their names.
+
+The forms whose name ends in C<x> are the same as the corresponding form
+without the C<x>, but the C<x> form is guaranteed to evaluate C<sv> exactly
+once, with a slight loss of efficiency.  Use this if C<sv> is an expression
+with side effects.
+
+C<SvPVutf8> is like C<SvPV>, but converts C<sv> to UTF-8 first if not already
+UTF-8.  Similiarly, the other forms with C<utf8> in their names correspond to
+their respective forms without.
+
+C<SvPVutf8_or_null> and C<SvPVutf8_or_null_nomg> don't have corresponding
+non-C<utf8> forms.  Instead they are like C<SvPVutf8_nomg>, but when C<sv> is
+undef, they return C<NULL>.
+
+C<SvPVbyte> is like C<SvPV>, but converts C<sv> to byte representation first if
+currently encoded as UTF-8.  If C<sv> cannot be downgraded from UTF-8, it
+croaks.  Similiarly, the other forms with C<byte> in their names correspond to
+their respective forms without.
+
+C<SvPVbyte_or_null> doesn't have a corresponding non-C<byte> form.  Instead it
+is like C<SvPVbyte>, but when C<sv> is undef, it returns C<NULL>.
 
 =for apidoc Am|IV|SvIV|SV* sv
-Coerces the given SV to IV and returns it.  The returned value in many
+=for apidoc_item SvIVx
+=for apidoc_item SvIV_nomg
+
+These coerce the given SV to IV and return it.  The returned value in many
 circumstances will get stored in C<sv>'s IV slot, but not in all cases.  (Use
 C<L</sv_setiv>> to make sure it does).
 
-See C<L</SvIVx>> for a version which guarantees to evaluate C<sv> only once.
+C<SvIVx> is different from the others in that it is guaranteed to evaluate
+C<sv> exactly once; the others may evaluate it multiple times.  Only use this
+form if C<sv> is an expression with side effects, otherwise use the more
+efficient C<SvIV>.
 
-=for apidoc Am|IV|SvIV_nomg|SV* sv
-Like C<SvIV> but doesn't process magic.
-
-=for apidoc Am|IV|SvIVx|SV* sv
-Coerces the given SV to IV and returns it.  The returned value in many
-circumstances will get stored in C<sv>'s IV slot, but not in all cases.  (Use
-C<L</sv_setiv>> to make sure it does).
-
-This form guarantees to evaluate C<sv> only once.  Only use this if C<sv> is an
-expression with side effects, otherwise use the more efficient C<SvIV>.
+C<SvIV_nomg> is the same as C<SvIV>, but does not perform 'get' magic.
 
 =for apidoc Am|NV|SvNV|SV* sv
-Coerces the given SV to NV and returns it.  The returned value in many
+=for apidoc_item SvNVx
+=for apidoc_item SvNV_nomg
+
+These coerce the given SV to NV and return it.  The returned value in many
 circumstances will get stored in C<sv>'s NV slot, but not in all cases.  (Use
 C<L</sv_setnv>> to make sure it does).
 
-See C<L</SvNVx>> for a version which guarantees to evaluate C<sv> only once.
+C<SvNVx> is different from the others in that it is guaranteed to evaluate
+C<sv> exactly once; the others may evaluate it multiple times.  Only use this
+form if C<sv> is an expression with side effects, otherwise use the more
+efficient C<SvNV>.
 
-=for apidoc Am|NV|SvNV_nomg|SV* sv
-Like C<SvNV> but doesn't process magic.
-
-=for apidoc Am|NV|SvNVx|SV* sv
-Coerces the given SV to NV and returns it.  The returned value in many
-circumstances will get stored in C<sv>'s NV slot, but not in all cases.  (Use
-C<L</sv_setnv>> to make sure it does).
-
-This form guarantees to evaluate C<sv> only once.  Only use this if C<sv> is an
-expression with side effects, otherwise use the more efficient C<SvNV>.
+C<SvNV_nomg> is the same as C<SvNV>, but does not perform 'get' magic.
 
 =for apidoc Am|UV|SvUV|SV* sv
-Coerces the given SV to UV and returns it.  The returned value in many
+=for apidoc_item SvUVx
+=for apidoc_item SvUV_nomg
+
+These coerce the given SV to UV and return it.  The returned value in many
 circumstances will get stored in C<sv>'s UV slot, but not in all cases.  (Use
 C<L</sv_setuv>> to make sure it does).
 
-See C<L</SvUVx>> for a version which guarantees to evaluate C<sv> only once.
+C<SvUVx> is different from the others in that it is guaranteed to evaluate
+C<sv> exactly once; the others may evaluate it multiple times.  Only use this
+form if C<sv> is an expression with side effects, otherwise use the more
+efficient C<SvUV>.
 
-=for apidoc Am|UV|SvUV_nomg|SV* sv
-Like C<SvUV> but doesn't process magic.
+C<SvUV_nomg> is the same as C<SvUV>, but does not perform 'get' magic.
 
-=for apidoc Am|UV|SvUVx|SV* sv
-Coerces the given SV to UV and returns it.  The returned value in many
-circumstances will get stored in C<sv>'s UV slot, but not in all cases.  (Use
-C<L</sv_setuv>> to make sure it does).
+=for apidoc SvTRUE
+=for apidoc_item SvTRUEx
+=for apidoc_item SvTRUE_nomg
+=for apidoc_item SvTRUE_NN
+=for apidoc_item SvTRUE_nomg_NN
 
-This form guarantees to evaluate C<sv> only once.  Only use this if C<sv> is an
-expression with side effects, otherwise use the more efficient C<SvUV>.
+These return a boolean indicating whether Perl would evaluate the SV as true or
+false.  See C<L</SvOK>> for a defined/undefined test.
 
-=for apidoc Am|bool|SvTRUE|SV* sv
-Returns a boolean indicating whether Perl would evaluate the SV as true or
-false.  See C<L</SvOK>> for a defined/undefined test.  Handles 'get' magic
-unless the scalar is already C<SvPOK>, C<SvIOK> or C<SvNOK> (the public, not the
-private flags).
+As of Perl 5.32, all are guaranteed to evaluate C<sv> only once.  Prior to that
+release, only C<SvTRUEx> guaranteed single evaluation; now C<SvTRUEx> is
+identical to C<SvTRUE>.
 
-As of Perl 5.32, this is guaranteed to evaluate C<sv> only once.  Prior to that
-release, use C<L</SvTRUEx>> for single evaluation.
+C<SvTRUE_nomg> and C<TRUE_nomg_NN> do not perform 'get' magic; the others do
+unless the scalar is already C<SvPOK>, C<SvIOK>, or C<SvNOK> (the public, not
+the private flags).
 
-=for apidoc Am|bool|SvTRUE_nomg|SV* sv
-Returns a boolean indicating whether Perl would evaluate the SV as true or
-false.  See C<L</SvOK>> for a defined/undefined test.  Does not handle 'get' magic.
+C<SvTRUE_NN> is like C<L</SvTRUE>>, but C<sv> is assumed to be
+non-null (NN).  If there is a possibility that it is NULL, use plain
+C<SvTRUE>.
 
-=for apidoc Am|bool|SvTRUEx|SV* sv
-Identical to C<L</SvTRUE>>.  Prior to 5.32, they differed in that only this one
-was guaranteed to evaluate C<sv> only once; in 5.32 they both evaluated it
-once, but C<SvTRUEx> was slightly slower on some platforms; now they are
-identical.
+C<SvTRUE_nomg_NN> is like C<L</SvTRUE_nomg>>, but C<sv> is assumed to be
+non-null (NN).  If there is a possibility that it is NULL, use plain
+C<SvTRUE_nomg>.
 
 =for apidoc Am|char*|SvPVutf8_force|SV* sv|STRLEN len
 Like C<SvPV_force>, but converts C<sv> to UTF-8 first if necessary.
@@ -1688,26 +1807,6 @@ Like C<SvPVbyte_or_null>, but does not process get magic.
 Like C<SvPV_nolen>, but converts C<sv> to byte representation first if
 necessary.  If the SV cannot be downgraded from UTF-8, this croaks.
 
-=for apidoc Am|char*|SvPVutf8x_force|SV* sv|STRLEN len
-Like C<SvPV_force>, but converts C<sv> to UTF-8 first if necessary.
-Guarantees to evaluate C<sv> only once; use the more efficient C<SvPVutf8_force>
-otherwise.
-
-=for apidoc Am|char*|SvPVutf8x|SV* sv|STRLEN len
-Like C<SvPV>, but converts C<sv> to UTF-8 first if necessary.
-Guarantees to evaluate C<sv> only once; use the more efficient C<SvPVutf8>
-otherwise.
-
-=for apidoc Am|char*|SvPVbytex_force|SV* sv|STRLEN len
-Like C<SvPV_force>, but converts C<sv> to byte representation first if necessary.
-Guarantees to evaluate C<sv> only once; use the more efficient C<SvPVbyte_force>
-otherwise.  If the SV cannot be downgraded from UTF-8, this croaks.
-
-=for apidoc Am|char*|SvPVbytex|SV* sv|STRLEN len
-Like C<SvPV>, but converts C<sv> to byte representation first if necessary.
-Guarantees to evaluate C<sv> only once; use the more efficient C<SvPVbyte>
-otherwise.  If the SV cannot be downgraded from UTF-8, this croaks.
-
 =for apidoc Am|U32|SvIsCOW|SV* sv
 Returns a U32 value indicating whether the SV is Copy-On-Write (either shared
 hash key scalars, or full Copy On Write scalars if 5.9.0 is configured for
@@ -1716,15 +1815,6 @@ COW).
 =for apidoc Am|bool|SvIsCOW_shared_hash|SV* sv
 Returns a boolean indicating whether the SV is Copy-On-Write shared hash key
 scalar.
-
-=for apidoc Am|void|sv_catpvn_nomg|SV* sv|const char* ptr|STRLEN len
-Like C<sv_catpvn> but doesn't process magic.
-
-=for apidoc Am|void|sv_catpv_nomg|SV* sv|const char* ptr
-Like C<sv_catpv> but doesn't process magic.
-
-=for apidoc Am|void|sv_catsv_nomg|SV* dsv|SV* ssv
-Like C<sv_catsv> but doesn't process magic.
 
 =cut
 */
@@ -1863,25 +1953,9 @@ Like C<sv_catsv> but doesn't process magic.
 #define SvPVutf8x_force(sv, len) sv_pvutf8n_force(sv, &len)
 #define SvPVbytex_force(sv, len) sv_pvbyten_force(sv, &len)
 
-#define SvTRUE(sv)         Perl_SvTRUE(aTHX_ sv)
 #define SvTRUEx(sv)        SvTRUE(sv)
-#define SvTRUE_nomg(sv)    (LIKELY(sv) && SvTRUE_nomg_NN(sv))
-#define SvTRUE_NN(sv)      (SvGETMAGIC(sv), SvTRUE_nomg_NN(sv))
-#define SvTRUE_nomg_NN(sv) (SvTRUE_common(sv, sv_2bool_nomg(sv)))
-
-#define SvTRUE_common(sv,fallback) (			\
-      SvIMMORTAL_INTERP(sv)                             \
-        ? SvIMMORTAL_TRUE(sv)                           \
-    : !SvOK(sv)						\
-	? 0						\
-    : SvPOK(sv)						\
-	? SvPVXtrue(sv)					\
-    : SvIOK(sv)                			        \
-        ? (SvIVX(sv) != 0 /* cast to bool */)           \
-    : (SvROK(sv) && !(   SvOBJECT(SvRV(sv))             \
-                      && HvAMAGIC(SvSTASH(SvRV(sv)))))  \
-        ? TRUE                                          \
-    : (fallback))
+#define SvTRUEx_nomg(sv)   SvTRUE_nomg(sv)
+#define SvTRUE_nomg_NN(sv) SvTRUE_common(sv, TRUE)
 
 #if defined(PERL_USE_GCC_BRACE_GROUPS)
 
@@ -1895,7 +1969,6 @@ Like C<sv_catsv> but doesn't process magic.
 #  define SvPVutf8x(sv, len) ({SV *_sv = (sv); SvPVutf8(_sv, len); })
 #  define SvPVbytex(sv, len) ({SV *_sv = (sv); SvPVbyte(_sv, len); })
 #  define SvPVbytex_nolen(sv) ({SV *_sv = (sv); SvPVbyte_nolen(_sv); })
-#  define SvTRUEx_nomg(sv) ({SV *_sv = (sv); SvTRUE_nomg(_sv); })
 
 #else /* __GNUC__ */
 
@@ -1912,7 +1985,6 @@ Like C<sv_catsv> but doesn't process magic.
 #  define SvPVutf8x(sv, len) ((PL_Sv = (sv)), SvPVutf8(PL_Sv, len))
 #  define SvPVbytex(sv, len) ((PL_Sv = (sv)), SvPVbyte(PL_Sv, len))
 #  define SvPVbytex_nolen(sv) ((PL_Sv = (sv)), SvPVbyte_nolen(PL_Sv))
-#  define SvTRUEx_nomg(sv) ((PL_Sv = (sv)), SvTRUE_nomg(PL_Sv))
 #endif /* __GNU__ */
 
 #define SvPVXtrue(sv)	(					\
@@ -1933,6 +2005,12 @@ Like C<sv_catsv> but doesn't process magic.
 
 #define SvSHARED_HEK_FROM_PV(pvx) \
 	((struct hek*)(pvx - STRUCT_OFFSET(struct hek, hek_key)))
+/*
+=for apidoc Am|struct hek*|SvSHARED_HASH|SV * sv
+Returns the hash for C<sv> created by C<L</newSVpvn_share>>.
+
+=cut
+*/
 #define SvSHARED_HASH(sv) (0 + SvSHARED_HEK_FROM_PV(SvPVX_const(sv))->hek_hash)
 
 /* flag values for sv_*_flags functions */
@@ -2092,10 +2170,11 @@ Like C<sv_catsv> but doesn't process magic.
 #endif
 
 /*
-=for apidoc Am|SV*|newRV_inc|SV* sv
+=for apidoc newRV
+=for apidoc_item ||newRV_inc|
 
-Creates an RV wrapper for an SV.  The reference count for the original SV is
-incremented.
+These are identical.  They create an RV wrapper for an SV.  The reference count
+for the original SV is incremented.
 
 =cut
 */
@@ -2105,7 +2184,7 @@ incremented.
 /* the following macros update any magic values this C<sv> is associated with */
 
 /*
-=for apidoc_section $magic
+=for apidoc_section $SV
 
 =for apidoc Am|void|SvGETMAGIC|SV* sv
 Invokes C<L</mg_get>> on an SV if it has 'get' magic.  For example, this
@@ -2119,18 +2198,21 @@ or a tied variable (it calls C<STORE>).  This macro evaluates its
 argument more than once.
 
 =for apidoc Am|void|SvSetSV|SV* dsv|SV* ssv
-Calls C<sv_setsv> if C<dsv> is not the same as C<ssv>.  May evaluate arguments
-more than once.  Does not handle 'set' magic on the destination SV.
+=for apidoc_item SvSetMagicSV
+=for apidoc_item SvSetSV_nosteal
+=for apidoc_item SvSetMagicSV_nosteal
 
-=for apidoc Am|void|SvSetSV_nosteal|SV* dsv|SV* ssv
-Calls a non-destructive version of C<sv_setsv> if C<dsv> is not the same as
-C<ssv>.  May evaluate arguments more than once.
+if C<dsv> is the same as C<ssv>, these do nothing.  Otherwise they all call
+some form of C<L</sv_setsv>>.  They may evaluate their arguments more than
+once.
 
-=for apidoc Am|void|SvSetMagicSV|SV* dsv|SV* ssv
-Like C<SvSetSV>, but does any set magic required afterwards.
+The only differences are:
 
-=for apidoc Am|void|SvSetMagicSV_nosteal|SV* dsv|SV* ssv
-Like C<SvSetSV_nosteal>, but does any set magic required afterwards.
+C<SvSetMagicSV> and C<SvSetMagicSV_nosteal> perform any required 'set' magic
+afterwards on the destination SV; C<SvSetSV> and C<SvSetSV_nosteal> do not.
+
+C<SvSetSV_nosteal> C<SvSetMagicSV_nosteal> call a non-destructive version of
+C<sv_setsv>.
 
 =for apidoc Am|void|SvSHARE|SV* sv
 Arranges for C<sv> to be shared between threads if a suitable module
@@ -2242,6 +2324,13 @@ See also C<L</PL_sv_yes>> and C<L</PL_sv_no>>.
 #define isGV(sv) (SvTYPE(sv) == SVt_PVGV)
 /* If I give every macro argument a different name, then there won't be bugs
    where nested macros get confused. Been there, done that.  */
+/*
+=for apidoc Am|bool|isGV_with_GP|SV * sv
+Returns a boolean as to whether or not C<sv> is a GV with a pointer to a GP
+(glob pointer).
+
+=cut
+*/
 #define isGV_with_GP(pwadak) \
 	(((SvFLAGS(pwadak) & (SVp_POK|SVpgv_GP)) == SVpgv_GP)	\
 	&& (SvTYPE(pwadak) == SVt_PVGV || SvTYPE(pwadak) == SVt_PVLV))
@@ -2374,51 +2463,54 @@ Evaluates C<sv> more than once.  Sets C<len> to 0 if C<SvOOK(sv)> is false.
 
 #define newIO()	MUTABLE_IO(newSV_type(SVt_PVIO))
 
-#define SV_CONST(name) \
+#if defined(PERL_CORE) || defined(PERL_EXT)
+
+#  define SV_CONST(name) \
 	PL_sv_consts[SV_CONST_##name] \
 		? PL_sv_consts[SV_CONST_##name] \
 		: (PL_sv_consts[SV_CONST_##name] = newSVpv_share(#name, 0))
 
-#define SV_CONST_TIESCALAR 0
-#define SV_CONST_TIEARRAY 1
-#define SV_CONST_TIEHASH 2
-#define SV_CONST_TIEHANDLE 3
+#  define SV_CONST_TIESCALAR 0
+#  define SV_CONST_TIEARRAY 1
+#  define SV_CONST_TIEHASH 2
+#  define SV_CONST_TIEHANDLE 3
 
-#define SV_CONST_FETCH 4
-#define SV_CONST_FETCHSIZE 5
-#define SV_CONST_STORE 6
-#define SV_CONST_STORESIZE 7
-#define SV_CONST_EXISTS 8
+#  define SV_CONST_FETCH 4
+#  define SV_CONST_FETCHSIZE 5
+#  define SV_CONST_STORE 6
+#  define SV_CONST_STORESIZE 7
+#  define SV_CONST_EXISTS 8
 
-#define SV_CONST_PUSH 9
-#define SV_CONST_POP 10
-#define SV_CONST_SHIFT 11
-#define SV_CONST_UNSHIFT 12
-#define SV_CONST_SPLICE 13
-#define SV_CONST_EXTEND 14
+#  define SV_CONST_PUSH 9
+#  define SV_CONST_POP 10
+#  define SV_CONST_SHIFT 11
+#  define SV_CONST_UNSHIFT 12
+#  define SV_CONST_SPLICE 13
+#  define SV_CONST_EXTEND 14
 
-#define SV_CONST_FIRSTKEY 15
-#define SV_CONST_NEXTKEY 16
-#define SV_CONST_SCALAR 17
+#  define SV_CONST_FIRSTKEY 15
+#  define SV_CONST_NEXTKEY 16
+#  define SV_CONST_SCALAR 17
 
-#define SV_CONST_OPEN 18
-#define SV_CONST_WRITE 19
-#define SV_CONST_PRINT 20
-#define SV_CONST_PRINTF 21
-#define SV_CONST_READ 22
-#define SV_CONST_READLINE 23
-#define SV_CONST_GETC 24
-#define SV_CONST_SEEK 25
-#define SV_CONST_TELL 26
-#define SV_CONST_EOF 27
-#define SV_CONST_BINMODE 28
-#define SV_CONST_FILENO 29
-#define SV_CONST_CLOSE 30
+#  define SV_CONST_OPEN 18
+#  define SV_CONST_WRITE 19
+#  define SV_CONST_PRINT 20
+#  define SV_CONST_PRINTF 21
+#  define SV_CONST_READ 22
+#  define SV_CONST_READLINE 23
+#  define SV_CONST_GETC 24
+#  define SV_CONST_SEEK 25
+#  define SV_CONST_TELL 26
+#  define SV_CONST_EOF 27
+#  define SV_CONST_BINMODE 28
+#  define SV_CONST_FILENO 29
+#  define SV_CONST_CLOSE 30
 
-#define SV_CONST_DELETE 31
-#define SV_CONST_CLEAR 32
-#define SV_CONST_UNTIE 33
-#define SV_CONST_DESTROY 34
+#  define SV_CONST_DELETE 31
+#  define SV_CONST_CLEAR 32
+#  define SV_CONST_UNTIE 33
+#  define SV_CONST_DESTROY 34
+#endif
 
 #define SV_CONSTS_COUNT 35
 

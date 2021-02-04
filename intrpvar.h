@@ -10,10 +10,6 @@
 
 #include "handy.h"
 
-/*
-=for apidoc_section Per-Interpreter Variables
-*/
-
 /* These variables are per-interpreter in threaded/multiplicity builds,
  * global otherwise.
 
@@ -40,7 +36,7 @@ PERLVAR(I, stack_base,	SV **)
 PERLVAR(I, stack_max,	SV **)
 
 PERLVAR(I, savestack,	ANY *)		/* items that need to be restored when
-					   LEAVEing scopes we've ENTERed */
+                                           LEAVEing scopes we've ENTERed */
 PERLVAR(I, savestack_ix, I32)
 PERLVAR(I, savestack_max, I32)
 
@@ -54,7 +50,7 @@ PERLVARI(I, tmps_floor,	SSize_t,	-1)
 PERLVAR(I, tmps_max,	SSize_t)        /* first unalloced slot in tmps stack */
 
 PERLVAR(I, markstack,	I32 *)		/* stack_sp locations we're
-					   remembering */
+                                           remembering */
 PERLVAR(I, markstack_ptr, I32 *)
 PERLVAR(I, markstack_max, I32 *)
 
@@ -94,11 +90,16 @@ PERLVARI(I, tainted,	bool, FALSE)	/* using variables controlled by $< */
 PERLVAR(I, delaymagic,	U16)		/* ($<,$>) = ... */
 
 /*
+=for apidoc_section $warning
 =for apidoc mn|U8|PL_dowarn
 
 The C variable that roughly corresponds to Perl's C<$^W> warning variable.
 However, C<$^W> is treated as a boolean, whereas C<PL_dowarn> is a
 collection of flag bits.
+
+On threaded perls, each thread has an independent copy of this variable;
+each initialized at creation time with the current value of the creating
+thread's copy.
 
 =cut
 */
@@ -118,6 +119,10 @@ PERLVARI(I, utf8cache, I8, PERL___I)	/* Is the utf8 caching code enabled? */
 
 The GV representing C<*_>.  Useful for access to C<$_>.
 
+On threaded perls, each thread has an independent copy of this variable;
+each initialized at creation time with the current value of the creating
+thread's copy.
+
 =cut
 */
 
@@ -129,6 +134,10 @@ PERLVAR(I, defgv,	GV *)           /* the *_ glob */
 =for apidoc Amn|HV*|PL_curstash
 
 The stash for the package code will be compiled into.
+
+On threaded perls, each thread has an independent copy of this variable;
+each initialized at creation time with the current value of the creating
+thread's copy.
 
 =cut
 */
@@ -143,6 +152,10 @@ PERLVAR(I, curstash,	HV *)		/* symbol table for current package */
 The currently active COP (control op) roughly representing the current
 statement in the source.
 
+On threaded perls, each thread has an independent copy of this variable;
+each initialized at creation time with the current value of the creating
+thread's copy.
+
 =cut
 */
 
@@ -150,7 +163,7 @@ PERLVAR(I, curcop,	COP *)
 PERLVAR(I, curstack,	AV *)		/* THE STACK */
 PERLVAR(I, curstackinfo, PERL_SI *)	/* current stack + context */
 PERLVAR(I, mainstack,	AV *)		/* the stack when nothing funny is
-					   happening */
+                                           happening */
 
 /* memory management */
 PERLVAR(I, sv_count,	IV)		/* how many SV* are currently allocated */
@@ -171,16 +184,18 @@ PERLVAR(I, regmatch_state, regmatch_state *)
 PERLVAR(I, comppad,	PAD *)		/* storage for lexically scoped temporaries */
 
 /*
+=for apidoc_section $SV
 =for apidoc Amn|SV|PL_sv_undef
-This is the C<undef> SV.  Always refer to this as C<&PL_sv_undef>.
+This is the C<undef> SV.  It is readonly.  Always refer to this as
+C<&PL_sv_undef>.
 
 =for apidoc Amn|SV|PL_sv_no
-This is the C<false> SV.  See C<L</PL_sv_yes>>.  Always refer to this as
-C<&PL_sv_no>.
+This is the C<false> SV.  It is readonly.  See C<L</PL_sv_yes>>.  Always refer
+to this as C<&PL_sv_no>.
 
 =for apidoc Amn|SV|PL_sv_yes
-This is the C<true> SV.  See C<L</PL_sv_no>>.  Always refer to this as
-C<&PL_sv_yes>.
+This is the C<true> SV.  It is readonly.  See C<L</PL_sv_no>>.  Always refer to
+this as C<&PL_sv_yes>.
 
 =for apidoc Amn|SV|PL_sv_zero
 This readonly SV has a zero numeric value and a C<"0"> string value. It's
@@ -234,7 +249,7 @@ C<SvPV_nolen> macro.
 */
 
 PERLVAR(I, na,		STRLEN)		/* for use in SvPV when length is
-					   Not Applicable */
+                                           Not Applicable */
 
 /* stat stuff */
 PERLVAR(I, statcache,	Stat_t)		/* _ */
@@ -242,17 +257,30 @@ PERLVAR(I, statgv,	GV *)
 PERLVARI(I, statname,	SV *,	NULL)
 
 /*
+=for apidoc_section $io
 =for apidoc mn|SV*|PL_rs
 
 The input record separator - C<$/> in Perl space.
+
+On threaded perls, each thread has an independent copy of this variable;
+each initialized at creation time with the current value of the creating
+thread's copy.
 
 =for apidoc mn|GV*|PL_last_in_gv
 
 The GV which was last used for a filehandle input operation.  (C<< <FH> >>)
 
+On threaded perls, each thread has an independent copy of this variable;
+each initialized at creation time with the current value of the creating
+thread's copy.
+
 =for apidoc mn|GV*|PL_ofsgv
 
 The glob containing the output field separator - C<*,> in Perl space.
+
+On threaded perls, each thread has an independent copy of this variable;
+each initialized at creation time with the current value of the creating
+thread's copy.
 
 =cut
 */
@@ -290,9 +318,10 @@ PERLVAR(I, efloatbuf,	char *)
 PERLVAR(I, efloatsize,	STRLEN)
 
 PERLVARI(I, dumpindent,	U16,	4)	/* number of blanks per dump
-					   indentation level */
+                                           indentation level */
 
 /*
+=for apidoc_section $embedding
 =for apidoc Amn|U8|PL_exit_flags
 
 Contains flags controlling perl's behaviour on exit():
@@ -325,6 +354,10 @@ Set by the L<perlfunc/exit> operator.
 =for apidoc Amnh||PERL_EXIT_DESTRUCT_END
 =for apidoc Amnh||PERL_EXIT_WARN
 
+On threaded perls, each thread has an independent copy of this variable;
+each initialized at creation time with the current value of the creating
+thread's copy.
+
 =cut
 */
 
@@ -346,6 +379,7 @@ PERLVARA(I, locale_utf8ness, 256, char)
 PERLVARA(I, colors,6,	char *)		/* values from PERL_RE_COLORS env var */
 
 /*
+=for apidoc_section $optree_construction
 =for apidoc Amn|peep_t|PL_peepp
 
 Pointer to the per-subroutine peephole optimiser.  This is a function
@@ -362,6 +396,10 @@ this can be seen in L<perlguts/Compile pass 3: peephole optimization>.
 If the new code wishes to operate on ops throughout the subroutine's
 structure, rather than just at the top level, it is likely to be more
 convenient to wrap the L</PL_rpeepp> hook.
+
+On threaded perls, each thread has an independent copy of this variable;
+each initialized at creation time with the current value of the creating
+thread's copy.
 
 =cut
 */
@@ -387,6 +425,10 @@ If the new code wishes to operate only on ops at a subroutine's top level,
 rather than throughout the structure, it is likely to be more convenient
 to wrap the L</PL_peepp> hook.
 
+On threaded perls, each thread has an independent copy of this variable;
+each initialized at creation time with the current value of the creating
+thread's copy.
+
 =cut
 */
 
@@ -400,6 +442,10 @@ This allows extensions to free any extra attribute they have locally attached to
 It is also assured to first fire for the parent OP and then for its kids.
 
 When you replace this variable, it is considered a good practice to store the possibly previously installed hook and that you recall it inside your own.
+
+On threaded perls, each thread has an independent copy of this variable;
+each initialized at creation time with the current value of the creating
+thread's copy.
 
 =cut
 */
@@ -446,7 +492,7 @@ PERLVAR(I, e_script,	SV *)
 PERLVAR(I, basetime,	Time_t)		/* $^T */
 
 PERLVARI(I, maxsysfd,	I32,	MAXSYSFD)
-					/* top fd to pass to subprocesses */
+                                        /* top fd to pass to subprocesses */
 PERLVAR(I, statusvalue,	I32)		/* $? */
 #ifdef VMS
 PERLVAR(I, statusvalue_vms, U32)
@@ -475,11 +521,16 @@ PERLVAR(I, DBgv,	GV *)		/*  *DB::DB     */
 PERLVAR(I, DBline,	GV *)		/*  *DB::line   */
 
 /*
+=for apidoc_section $debugging
 =for apidoc mn|GV *|PL_DBsub
 When Perl is run in debugging mode, with the B<-d> switch, this GV contains
 the SV which holds the name of the sub being debugged.  This is the C
 variable which corresponds to Perl's $DB::sub variable.  See
 C<L</PL_DBsingle>>.
+
+On threaded perls, each thread has an independent copy of this variable;
+each initialized at creation time with the current value of the creating
+thread's copy.
 
 =for apidoc mn|SV *|PL_DBsingle
 When Perl is run in debugging mode, with the B<-d> switch, this SV is a
@@ -488,10 +539,18 @@ Single-stepping is automatically turned on after every step.  This is the C
 variable which corresponds to Perl's $DB::single variable.  See
 C<L</PL_DBsub>>.
 
+On threaded perls, each thread has an independent copy of this variable;
+each initialized at creation time with the current value of the creating
+thread's copy.
+
 =for apidoc mn|SV *|PL_DBtrace
 Trace variable used when Perl is run in debugging mode, with the B<-d>
 switch.  This is the C variable which corresponds to Perl's $DB::trace
 variable.  See C<L</PL_DBsingle>>.
+
+On threaded perls, each thread has an independent copy of this variable;
+each initialized at creation time with the current value of the creating
+thread's copy.
 
 =cut
 */
@@ -553,14 +612,15 @@ PERLVARI(I, laststype,	U16,	OP_STAT)
 PERLVARI(I, laststatval, int,	-1)
 
 PERLVAR(I, modcount,	I32)		/* how much op_lvalue()ification in
-					   assignment? */
+                                           assignment? */
 
 /* interpreter atexit processing */
 PERLVARI(I, exitlistlen, I32, 0)	/* length of same */
 PERLVARI(I, exitlist,	PerlExitListEntry *, NULL)
-					/* list of exit functions */
+                                        /* list of exit functions */
 
 /*
+=for apidoc_section $HV
 =for apidoc Amn|HV*|PL_modglobal
 
 C<PL_modglobal> is a general purpose, interpreter global HV for use by
@@ -568,6 +628,10 @@ extensions that need to keep information on a per-interpreter basis.
 In a pinch, it can also be used as a symbol table for extensions
 to share data among each other.  It is a good idea to use keys
 prefixed by the package name of the extension that owns the data.
+
+On threaded perls, each thread has an independent copy of this variable;
+each initialized at creation time with the current value of the creating
+thread's copy.
 
 =cut
 */
@@ -586,7 +650,7 @@ PERLVAR(I, comppad_name_floor,	PADOFFSET)/* start of vars in innermost block */
 
 #ifdef HAVE_INTERP_INTERN
 PERLVAR(I, sys_intern,	struct interp_intern)
-					/* platform internals */
+                                        /* platform internals */
 #endif
 
 /* more statics moved here */
@@ -649,7 +713,7 @@ PERLVAR(I, min_intro_pending, PADOFFSET)/* start of vars to introduce */
 
 PERLVAR(I, max_intro_pending, PADOFFSET)/* end of vars to introduce */
 PERLVAR(I, padix,	PADOFFSET)	/* lowest unused index - 1
-					   in current "register" pad */
+                                           in current "register" pad */
 PERLVAR(I, constpadix,	PADOFFSET)	/* lowest unused for constants */
 
 PERLVAR(I, padix_floor,	PADOFFSET)	/* how low may inner block reset padix */
@@ -672,7 +736,7 @@ PERLVARI(I, strxfrm_is_behaved, bool, TRUE)
                             /* Assume until proven otherwise that it works */
 PERLVARI(I, strxfrm_max_cp, U8, 0)      /* Highest collating cp in locale */
 PERLVARI(I, collation_standard, bool, TRUE)
-					/* Assume simple collation */
+                                        /* Assume simple collation */
 #endif /* USE_LOCALE_COLLATE */
 
 PERLVARI(I, langinfo_buf, char *, NULL)
@@ -695,6 +759,7 @@ PERLVAR(I, unsafe,	bool)
 PERLVAR(I, colorset,	bool)		/* PERL_RE_COLORS env var is in use */
 
 /*
+=for apidoc_section $embedding
 =for apidoc Amn|signed char|PL_perl_destruct_level
 
 This value may be set when embedding for full cleanup.
@@ -714,6 +779,10 @@ Possible values:
 If C<$ENV{PERL_DESTRUCT_LEVEL}> is set to an integer greater than the
 value of C<PL_perl_destruct_level> its value is used instead.
 
+On threaded perls, each thread has an independent copy of this variable;
+each initialized at creation time with the current value of the creating
+thread's copy.
+
 =cut
 */
 /* mod_perl is special, and also assigns a meaning -1 */
@@ -726,11 +795,11 @@ PERLVAR(I, srand_called, bool)
 #ifdef USE_LOCALE_NUMERIC
 
 PERLVARI(I, numeric_underlying, bool, TRUE)
-					/* Assume underlying locale numerics */
+                                        /* Assume underlying locale numerics */
 PERLVARI(I, numeric_underlying_is_standard, bool, TRUE)
 
 PERLVARI(I, numeric_standard, int, TRUE)
-					/* Assume C locale numerics */
+                                        /* Assume C locale numerics */
 PERLVAR(I, numeric_name, char *)	/* Name of current numeric locale */
 PERLVAR(I, numeric_radix_sv, SV *)	/* The radix separator if not '.' */
 
@@ -769,12 +838,12 @@ PERLVAR(I, body_arenas, void *)		/* pointer to list of body-arenas */
 
 #if defined(USE_ITHREADS)
 PERLVAR(I, regex_pad,     SV **)	/* Shortcut into the array of
-					   regex_padav */
+                                           regex_padav */
 PERLVAR(I, regex_padav,   AV *)		/* All regex objects, indexed via the
-					   values in op_pmoffset of pmop.
-					   Entry 0 is an SV whose PV is a
-					   "packed" list of IVs listing
-					   the now-free slots in the array */
+                                           values in op_pmoffset of pmop.
+                                           Entry 0 is an SV whose PV is a
+                                           "packed" list of IVs listing
+                                           the now-free slots in the array */
 PERLVAR(I, stashpad,    HV **)		/* for CopSTASH */
 PERLVARI(I, stashpadmax, PADOFFSET, 64)
 PERLVARI(I, stashpadix, PADOFFSET, 0)
@@ -795,7 +864,7 @@ PERLVARI(I, def_layerlist, PerlIO_list_t *, NULL)
 
 PERLVARI(I, checkav_save, AV *, NULL)	/* save CHECK{}s when compiling */
 PERLVARI(I, unitcheckav_save, AV *, NULL)
-					/* save UNITCHECK{}s when compiling */
+                                        /* save UNITCHECK{}s when compiling */
 
 PERLVARI(I, clocktick,	long,	0)	/* this many times() ticks in a second */
 
@@ -950,6 +1019,12 @@ PERLVAR(I, mbrtowc_ps, mbstate_t)
 #endif
 #ifdef HAS_WCRTOMB
 PERLVAR(I, wcrtomb_ps, mbstate_t)
+#endif
+#ifdef PERL_MEM_LOG
+/* Enough space for the reserved byte, 1 for a potential leading 0, then enough
+ * for the longest representable integer plus an extra, the 3 flag characters,
+ * and NUL */
+PERLVARA(I, mem_log, 1 + 1 + TYPE_DIGITS(UV) + 1 + 3 + 1, char);
 #endif
 
 /* If you are adding a U8 or U16, check to see if there are 'Space' comments

@@ -3419,7 +3419,7 @@ X<gmtime> X<UTC> X<Greenwich>
 
 =for Pod::Functions convert UNIX time into record or string using Greenwich time
 
-Works just like L<C<localtime>|/localtime EXPR> but the returned values
+Works just like L<C<localtime>|/localtime EXPR>, but the returned values
 are localized for the standard Greenwich time zone.
 
 Note: When called in list context, $isdst, the last value
@@ -4055,8 +4055,8 @@ C<$wday> is the day of the week, with 0 indicating Sunday and 3 indicating
 Wednesday.  C<$yday> is the day of the year, in the range C<0..364>
 (or C<0..365> in leap years.)
 
-C<$isdst> is true if the specified time occurs during Daylight Saving
-Time, false otherwise.
+C<$isdst> is true if the specified time occurs when Daylight Saving
+Time is in effect, false otherwise.
 
 If EXPR is omitted, L<C<localtime>|/localtime EXPR> uses the current
 time (as returned by L<C<time>|/time>).
@@ -4064,27 +4064,21 @@ time (as returned by L<C<time>|/time>).
 In scalar context, L<C<localtime>|/localtime EXPR> returns the
 L<ctime(3)> value:
 
-    my $now_string = localtime;  # e.g., "Thu Oct 13 04:54:34 1994"
+ my $now_string = localtime;  # e.g., "Thu Oct 13 04:54:34 1994"
 
-The format of this scalar value is B<not> locale-dependent but built
-into Perl.  For GMT instead of local time use the
-L<C<gmtime>|/gmtime EXPR> builtin.  See also the
-L<C<Time::Local>|Time::Local> module (for converting seconds, minutes,
-hours, and such back to the integer value returned by L<C<time>|/time>),
-and the L<POSIX> module's L<C<strftime>|POSIX/C<strftime>> and
-L<C<mktime>|POSIX/C<mktime>> functions.
+This scalar value is always in English, and is B<not> locale-dependent.
+To get similar but locale-dependent date strings, try for example:
 
-To get somewhat similar but locale-dependent date strings, set up your
-locale environment variables appropriately (please see L<perllocale>) and
-try for example:
+ use POSIX qw(strftime);
+ my $now_string = strftime "%a %b %e %H:%M:%S %Y", localtime;
+ # or for GMT formatted appropriately for your locale:
+ my $now_string = strftime "%a %b %e %H:%M:%S %Y", gmtime;
 
-    use POSIX qw(strftime);
-    my $now_string = strftime "%a %b %e %H:%M:%S %Y", localtime;
-    # or for GMT formatted appropriately for your locale:
-    my $now_string = strftime "%a %b %e %H:%M:%S %Y", gmtime;
-
-Note that C<%a> and C<%b>, the short forms of the day of the week
-and the month of the year, may not necessarily be three characters wide.
+C$now_string> will be formatted according to the current LC_TIME locale
+the program or thread is running in.  See L<perllocale> for how to set
+up and change that locale.  Note that C<%a> and C<%b>, the short forms
+of the day of the week and the month of the year, may not necessarily be
+three characters wide.
 
 The L<Time::gmtime> and L<Time::localtime> modules provide a convenient,
 by-name access mechanism to the L<C<gmtime>|/gmtime EXPR> and
@@ -4092,6 +4086,13 @@ L<C<localtime>|/localtime EXPR> functions, respectively.
 
 For a comprehensive date and time representation look at the
 L<DateTime> module on CPAN.
+
+For GMT instead of local time use the L<C<gmtime>|/gmtime EXPR> builtin.
+
+See also the L<C<Time::Local>|Time::Local> module (for converting
+seconds, minutes, hours, and such back to the integer value returned by
+L<C<time>|/time>), and the L<POSIX> module's
+L<C<mktime>|POSIX/C<mktime>> function.
 
 Portability issues: L<perlport/localtime>.
 
@@ -4326,9 +4327,8 @@ X<msgsnd>
 
 Calls the System V IPC function msgsnd to send the message MSG to the
 message queue ID.  MSG must begin with the native long integer message
-type, be followed by the length of the actual message, and then finally
-the message itself.  This kind of packing can be achieved with
-C<pack("l! a*", $type, $message)>.  Returns true if successful,
+type, followed by the message itself.  This kind of packing can be achieved
+with C<pack("l! a*", $type, $message)>.  Returns true if successful,
 false on error.  See also L<perlipc/"SysV IPC"> and the documentation
 for L<C<IPC::SysV>|IPC::SysV> and L<C<IPC::Msg>|IPC::Msg>.
 
@@ -4433,7 +4433,10 @@ X<oct> X<octal> X<hex> X<hexadecimal> X<binary> X<bin>
 =for Pod::Functions convert a string to an octal number
 
 Interprets EXPR as an octal string and returns the corresponding
-value.  (If EXPR happens to start off with C<0x> or C<x>, interprets it as a
+value.  An octal string consists of octal digits and, as of Perl 5.33.5,
+an optional C<0o> or C<o> prefix.  Each octal digit may be preceded by
+a single underscore, which will be ignored.
+(If EXPR happens to start off with C<0x> or C<x>, interprets it as a
 hex string.  If EXPR starts off with C<0b> or C<b>, it is interpreted as a
 binary string.  Leading whitespace is ignored in all three cases.)
 The following will handle decimal, binary, octal, and hex in standard
@@ -5856,7 +5859,7 @@ symbol table the compiler uses for the rest of that block.  You can refer to
 identifiers in other packages than the current one by prefixing the identifier
 with the package name and a double colon, as in C<$SomePack::var>
 or C<ThatPack::INPUT_HANDLE>.  If package name is omitted, the C<main>
-package as assumed.  That is, C<$::sail> is equivalent to
+package is assumed.  That is, C<$::sail> is equivalent to
 C<$main::sail> (as well as to C<$main'sail>, still seen in ancient
 code, mostly from Perl 4).
 
@@ -6149,6 +6152,18 @@ Or:
 Will both leave the sentence as is.
 Normally, when accepting literal string input from the user,
 L<C<quotemeta>|/quotemeta EXPR> or C<\Q> must be used.
+
+Beware that if you put literal backslashes (those not inside
+interpolated variables) between C<\Q> and C<\E>, double-quotish
+backslash interpolation may lead to confusing results.  If you
+I<need> to use literal backslashes within C<\Q...\E>,
+consult L<perlop/"Gory details of parsing quoted constructs">.
+
+Because the result of S<C<"\Q I<STRING> \E">> has all metacharacters
+quoted, there is no way to insert a literal C<$> or C<@> inside a
+C<\Q\E> pair.  If protected by C<\>, C<$> will be quoted to become
+C<"\\\$">; if not, it is interpreted as the start of an interpolated
+scalar.
 
 In Perl v5.14, all non-ASCII characters are quoted in non-UTF-8-encoded
 strings, but not quoted in UTF-8 strings.
@@ -7840,7 +7855,7 @@ pattern argument to split; in Perl 5.18.0 and later this special case is
 triggered by any expression which evaluates to the simple string S<C<" ">>.
 
 As of Perl 5.28, this special-cased whitespace splitting works as expected in
-the scope of L<< S<C<"use feature 'unicode_strings">>|feature/The
+the scope of L<< S<C<"use feature 'unicode_strings'">>|feature/The
 'unicode_strings' feature >>. In previous versions, and outside the scope of
 that feature, it exhibits L<perlunicode/The "Unicode Bug">: characters that are
 whitespace according to Unicode rules but not according to ASCII rules can be
@@ -8222,6 +8237,11 @@ as supported by the compiler used to build Perl:
                5.14 or later
    z           interpret integer as C types "size_t" or
                "ssize_t" on Perl 5.14 or later
+
+Note that, in general, using the C<l> modifier (for example, when writing
+C<"%ld"> or C<"%lu"> instead of C<"%d"> and C<"%u">) is unnecessary
+when used from Perl code.  Moreover, it may be harmful, for example on
+Windows 64-bit where a long is 32-bits.
 
 As of 5.14, none of these raises an exception if they are not supported on
 your platform.  However, if warnings are enabled, a warning of the

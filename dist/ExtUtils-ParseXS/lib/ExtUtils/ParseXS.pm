@@ -11,7 +11,7 @@ use Symbol;
 
 our $VERSION;
 BEGIN {
-  $VERSION = '3.41';
+  $VERSION = '3.42';
   require ExtUtils::ParseXS::Constants; ExtUtils::ParseXS::Constants->VERSION($VERSION);
   require ExtUtils::ParseXS::CountLines; ExtUtils::ParseXS::CountLines->VERSION($VERSION);
   require ExtUtils::ParseXS::Utilities; ExtUtils::ParseXS::Utilities->VERSION($VERSION);
@@ -42,6 +42,7 @@ use ExtUtils::ParseXS::Utilities qw(
 our @EXPORT_OK = qw(
   process_file
   report_error_count
+  errors
 );
 
 ##############################
@@ -1012,6 +1013,7 @@ sub report_error_count {
     return $Singleton->{errors}||0;
   }
 }
+*errors = \&report_error_count;
 
 # Input:  ($self, $_, @{ $self->{line} }) == unparsed input.
 # Output: ($_, @{ $self->{line} }) == (rest of line, following lines).

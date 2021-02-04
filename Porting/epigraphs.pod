@@ -17,6 +17,30 @@ Consult your favorite dictionary for details.
 
 =head1 EPIGRAPHS
 
+=head2 v5.33.6 - Edward R. Murrow
+
+L<Announced on 2021-01-20 by Richard Leach|https://www.nntp.perl.org/group/perl.perl5.porters/2021/01/msg258843.html>
+
+This instrument can teach, it can illuminate; yes, and it can even
+inspire. But it can do so only to the extent that humans are determined
+to use it to those ends. Otherwise it is merely wires and lights in a box.
+
+=head2 v5.33.5 - Max Weber, (from "Understanding Administration", by Wolfgang Seibel)
+
+L<Announced on 2020-12-20 by Max Maischein|https://www.nntp.perl.org/group/perl.perl5.porters/2020/12/msg258683.html>
+
+Authority is primarily: Administration
+    -- Max Weber
+
+=head2 v5.33.4 - George Eliot, "Adam Bede"
+
+L<Announced on 2020-11-20 by Tom Hukins|https://www.nntp.perl.org/group/perl.perl5.porters/2020/11/msg258597.html>
+
+It was more than two o'clock in the afternoon when Adam came in sight of
+the grey town on the hill-side and looked searchingly towards the green
+valley below, for the first glimpse of the old thatched roof near the
+ugly red mill.
+
 =head2 v5.33.3 - Ludwig van Beethoven, "Heiligenstadt Testament"; translated and quoted in: Maynard Solomon, "Beethoven"
 
 L<Announced on 2020-10-20 by Steve Hay|https://www.nntp.perl.org/group/perl.perl5.porters/2020/10/msg258502.html>
@@ -64,6 +88,31 @@ L<Announced on 2020-08-20 by Karen Etheridge|https://www.nntp.perl.org/group/per
 L<Announed on 2020-07-17 by Sawyer X|https://www.nntp.perl.org/group/perl.perl5.porters/2020/07/msg258033.html>
 
   The man who moves a mountain begins by carrying away small stones.
+
+=head2 v5.32.1 - Mikhail Bulgakov, trans. Michael Glenny, "The Master and Margarita"
+
+L<Announced on 2021-01-23 by Steve Hay|https://www.nntp.perl.org/group/perl.perl5.porters/2021/01/msg258868.html>
+
+As the warning bells rang, inquisitive people were peeping into the star
+dressing room.  Among them were jugglers in bright robes and turbans, a
+roller-skater in a knitted cardigan, a comedian with a powdered white
+face and a make-up man.  The celebrated guest artiste amazed everyone
+with his unusually long, superbly cut tail coat and by wearing a black
+domino.  Even more astounding were the black magician's two companions:
+a tall man in checks with an unsteady pince-nez and a fat black cat
+which walked into the dressing room on its hind legs and casually sat
+down on the divan, blinking in the light of the unshaded lamps round the
+make-up mirror.
+
+=head2 v5.32.1-RC1 - Mikhail Bulgakov, trans. Michael Glenny, "The Heart of a Dog"
+
+L<Announced on 2021-01-09 by Steve Hay|https://www.nntp.perl.org/group/perl.perl5.porters/2021/01/msg258762.html>
+
+Why bother to learn to read when you can smell meat a mile away?  If you
+live in Moscow, though, and if you've got an ounce of brain in your head
+you can't help learning to read - and without going to night-school
+either.  There are forty-thousand dogs in Moscow and I'll bet there's
+not one of them so stupid he can't spell out the word 'sausage'.
 
 =head2 v5.32.0 - Bob Dylan, "The Times They Are A Changing"
 

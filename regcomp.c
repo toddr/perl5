@@ -143,13 +143,6 @@ EXTERN_C const struct regexp_engine wild_reg_engine;
 #include "invlist_inline.h"
 #include "unicode_constants.h"
 
-#define HAS_NONLATIN1_FOLD_CLOSURE(i) \
- _HAS_NONLATIN1_FOLD_CLOSURE_ONLY_FOR_USE_BY_REGCOMP_DOT_C_AND_REGEXEC_DOT_C(i)
-#define HAS_NONLATIN1_SIMPLE_FOLD_CLOSURE(i) \
- _HAS_NONLATIN1_SIMPLE_FOLD_CLOSURE_ONLY_FOR_USE_BY_REGCOMP_DOT_C_AND_REGEXEC_DOT_C(i)
-#define IS_NON_FINAL_FOLD(c) _IS_NON_FINAL_FOLD_ONLY_FOR_USE_BY_REGCOMP_DOT_C(c)
-#define IS_IN_SOME_FOLD_L1(c) _IS_IN_SOME_FOLD_ONLY_FOR_USE_BY_REGCOMP_DOT_C(c)
-
 #ifndef STATIC
 #define	STATIC	static
 #endif
@@ -367,8 +360,9 @@ struct RExC_state_t {
     if (RExC_naughty < TOO_NAUGHTY) \
         RExC_naughty += RExC_naughty / (exp) + (add)
 
-#define	ISMULT1(c)	((c) == '*' || (c) == '+' || (c) == '?')
-#define	ISMULT2(s)	(ISMULT1(*s) || ((*s) == '{' && regcurly(s)))
+#define	isNON_BRACE_QUANTIFIER(c)   ((c) == '*' || (c) == '+' || (c) == '?')
+#define	isQUANTIFIER(s,e)  (   isNON_BRACE_QUANTIFIER(*s)                      \
+                            || ((*s) == '{' && regcurly(s, e, NULL)))
 
 /*
  * Flags to be passed up and down.
@@ -2132,8 +2126,6 @@ S_ssc_clear_locale(regnode_ssc *ssc)
     ANYOF_POSIXL_ZERO(ssc);
     ANYOF_FLAGS(ssc) &= ~ANYOF_LOCALE_FLAGS;
 }
-
-#define NON_OTHER_COUNT   NON_OTHER_COUNT_FOR_USE_ONLY_BY_REGCOMP_DOT_C
 
 STATIC bool
 S_is_ssc_worth_it(const RExC_state_t * pRExC_state, const regnode_ssc * ssc)
@@ -5897,7 +5889,7 @@ Perl_re_printf( aTHX_  "LHS=%" UVuf " RHS=%" UVuf "\n",
 	}
 	else if (OP(scan) == LNBREAK) {
 	    if (flags & SCF_DO_STCLASS) {
-    	        if (flags & SCF_DO_STCLASS_AND) {
+                if (flags & SCF_DO_STCLASS_AND) {
                     ssc_intersection(data->start_class,
                                     PL_XPosix_ptrs[_CC_VERTSPACE], FALSE);
                     ssc_clear_locale(data->start_class);
@@ -5923,12 +5915,12 @@ Perl_re_printf( aTHX_  "LHS=%" UVuf " RHS=%" UVuf "\n",
             if (flags & SCF_DO_SUBSTR) {
                 /* Cannot expect anything... */
                 scan_commit(pRExC_state, data, minlenp, is_inf);
-    	        data->pos_min += 1;
+                data->pos_min += 1;
                 if (data->pos_delta != OPTIMIZE_INFTY) {
                     data->pos_delta += 1;
                 }
 		data->cur_is_floating = 1; /* float */
-    	    }
+            }
 	}
 	else if (REGNODE_SIMPLE(OP(scan))) {
 
@@ -6520,12 +6512,12 @@ Perl_re_printf( aTHX_  "LHS=%" UVuf " RHS=%" UVuf "\n",
             if (flags & SCF_DO_SUBSTR) {
                 /* Cannot expect anything... */
                 scan_commit(pRExC_state, data, minlenp, is_inf);
-    	        data->pos_min += trie->minlen;
-    	        data->pos_delta += (trie->maxlen - trie->minlen);
+                data->pos_min += trie->minlen;
+                data->pos_delta += (trie->maxlen - trie->minlen);
 		if (trie->maxlen != trie->minlen)
 		    data->cur_is_floating = 1; /* float */
-    	    }
-    	    if (trie->jump) /* no more substrings -- for now /grr*/
+            }
+            if (trie->jump) /* no more substrings -- for now /grr*/
                flags &= ~SCF_DO_SUBSTR;
 	}
         else if (OP(scan) == REGEX_SET) {
@@ -11079,6 +11071,11 @@ S_handle_named_backref(pTHX_ RExC_state_t *pRExC_state,
 
     PERL_ARGS_ASSERT_HANDLE_NAMED_BACKREF;
 
+    if (RExC_parse != name_start && ch == '}') {
+        while (isBLANK(*RExC_parse)) {
+            RExC_parse++;
+        }
+    }
     if (RExC_parse == name_start || *RExC_parse != ch) {
         /* diag_listed_as: Sequence \%s... not terminated in regex; marked by <-- HERE in m/%s/ */
         vFAIL2("Sequence %.3s... not terminated", parse_start);
@@ -12066,7 +12063,7 @@ S_reg(pTHX_ RExC_state_t *pRExC_state, I32 paren, I32 *flagp, U32 depth)
                         if (! REGTAIL(pRExC_state, ret, lastbr)) {
                             REQUIRE_BRANCHJ(flagp, 0);
                         }
-		 	if (flags&HASWIDTH)
+                        if (flags&HASWIDTH)
 			    *flagp |= HASWIDTH;
                         c = UCHARAT(RExC_parse);
                         nextchar(pRExC_state);
@@ -12549,6 +12546,167 @@ S_regbranch(pTHX_ RExC_state_t *pRExC_state, I32 *flagp, I32 first, U32 depth)
     return ret;
 }
 
+bool
+Perl_regcurly(const char *s, const char *e, const char * result[5])
+{
+    /* This function matches a {m,n} quantifier.  When called with a NULL final
+     * argument, it simply parses the input from 's' up through 'e-1', and
+     * returns a boolean as to whether or not this input is syntactically a
+     * {m,n} quantifier.
+     *
+     * When called with a non-NULL final parameter, and when the function
+     * returns TRUE, it additionally stores information into the array
+     * specified by that parameter about what it found in the parse.  The
+     * parameter must be a pointer into a 5 element array of 'const char *'
+     * elements.  The returned information is as follows:
+     *   result[RBRACE]  points to the closing brace
+     *   result[MIN_S]   points to the first byte of the lower bound
+     *   result[MIN_E]   points to one beyond the final byte of the lower bound
+     *   result[MAX_S]   points to the first byte of the upper bound
+     *   result[MAX_E]   points to one beyond the final byte of the upper bound
+     *
+     * If the quantifier is of the form {m,} (meaning an infinite upper
+     * bound), result[MAX_E] is set to result[MAX_S]; what they actually point
+     * to is irrelevant, just that it's the same place
+     *
+     * If instead the quantifier is of the form {m} there is actually only
+     * one bound, and both the upper and lower result[] elements are set to
+     * point to it.
+     *
+     * This function checks only for syntactic validity; it leaves checking for
+     * semantic validity and raising any diagnostics to the caller.  This
+     * function is called in multiple places to check for syntax, but only from
+     * one for semantics.  It makes it as simple as possible for the
+     * syntax-only callers, while furnishing just enough information for the
+     * semantic caller.
+     */
+
+    const char * min_start = NULL;
+    const char * max_start = NULL;
+    const char * min_end = NULL;
+    const char * max_end = NULL;
+
+    bool has_comma = FALSE;
+
+    PERL_ARGS_ASSERT_REGCURLY;
+
+    if (s >= e || *s++ != '{')
+	return FALSE;
+
+    while (s < e && isBLANK(*s)) {
+        s++;
+    }
+
+    if isDIGIT(*s) {
+        min_start = s;
+        do {
+            s++;
+        } while (s < e && isDIGIT(*s));
+        min_end = s;
+    }
+
+    while (s < e && isBLANK(*s)) {
+        s++;
+    }
+
+    if (*s == ',') {
+        has_comma = TRUE;
+	s++;
+
+        while (s < e && isBLANK(*s)) {
+            s++;
+        }
+
+        if isDIGIT(*s) {
+            max_start = s;
+            do {
+                s++;
+            } while (s < e && isDIGIT(*s));
+            max_end = s;
+        }
+    }
+
+    while (s < e && isBLANK(*s)) {
+        s++;
+    }
+                               /* Need at least one number */
+    if (s >= e || *s != '}' || (! min_start && ! max_end)) {
+        return FALSE;
+    }
+
+    if (result) {
+
+#define RBRACE  0
+#define MIN_S   1
+#define MIN_E   2
+#define MAX_S   3
+#define MAX_E   4
+
+        result[RBRACE] = s;
+
+        result[MIN_S] = min_start;
+        result[MIN_E] = min_end;
+        if (has_comma) {
+            if (max_start) {
+                result[MAX_S] = max_start;
+                result[MAX_E] = max_end;
+            }
+            else {
+                /* Having no value after the comma is signalled by setting
+                 * start and end to the same value.  What that value is isn't
+                 * relevant; NULL is chosen simply because it will fail if the
+                 * caller mistakenly uses it */
+                result[MAX_S] = result[MAX_E] = NULL;
+            }
+        }
+        else {  /* No comma means lower and upper bounds are the same */
+            result[MAX_S] = min_start;
+            result[MAX_E] = min_end;
+        }
+    }
+
+    return TRUE;
+}
+
+U32
+S_get_quantifier_value(pTHX_ RExC_state_t *pRExC_state,
+                       const char * start, const char * end)
+{
+    /* This is a helper function for regpiece() to compute, given the
+     * quantifier {m,n}, the value of either m or n, based on the starting
+     * position 'start' in the string, through the byte 'end-1', returning it
+     * if valid, and failing appropriately if not.  It knows the restrictions
+     * imposed on quantifier values */
+
+    UV uv;
+    STATIC_ASSERT_DECL(REG_INFTY <= U32_MAX);
+
+    PERL_ARGS_ASSERT_GET_QUANTIFIER_VALUE;
+
+    if (grok_atoUV(start, &uv, &end)) {
+        if (uv < REG_INFTY) {   /* A valid, small-enough number */
+            return (U32) uv;
+        }
+    }
+    else if (*start == '0') { /* grok_atoUV() fails for only two reasons:
+                                 leading zeros or overflow */
+        RExC_parse = (char * ) end;
+
+        /* Perhaps too generic a msg for what is only failure from having
+         * leading zeros, but this is how it's always behaved. */
+        vFAIL("Invalid quantifier in {,}");
+        NOT_REACHED; /*NOTREACHED*/
+    }
+
+    /* Here, found a quantifier, but was too large; either it overflowed or was
+     * too big a legal number */
+    RExC_parse = (char * ) end;
+    vFAIL2("Quantifier in {,} bigger than %d", REG_INFTY - 1);
+
+    NOT_REACHED; /*NOTREACHED*/
+    return U32_MAX; /* Perhaps some compilers will be expecting a return */
+}
+
 /*
  - regpiece - something followed by possible quantifier * + ? {n,m}
  *
@@ -12571,7 +12729,6 @@ S_regpiece(pTHX_ RExC_state_t *pRExC_state, I32 *flagp, U32 depth)
 {
     regnode_offset ret;
     char op;
-    char *next;
     I32 flags;
     const char * const origparse = RExC_parse;
     I32 min;
@@ -12579,8 +12736,6 @@ S_regpiece(pTHX_ RExC_state_t *pRExC_state, I32 *flagp, U32 depth)
 #ifdef RE_TRACK_PATTERN_OFFSETS
     char *parse_start;
 #endif
-    const char *maxpos = NULL;
-    UV uv;
 
     /* Save the original in case we change the emitted regop to a FAIL. */
     const regnode_offset orig_emit = RExC_emit;
@@ -12603,6 +12758,7 @@ S_regpiece(pTHX_ RExC_state_t *pRExC_state, I32 *flagp, U32 depth)
 
     op = *RExC_parse;
     switch (op) {
+        const char * regcurly_return[5];
 
       case '*':
         nextchar(pRExC_state);
@@ -12621,54 +12777,34 @@ S_regpiece(pTHX_ RExC_state_t *pRExC_state, I32 *flagp, U32 depth)
 
       case '{':  /* A '{' may or may not indicate a quantifier; call regcurly()
                     to determine which */
-        if (regcurly(RExC_parse)) {
-            const char* endptr;
+        if (regcurly(RExC_parse, RExC_end, regcurly_return)) {
+            const char * min_start = regcurly_return[MIN_S];
+            const char * min_end   = regcurly_return[MIN_E];
+            const char * max_start = regcurly_return[MAX_S];
+            const char * max_end   = regcurly_return[MAX_E];
 
-            /* Here is a quantifier, parse for min and max values */
-            maxpos = NULL;
-            next = RExC_parse + 1;
-            while (isDIGIT(*next) || *next == ',') {
-                if (*next == ',') {
-                    if (maxpos)
-                        break;
-                    else
-                        maxpos = next;
-                }
-                next++;
+            if (min_start) {
+                min = get_quantifier_value(pRExC_state, min_start, min_end);
             }
-
-            assert(*next == '}');
-
-            if (!maxpos)
-                maxpos = next;
-            RExC_parse++;
-            if (isDIGIT(*RExC_parse)) {
-                endptr = RExC_end;
-                if (!grok_atoUV(RExC_parse, &uv, &endptr))
-                    vFAIL("Invalid quantifier in {,}");
-                if (uv >= REG_INFTY)
-                    vFAIL2("Quantifier in {,} bigger than %d", REG_INFTY - 1);
-                min = (I32)uv;
-            } else {
+            else {
                 min = 0;
             }
-            if (*maxpos == ',')
-                maxpos++;
-            else
-                maxpos = RExC_parse;
-            if (isDIGIT(*maxpos)) {
-                endptr = RExC_end;
-                if (!grok_atoUV(maxpos, &uv, &endptr))
-                    vFAIL("Invalid quantifier in {,}");
-                if (uv >= REG_INFTY)
-                    vFAIL2("Quantifier in {,} bigger than %d", REG_INFTY - 1);
-                max = (I32)uv;
-            } else {
-                max = REG_INFTY;            /* meaning "infinity" */
+
+            if (max_start == max_end) {     /* Was of the form {m,} */
+                max = REG_INFTY;
+            }
+            else if (max_start == min_start) {  /* Was of the form {m} */
+                max = min;
+            }
+            else {  /* Was of the form {m,n} */
+                assert(max_end >= max_start);
+
+                max = get_quantifier_value(pRExC_state, max_start, max_end);
             }
 
-            RExC_parse = next;
+            RExC_parse = (char *) regcurly_return[RBRACE];
             nextchar(pRExC_state);
+
             if (max < min) {    /* If can't match, warn and optimize to fail
                                    unconditionally */
                 reginsert(pRExC_state, OPFAIL, orig_emit, depth+1);
@@ -12677,15 +12813,14 @@ S_regpiece(pTHX_ RExC_state_t *pRExC_state, I32 *flagp, U32 depth)
                                     regarglen[OPFAIL] + NODE_STEP_REGNODE;
                 return ret;
             }
-            else if (min == max && *RExC_parse == '?')
-            {
+            else if (min == max && *RExC_parse == '?') {
                 ckWARN2reg(RExC_parse + 1,
                            "Useless use of greediness modifier '%c'",
                            *RExC_parse);
             }
 
             break;
-        } /* End of is regcurly() */
+        } /* End of is {m,n} */
 
         /* Here was a '{', but what followed it didn't form a quantifier. */
         /* FALLTHROUGH */
@@ -12826,7 +12961,7 @@ S_regpiece(pTHX_ RExC_state_t *pRExC_state, I32 *flagp, U32 depth)
     }
 
     /* Forbid extra quantifiers */
-    if (ISMULT2(RExC_parse)) {
+    if (isQUANTIFIER(RExC_parse, RExC_end)) {
         RExC_parse++;
         vFAIL("Nested quantifiers");
     }
@@ -12916,12 +13051,12 @@ S_grok_bslash_N(pTHX_ RExC_state_t *pRExC_state,
   * sequence. *node_p will be set to a generated node returned by this
   * function calling S_reg().
   *
-  * The final possibility is that it is premature to be calling this function;
-  * the parse needs to be restarted.  This can happen when this changes from
-  * /d to /u rules, or when the pattern needs to be upgraded to UTF-8.  The
-  * latter occurs only when the fifth possibility would otherwise be in
-  * effect, and is because one of those code points requires the pattern to be
-  * recompiled as UTF-8.  The function returns FALSE, and sets the
+  * The sixth and final possibility is that it is premature to be calling this
+  * function; the parse needs to be restarted.  This can happen when this
+  * changes from /d to /u rules, or when the pattern needs to be upgraded to
+  * UTF-8.  The latter occurs only when the fifth possibility would otherwise
+  * be in effect, and is because one of those code points requires the pattern
+  * to be recompiled as UTF-8.  The function returns FALSE, and sets the
   * RESTART_PARSE and NEED_UTF8 flags in *flagp, as appropriate.  When this
   * happens, the caller needs to desist from continuing parsing, and return
   * this information to its caller.  This is not set for when there is only one
@@ -12943,6 +13078,7 @@ S_grok_bslash_N(pTHX_ RExC_state_t *pRExC_state,
   * are already native, so no translation is done. */
 
     char * endbrace;    /* points to '}' following the name */
+    char * e;           /* points to final non-blank before endbrace */
     char* p = RExC_parse; /* Temporary */
 
     SV * substitute_parse = NULL;
@@ -12962,15 +13098,16 @@ S_grok_bslash_N(pTHX_ RExC_state_t *pRExC_state,
     }
 
     /* The [^\n] meaning of \N ignores spaces and comments under the /x
-     * modifier.  The other meanings do not, so use a temporary until we find
-     * out which we are being called with */
+     * modifier.  The other meanings do not (except blanks adjacent to and
+     * within the braces), so use a temporary until we find out which we are
+     * being called with */
     skip_to_be_ignored_text(pRExC_state, &p,
                             FALSE /* Don't force to /x */ );
 
     /* Disambiguate between \N meaning a named character versus \N meaning
      * [^\n].  The latter is assumed when the {...} following the \N is a legal
      * quantifier, or if there is no '{' at all */
-    if (*p != '{' || regcurly(p)) {
+    if (*p != '{' || regcurly(p, RExC_end, NULL)) {
         RExC_parse = p;
         if (cp_count) {
             *cp_count = -1;
@@ -13027,13 +13164,22 @@ S_grok_bslash_N(pTHX_ RExC_state_t *pRExC_state,
         return TRUE;
     }
 
-    if (endbrace - RExC_parse < 2 || ! strBEGINs(RExC_parse, "U+")) {
+    while (isBLANK(*RExC_parse)) {
+        RExC_parse++;
+    }
+
+    e = endbrace;
+    while (RExC_parse < e && isBLANK(*(e-1))) {
+        e--;
+    }
+
+    if (e - RExC_parse < 2 || ! strBEGINs(RExC_parse, "U+")) {
 
         /* Here, the name isn't of the form  U+....  This can happen if the
          * pattern is single-quoted, so didn't get evaluated in toke.c.  Now
          * is the time to find out what the name means */
 
-        const STRLEN name_len = endbrace - RExC_parse;
+        const STRLEN name_len = e - RExC_parse;
         SV *  value_sv;     /* What does this name evaluate to */
         SV ** value_svp;
         const U8 * value;   /* string of name's value */
@@ -13058,7 +13204,7 @@ S_grok_bslash_N(pTHX_ RExC_state_t *pRExC_state,
         }
         else { /* Otherwise we have to go out and get the name */
             const char * error_msg = NULL;
-            value_sv = get_and_check_backslash_N_name(RExC_parse, endbrace,
+            value_sv = get_and_check_backslash_N_name(RExC_parse, e,
                                                       UTF,
                                                       &error_msg);
             if (error_msg) {
@@ -13157,7 +13303,7 @@ S_grok_bslash_N(pTHX_ RExC_state_t *pRExC_state,
                       | PERL_SCAN_NOTIFY_ILLDIGIT
                       | PERL_SCAN_ALLOW_MEDIAL_UNDERSCORES
                       | PERL_SCAN_DISALLOW_PREFIX;
-            STRLEN len = endbrace - RExC_parse;
+            STRLEN len = e - RExC_parse;
             NV overflow_value;
             char * start_digit = RExC_parse;
             UV cp = grok_hex(RExC_parse, &len, &flags, &overflow_value);
@@ -13174,7 +13320,7 @@ S_grok_bslash_N(pTHX_ RExC_state_t *pRExC_state,
                 vFAIL(form_cp_too_large_msg(16, start_digit, len, 0));
             }
 
-            if (RExC_parse >= endbrace) { /* Got to the closing '}' */
+            if (RExC_parse >= e) { /* Got to the closing '}' */
                 if (count) {
                     goto do_concat;
                 }
@@ -13196,14 +13342,15 @@ S_grok_bslash_N(pTHX_ RExC_state_t *pRExC_state,
              * only if that character is a dot separating code points, like a
              * multiple character sequence (of the form "\N{U+c1.c2. ... }".
              * So the next character must be a dot (and the one after that
-             * can't be the endbrace, or we'd have something like \N{U+100.} )
+             * can't be the ending brace, or we'd have something like
+             * \N{U+100.} )
              * */
-            if (*RExC_parse != '.' || RExC_parse + 1 >= endbrace) {
+            if (*RExC_parse != '.' || RExC_parse + 1 >= e) {
                 RExC_parse += (RExC_orig_utf8)  /* point to after 1st invalid */
                               ? UTF8SKIP(RExC_parse)
                               : 1;
-                RExC_parse = MIN(endbrace, RExC_parse);/* Guard against
-                                                          malformed utf8 */
+                RExC_parse = MIN(e, RExC_parse);/* Guard against malformed utf8
+                                                 */
                 goto bad_NU;
             }
 
@@ -13241,7 +13388,7 @@ S_grok_bslash_N(pTHX_ RExC_state_t *pRExC_state,
             RExC_parse++;
             count++;
 
-        } while (RExC_parse < endbrace);
+        } while (RExC_parse < e);
 
         if (! node_p) { /* Doesn't want the node */
             assert (cp_count);
@@ -13316,53 +13463,6 @@ S_compute_EXACTish(RExC_state_t *pRExC_state)
     }
 
     return op + EXACTF;
-}
-
-STATIC bool
-S_new_regcurly(const char *s, const char *e)
-{
-    /* This is a temporary function designed to match the most lenient form of
-     * a {m,n} quantifier we ever envision, with either number omitted, and
-     * spaces anywhere between/before/after them.
-     *
-     * If this function fails, then the string it matches is very unlikely to
-     * ever be considered a valid quantifier, so we can allow the '{' that
-     * begins it to be considered as a literal */
-
-    bool has_min = FALSE;
-    bool has_max = FALSE;
-
-    PERL_ARGS_ASSERT_NEW_REGCURLY;
-
-    if (s >= e || *s++ != '{')
-	return FALSE;
-
-    while (s < e && isSPACE(*s)) {
-        s++;
-    }
-    while (s < e && isDIGIT(*s)) {
-        has_min = TRUE;
-        s++;
-    }
-    while (s < e && isSPACE(*s)) {
-        s++;
-    }
-
-    if (*s == ',') {
-	s++;
-        while (s < e && isSPACE(*s)) {
-            s++;
-        }
-        while (s < e && isDIGIT(*s)) {
-            has_max = TRUE;
-            s++;
-        }
-        while (s < e && isSPACE(*s)) {
-            s++;
-        }
-    }
-
-    return s < e && *s == '}' && (has_min || has_max);
 }
 
 /* Parse backref decimal value, unless it's too big to sensibly be a backref,
@@ -13659,27 +13759,31 @@ S_regatom(pTHX_ RExC_state_t *pRExC_state, I32 *flagp, U32 depth)
             else {
                 STRLEN length;
                 char name = *RExC_parse;
-                char * endbrace = NULL;
+                char * endbrace =  (char *) memchr(RExC_parse, '}',
+                                                   RExC_end - RExC_parse);
+                char * e = endbrace;
+
                 RExC_parse += 2;
-                endbrace = (char *) memchr(RExC_parse, '}', RExC_end - RExC_parse);
 
                 if (! endbrace) {
                     vFAIL2("Missing right brace on \\%c{}", name);
                 }
-                /* XXX Need to decide whether to take spaces or not.  Should be
-                 * consistent with \p{}, but that currently is SPACE, which
-                 * means vertical too, which seems wrong
-                 * while (isBLANK(*RExC_parse)) {
+
+                while (isBLANK(*RExC_parse)) {
                     RExC_parse++;
-                }*/
-                if (endbrace == RExC_parse) {
-                    RExC_parse++;  /* After the '}' */
+                }
+
+                while (RExC_parse < e && isBLANK(*(e - 1))) {
+                    e--;
+                }
+
+                if (e == RExC_parse) {
+                    RExC_parse = endbrace + 1;  /* After the '}' */
                     vFAIL2("Empty \\%c{}", name);
                 }
-                length = endbrace - RExC_parse;
-                /*while (isBLANK(*(RExC_parse + length - 1))) {
-                    length--;
-                }*/
+
+                length = e - RExC_parse;
+
                 switch (*RExC_parse) {
                     case 'g':
                         if (    length != 1
@@ -13709,10 +13813,10 @@ S_regatom(pTHX_ RExC_state_t *pRExC_state, I32 *flagp, U32 depth)
                         break;
                     default:
                       bad_bound_type:
-                        RExC_parse = endbrace;
+                        RExC_parse = e;
 			vFAIL2utf8f(
                             "'%" UTF8f "' is an unknown bound type",
-			    UTF8fARG(UTF, length, endbrace - length));
+			    UTF8fARG(UTF, length, e - length));
                         NOT_REACHED; /*NOTREACHED*/
                 }
                 RExC_parse = endbrace;
@@ -13800,7 +13904,7 @@ S_regatom(pTHX_ RExC_state_t *pRExC_state, I32 *flagp, U32 depth)
                     * correspondingly 'P' can be */
             if (   RExC_parse - parse_start == 1
                 && UCHARAT(RExC_parse + 1) == '{'
-                && UNLIKELY(! new_regcurly(RExC_parse + 1, RExC_end)))
+                && UNLIKELY(! regcurly(RExC_parse + 1, RExC_end, NULL)))
             {
                 RExC_parse += 2;
                 vFAIL("Unescaped left brace in regex is illegal here");
@@ -13841,8 +13945,8 @@ S_regatom(pTHX_ RExC_state_t *pRExC_state, I32 *flagp, U32 depth)
             RExC_parse = parse_start;
             goto defchar;
 
-	case 'k':    /* Handle \k<NAME> and \k'NAME' */
-      parse_named_seq:
+	case 'k':    /* Handle \k<NAME> and \k'NAME' and \k{NAME} */
+      parse_named_seq:  /* Also handle non-numeric \g{...} */
         {
             char ch;
             if (   RExC_parse >= RExC_end - 1
@@ -13855,6 +13959,11 @@ S_regatom(pTHX_ RExC_state_t *pRExC_state, I32 *flagp, U32 depth)
 	        vFAIL2("Sequence %.2s... not terminated", parse_start);
 	    } else {
 		RExC_parse += 2;
+                if (ch == '{') {
+                    while (isBLANK(*RExC_parse)) {
+                        RExC_parse++;
+                    }
+                }
                 ret = handle_named_backref(pRExC_state,
                                            flagp,
                                            parse_start,
@@ -13871,29 +13980,66 @@ S_regatom(pTHX_ RExC_state_t *pRExC_state, I32 *flagp, U32 depth)
 	case '5': case '6': case '7': case '8': case '9':
 	    {
 		I32 num;
-		bool hasbrace = 0;
+		char * endbrace = NULL;
+                char * s = RExC_parse;
+                char * e = RExC_end;
 
-		if (*RExC_parse == 'g') {
+		if (*s == 'g') {
                     bool isrel = 0;
 
-		    RExC_parse++;
-		    if (*RExC_parse == '{') {
-		        RExC_parse++;
-		        hasbrace = 1;
+		    s++;
+		    if (*s == '{') {
+                        endbrace = (char *) memchr(s, '}', RExC_end - s);
+                        if (! endbrace ) {
+
+                            /* Missing '}'.  Position after the number to give
+                             * a better indication to the user of where the
+                             * problem is. */
+                            s++;
+                            if (*s == '-') {
+                                s++;
+                            }
+
+                            /* If it looks to be a name and not a number, go
+                             * handle it there */
+                            if (! isDIGIT(*s)) {
+                                goto parse_named_seq;
+                            }
+
+                            do {
+                                s++;
+                            } while isDIGIT(*s);
+
+                            RExC_parse = s;
+                            vFAIL("Unterminated \\g{...} pattern");
+                        }
+
+		        s++;    /* Past the '{' */
+
+                        while (isBLANK(*s)) {
+                            s++;
+                        }
+
+                        /* Ignore trailing blanks */
+                        e = endbrace;
+                        while (s < e && isBLANK(*(e - 1))) {
+                            e--;
+                        }
 		    }
-		    if (*RExC_parse == '-') {
-		        RExC_parse++;
+
+                    /* Here, have isolated the meat of the construct from any
+                     * surrounding braces */
+
+		    if (*s == '-') {
 		        isrel = 1;
+		        s++;
 		    }
-		    if (hasbrace && !isDIGIT(*RExC_parse)) {
-		        if (isrel) RExC_parse--;
-                        RExC_parse -= 2;
+
+		    if (endbrace && !isDIGIT(*s)) {
 		        goto parse_named_seq;
                     }
 
-                    if (RExC_parse >= RExC_end) {
-                        goto unterminated_g;
-                    }
+                    RExC_parse = s;
                     num = S_backref_value(RExC_parse, RExC_end);
                     if (num == 0)
                         vFAIL("Reference to invalid group 0");
@@ -13901,7 +14047,6 @@ S_regatom(pTHX_ RExC_state_t *pRExC_state, I32 *flagp, U32 depth)
                          if (isDIGIT(*RExC_parse))
 			    vFAIL("Reference to nonexistent group");
                         else
-                          unterminated_g:
                             vFAIL("Unterminated \\g... pattern");
                     }
 
@@ -13920,12 +14065,12 @@ S_regatom(pTHX_ RExC_state_t *pRExC_state, I32 *flagp, U32 depth)
                     /* Note we do NOT check if num == I32_MAX here, as that is
                      * handled by the RExC_npar check */
 
-                    if (
-                        /* any numeric escape < 10 is always a backref */
-                        num > 9
-                        /* any numeric escape < RExC_npar is a backref */
+                    if (    /* any numeric escape < 10 is always a backref */
+                           num > 9
+                            /* any numeric escape < RExC_npar is a backref */
                         && num >= RExC_npar
-                        /* cannot be an octal escape if it starts with [89] */
+                            /* cannot be an octal escape if it starts with [89]
+                             * */
                         && ! inRANGE(*RExC_parse, '8', '9')
                     ) {
                         /* Probably not meant to be a backref, instead likely
@@ -13938,17 +14083,20 @@ S_regatom(pTHX_ RExC_state_t *pRExC_state, I32 *flagp, U32 depth)
                 }
 
                 /* At this point RExC_parse points at a numeric escape like
-                 * \12 or \88 or something similar, which we should NOT treat
-                 * as an octal escape. It may or may not be a valid backref
-                 * escape. For instance \88888888 is unlikely to be a valid
-                 * backref. */
-                while (isDIGIT(*RExC_parse))
-                    RExC_parse++;
-                if (hasbrace) {
-                    if (*RExC_parse != '}')
-                        vFAIL("Unterminated \\g{...} pattern");
+                 * \12 or \88 or the digits in \g{34} or \g34 or something
+                 * similar, which we should NOT treat as an octal escape. It
+                 * may or may not be a valid backref escape. For instance
+                 * \88888888 is unlikely to be a valid backref.
+                 *
+                 * We've already figured out what value the digits represent.
+                 * Now, move the parse to beyond them. */
+                if (endbrace) {
+                    RExC_parse = endbrace + 1;
+                }
+                else while (isDIGIT(*RExC_parse)) {
                     RExC_parse++;
                 }
+
                 if (num >= (I32)RExC_npar) {
 
                     /* It might be a forward reference; we can't fail until we
@@ -14347,6 +14495,7 @@ S_regatom(pTHX_ RExC_state_t *pRExC_state, I32 *flagp, U32 depth)
                         goto loopdone;
                     case '1': case '2': case '3':case '4':
 		    case '5': case '6': case '7':
+
                         /* When we parse backslash escapes there is ambiguity
                          * between backreferences and octal escapes. Any escape
                          * from \1 - \9 is a backreference, any multi-digit
@@ -14366,7 +14515,7 @@ S_regatom(pTHX_ RExC_state_t *pRExC_state, I32 *flagp, U32 depth)
                         if ( !isDIGIT(p[1]) || S_backref_value(p, RExC_end) < RExC_npar)
                         {  /* Not to be treated as an octal constant, go
                                    find backref */
-                            --p;
+                            p = oldp;
                             goto loopdone;
                         }
                         /* FALLTHROUGH */
@@ -14425,8 +14574,7 @@ S_regatom(pTHX_ RExC_state_t *pRExC_state, I32 *flagp, U32 depth)
                         if (      RExC_strict
                             || (  p > parse_start + 1
                                 && isALPHA_A(*(p - 1))
-                                && *(p - 2) == '\\')
-                            || new_regcurly(p, RExC_end))
+                                && *(p - 2) == '\\'))
                         {
                             RExC_parse = p + 1;
                             vFAIL("Unescaped left brace in regex is "
@@ -14487,7 +14635,7 @@ S_regatom(pTHX_ RExC_state_t *pRExC_state, I32 *flagp, U32 depth)
                  * only thing in its new node */
 
                 next_is_quantifier =    LIKELY(p < RExC_end)
-                                     && UNLIKELY(ISMULT2(p));
+                                     && UNLIKELY(isQUANTIFIER(p, RExC_end));
 
                 if (next_is_quantifier && LIKELY(len)) {
                     p = oldp;
@@ -15359,9 +15507,9 @@ S_regatom(pTHX_ RExC_state_t *pRExC_state, I32 *flagp, U32 depth)
     skip_to_be_ignored_text(pRExC_state, &RExC_parse,
                                             FALSE /* Don't force to /x */ );
     if (   *RExC_parse == '{'
-        && OP(REGNODE_p(ret)) != SBOL && ! regcurly(RExC_parse))
+        && OP(REGNODE_p(ret)) != SBOL && ! regcurly(RExC_parse, RExC_end, NULL))
     {
-        if (RExC_strict || new_regcurly(RExC_parse, RExC_end)) {
+        if (RExC_strict) {
             RExC_parse++;
             vFAIL("Unescaped left brace in regex is illegal here");
         }
@@ -21187,7 +21335,7 @@ Perl_regprop(pTHX_ const regexp *prog, SV *sv, const regnode *o, const regmatch_
                 if (name) {
                     for ( n=0; n<SvIVX(sv_dat); n++ ) {
                         Perl_sv_catpvf(aTHX_ sv, "%s%" IVdf,
-			   	    (n ? "," : ""), (IV)nums[n]);
+                                    (n ? "," : ""), (IV)nums[n]);
                     }
                     Perl_sv_catpvf(aTHX_ sv, " '%" SVf "'", SVfARG(*name));
                 }
@@ -21789,8 +21937,6 @@ Perl_regfree_internal(pTHX_ REGEXP * const rx)
                      Used in stclass optimization only */
                     U32 refcount;
                     reg_ac_data *aho=(reg_ac_data*)ri->data->data[n];
-#ifdef USE_ITHREADS
-#endif
                     OP_REFCNT_LOCK;
                     refcount = --aho->refcount;
                     OP_REFCNT_UNLOCK;
@@ -21817,8 +21963,6 @@ Perl_regfree_internal(pTHX_ REGEXP * const rx)
 	            /* trie structure. */
 	            U32 refcount;
 	            reg_trie_data *trie=(reg_trie_data*)ri->data->data[n];
-#ifdef USE_ITHREADS
-#endif
                     OP_REFCNT_LOCK;
                     refcount = --trie->refcount;
                     OP_REFCNT_UNLOCK;
@@ -22212,8 +22356,6 @@ S_put_code_point(pTHX_ SV *sv, UV c)
         Perl_sv_catpvf(aTHX_ sv, "\\x%02X", (U8) c);
     }
 }
-
-#define MAX_PRINT_A MAX_PRINT_A_FOR_USE_ONLY_BY_REGCOMP_DOT_C
 
 STATIC void
 S_put_range(pTHX_ SV *sv, UV start, const UV end, const bool allow_literals)

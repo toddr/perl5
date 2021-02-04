@@ -183,13 +183,13 @@ C<(bool)!!(cbool)> in a ternary triggers a bug in xlc on AIX
    For dealing with issues that may arise from various 32/64-bit
    systems, we will ask Configure to check out
 
-	SHORTSIZE == sizeof(short)
-	INTSIZE == sizeof(int)
-	LONGSIZE == sizeof(long)
-	LONGLONGSIZE == sizeof(long long) (if HAS_LONG_LONG)
-	PTRSIZE == sizeof(void *)
-	DOUBLESIZE == sizeof(double)
-	LONG_DOUBLESIZE == sizeof(long double) (if HAS_LONG_DOUBLE).
+        SHORTSIZE == sizeof(short)
+        INTSIZE == sizeof(int)
+        LONGSIZE == sizeof(long)
+        LONGLONGSIZE == sizeof(long long) (if HAS_LONG_LONG)
+        PTRSIZE == sizeof(void *)
+        DOUBLESIZE == sizeof(double)
+        LONG_DOUBLESIZE == sizeof(long double) (if HAS_LONG_DOUBLE).
 
 */
 
@@ -284,13 +284,19 @@ typedef U64TYPE U64;
 #  define U32_MIN PERL_ULONG_MIN
 #endif
 
-/* These C99 typedefs are useful sometimes for, say, loop variables whose
- * maximum values are small, but for which speed trumps size.  If we have a C99
- * compiler, use that.  Otherwise, a plain 'int' should be good enough.
- *
- * Restrict these to core for now until we are more certain this is a good
- * idea. */
-#if defined(PERL_CORE) || defined(PERL_EXT)
+/*
+=for apidoc_section $integer
+=for apidoc Ay|| PERL_INT_FAST8_T
+=for apidoc_item PERL_INT_FAST16_T
+=for apidoc_item PERL_UINT_FAST8_T
+=for apidoc_item PERL_UINT_FAST16_T
+
+These are equivalent to the correspondingly-named C99 typedefs on platforms
+that have those; they evaluate to C<int> and C<unsigned int> on platforms that
+don't, so that you can portably take advantage of this C99 feature.
+
+=cut
+*/
 #  ifdef I_STDINT
     typedef  int_fast8_t  PERL_INT_FAST8_T;
     typedef uint_fast8_t  PERL_UINT_FAST8_T;
@@ -302,7 +308,6 @@ typedef U64TYPE U64;
     typedef int           PERL_INT_FAST16_T;
     typedef unsigned int  PERL_UINT_FAST16_T;
 #  endif
-#endif
 
 /* log(2) (i.e., log base 10 of 2) is pretty close to 0.30103, just in case
  * anyone is grepping for it.  So BIT_DIGITS gives the number of decimal digits
@@ -350,7 +355,7 @@ assert(), we would get a comma with nothing before it when not DEBUGGING.
 
 =cut
 
-We also use empty definition under Coverity since the __ASSERT__
+We also use empty definition under Coverity since the __ASSERT_
 checks often check for things that Really Cannot Happen, and Coverity
 detects that and gets all excited. */
 
@@ -489,7 +494,7 @@ Perl_xxx(aTHX_ ...) form for any API calls where it's used.
 #define lex_stuff_pvs(pv,flags) Perl_lex_stuff_pvn(aTHX_ STR_WITH_LEN(pv), flags)
 
 #define get_cvs(str, flags)					\
-	Perl_get_cvn_flags(aTHX_ STR_WITH_LEN(str), (flags))
+        Perl_get_cvn_flags(aTHX_ STR_WITH_LEN(str), (flags))
 
 /* internal helpers */
 /* Transitional */
@@ -626,22 +631,24 @@ wrapper for C<strncmp>).
 =for apidoc Am|bool|memEQ|char* s1|char* s2|STRLEN len
 Test two buffers (which may contain embedded C<NUL> characters, to see if they
 are equal.  The C<len> parameter indicates the number of bytes to compare.
-Returns zero if equal, or non-zero if non-equal.
+Returns true or false.  It is undefined behavior if either of the buffers
+doesn't contain at least C<len> bytes.
 
 =for apidoc Am|bool|memEQs|char* s1|STRLEN l1|"s2"
 Like L</memEQ>, but the second string is a literal enclosed in double quotes,
 C<l1> gives the number of bytes in C<s1>.
-Returns zero if equal, or non-zero if non-equal.
+Returns true or false.
 
 =for apidoc Am|bool|memNE|char* s1|char* s2|STRLEN len
 Test two buffers (which may contain embedded C<NUL> characters, to see if they
 are not equal.  The C<len> parameter indicates the number of bytes to compare.
-Returns zero if non-equal, or non-zero if equal.
+Returns true or false.  It is undefined behavior if either of the buffers
+doesn't contain at least C<len> bytes.
 
 =for apidoc Am|bool|memNEs|char* s1|STRLEN l1|"s2"
 Like L</memNE>, but the second string is a literal enclosed in double quotes,
 C<l1> gives the number of bytes in C<s1>.
-Returns zero if non-equal, or zero if non-equal.
+Returns true or false.
 
 =for apidoc Am|bool|memCHRs|"list"|char c
 Returns the position of the first occurence of the byte C<c> in the literal
@@ -1402,18 +1409,33 @@ or casts
  * needed.  (The NV casts stop any warnings about comparison always being true
  * if called with an unsigned.  The cast preserves the sign, which is all we
  * care about.) */
-#define withinCOUNT(c, l, n) (__ASSERT_((NV) (l) >= 0)                         \
-                              __ASSERT_((NV) (n) >= 0)                         \
-   (((WIDEST_UTYPE) (((c)) - ((l) | 0))) <= (((WIDEST_UTYPE) ((n) | 0)))))
+#define withinCOUNT(c, l, n)  (__ASSERT_((NV) (l) >= 0)                 \
+                               __ASSERT_((NV) (n) >= 0)                 \
+                               withinCOUNT_KNOWN_VALID_((c), (l), (n)))
+
+/* For internal use only, this can be used in places where it is known that the
+ * parameters to withinCOUNT() are valid, to avoid the asserts.  For example,
+ * inRANGE() below, calls this several times, but does all the necessary
+ * asserts itself, once.  The reason that this is necessary is that the
+ * duplicate asserts were exceeding the internal limits of some compilers */
+#define withinCOUNT_KNOWN_VALID_(c, l, n)                                   \
+    (((WIDEST_UTYPE) (((c)) - ((l) | 0))) <= (((WIDEST_UTYPE) ((n) | 0))))
 
 /* Returns true if c is in the range l..u, where 'l' is non-negative
  * Written this way so that after optimization, only one conditional test is
  * needed. */
-#define inRANGE(c, l, u) (__ASSERT_((u) >= (l))                                \
-   (  (sizeof(c) == sizeof(U8))  ? withinCOUNT(((U8)  (c)), (l), ((u) - (l)))  \
-    : (sizeof(c) == sizeof(U32)) ? withinCOUNT(((U32) (c)), (l), ((u) - (l)))  \
-    : (__ASSERT_(sizeof(c) == sizeof(WIDEST_UTYPE))                            \
-                          withinCOUNT(((WIDEST_UTYPE) (c)), (l), ((u) - (l))))))
+#define inRANGE(c, l, u) (__ASSERT_((NV) (l) >= 0) __ASSERT_((u) >= (l))    \
+   (  (sizeof(c) == sizeof(U8))  ? inRANGE_helper_(U8, (c), (l), ((u)))     \
+    : (sizeof(c) == sizeof(U16)) ? inRANGE_helper_(U16,(c), (l), ((u)))     \
+    : (sizeof(c) == sizeof(U32)) ? inRANGE_helper_(U32,(c), (l), ((u)))     \
+             : (__ASSERT_(sizeof(c) == sizeof(WIDEST_UTYPE))                \
+                          inRANGE_helper_(WIDEST_UTYPE,(c), (l), ((u))))))
+
+/* For internal use, this is used by machine-generated code which generates
+ * known valid calls, with a known sizeof().  This avoids the extra code and
+ * asserts that were exceeding internal limits of some compilers. */
+#define inRANGE_helper_(cast, c, l, u)                                      \
+                    withinCOUNT_KNOWN_VALID_(((cast) (c)), (l), ((u) - (l)))
 
 #ifdef EBCDIC
 #   ifndef _ALL_SOURCE
@@ -1611,16 +1633,21 @@ END_EXTERN_C
 #   endif
 
     /* Participates in a single-character fold with a character above 255 */
-#   define _HAS_NONLATIN1_SIMPLE_FOLD_CLOSURE_ONLY_FOR_USE_BY_REGCOMP_DOT_C_AND_REGEXEC_DOT_C(c) ((! cBOOL(FITS_IN_8_BITS(c))) || (PL_charclass[(U8) (c)] & _CC_mask(_CC_NONLATIN1_SIMPLE_FOLD)))
+#   if defined(PERL_IN_REGCOMP_C) || defined(PERL_IN_REGEXEC_C)
+#     define HAS_NONLATIN1_SIMPLE_FOLD_CLOSURE(c)                          \
+        ((   ! cBOOL(FITS_IN_8_BITS(c)))                                    \
+          || (PL_charclass[(U8) (c)] & _CC_mask(_CC_NONLATIN1_SIMPLE_FOLD)))
+
+#   define IS_NON_FINAL_FOLD(c)   _generic_isCC(c, _CC_NON_FINAL_FOLD)
+#   define IS_IN_SOME_FOLD_L1(c)  _generic_isCC(c, _CC_IS_IN_SOME_FOLD)
+#  endif
 
     /* Like the above, but also can be part of a multi-char fold */
-#   define _HAS_NONLATIN1_FOLD_CLOSURE_ONLY_FOR_USE_BY_REGCOMP_DOT_C_AND_REGEXEC_DOT_C(c) ((! cBOOL(FITS_IN_8_BITS(c))) || (PL_charclass[(U8) (c)] & _CC_mask(_CC_NONLATIN1_FOLD)))
+#   define HAS_NONLATIN1_FOLD_CLOSURE(c)                                    \
+      (   (! cBOOL(FITS_IN_8_BITS(c)))                                      \
+       || (PL_charclass[(U8) (c)] & _CC_mask(_CC_NONLATIN1_FOLD)))
 
 #   define _isQUOTEMETA(c) _generic_isCC(c, _CC_QUOTEMETA)
-#   define _IS_NON_FINAL_FOLD_ONLY_FOR_USE_BY_REGCOMP_DOT_C(c) \
-                                           _generic_isCC(c, _CC_NON_FINAL_FOLD)
-#   define _IS_IN_SOME_FOLD_ONLY_FOR_USE_BY_REGCOMP_DOT_C(c) \
-                                           _generic_isCC(c, _CC_IS_IN_SOME_FOLD)
 
 /* is c a control character for which we have a mnemonic? */
 #  if defined(PERL_CORE) || defined(PERL_EXT)
@@ -2402,22 +2429,29 @@ END_EXTERN_C
                          : (LATIN1_TO_NATIVE(((U8) (c)) ^ 64)))))
 #endif
 
-/* Line numbers are unsigned, 32 bits. */
+/*
+=for apidoc Ay||line_t
+The typedef to use to declare variables that are to hold line numbers.
+
+=cut
+
+  Line numbers are unsigned, 32 bits.
+*/
 typedef U32 line_t;
 #define NOLINE ((line_t) 4294967295UL)  /* = FFFFFFFF */
 
 /* Helpful alias for version prescan */
 #define is_LAX_VERSION(a,b) \
-	(a != Perl_prescan_version(aTHX_ a, FALSE, b, NULL, NULL, NULL, NULL))
+        (a != Perl_prescan_version(aTHX_ a, FALSE, b, NULL, NULL, NULL, NULL))
 
 #define is_STRICT_VERSION(a,b) \
-	(a != Perl_prescan_version(aTHX_ a, TRUE, b, NULL, NULL, NULL, NULL))
+        (a != Perl_prescan_version(aTHX_ a, TRUE, b, NULL, NULL, NULL, NULL))
 
 #define BADVERSION(a,b,c) \
-	if (b) { \
-	    *b = c; \
-	} \
-	return a;
+        if (b) { \
+            *b = c; \
+        } \
+        return a;
 
 /* Converts a character KNOWN to represent a hexadecimal digit (0-9, A-F, or
  * a-f) to its numeric value without using any branches.  The input is
@@ -2605,17 +2639,17 @@ PoisonWith(0xEF) for catching access to freed memory.
             MEM_SIZE_MAX/sizeof(t)) > MEM_SIZE_MAX/sizeof(t))
 
 #  define MEM_WRAP_CHECK(n,t) \
-	(void)(UNLIKELY(_MEM_WRAP_WILL_WRAP(n,t)) \
+        (void)(UNLIKELY(_MEM_WRAP_WILL_WRAP(n,t)) \
         && (croak_memory_wrap(),0))
 
 #  define MEM_WRAP_CHECK_1(n,t,a) \
-	(void)(UNLIKELY(_MEM_WRAP_WILL_WRAP(n,t)) \
-	&& (Perl_croak_nocontext("%s",(a)),0))
+        (void)(UNLIKELY(_MEM_WRAP_WILL_WRAP(n,t)) \
+        && (Perl_croak_nocontext("%s",(a)),0))
 
 /* "a" arg must be a string literal */
 #  define MEM_WRAP_CHECK_s(n,t,a) \
-	(void)(UNLIKELY(_MEM_WRAP_WILL_WRAP(n,t)) \
-	&& (Perl_croak_nocontext("" a ""),0))
+        (void)(UNLIKELY(_MEM_WRAP_WILL_WRAP(n,t)) \
+        && (Perl_croak_nocontext("" a ""),0))
 
 #define MEM_WRAP_CHECK_(n,t) MEM_WRAP_CHECK(n,t),
 
@@ -2710,9 +2744,9 @@ void Perl_mem_log_del_sv(const SV *sv, const char *filename, const int linenumbe
 #endif
 
 #define Renew(v,n,t) \
-	  (v = (MEM_WRAP_CHECK_(n,t) (t*)MEM_LOG_REALLOC(n,t,v,saferealloc((Malloc_t)(v),(MEM_SIZE)((n)*sizeof(t))))))
+          (v = (MEM_WRAP_CHECK_(n,t) (t*)MEM_LOG_REALLOC(n,t,v,saferealloc((Malloc_t)(v),(MEM_SIZE)((n)*sizeof(t))))))
 #define Renewc(v,n,t,c) \
-	  (v = (MEM_WRAP_CHECK_(n,t) (c*)MEM_LOG_REALLOC(n,t,v,saferealloc((Malloc_t)(v),(MEM_SIZE)((n)*sizeof(t))))))
+          (v = (MEM_WRAP_CHECK_(n,t) (c*)MEM_LOG_REALLOC(n,t,v,saferealloc((Malloc_t)(v),(MEM_SIZE)((n)*sizeof(t))))))
 
 #ifdef PERL_POISON
 #define Safefree(d) \
@@ -2747,6 +2781,7 @@ void Perl_mem_log_del_sv(const SV *sv, const char *filename, const int linenumbe
 #  define PERL_POISON_EXPR(x)
 #endif
 
+/* Shallow copy */
 #define StructCopy(s,d,t) (*((t*)(d)) = *((t*)(s)))
 
 /*

@@ -66,9 +66,9 @@ use Text::Tabs;
 use strict;
 use warnings;
 
-# 80 column terminal - 1 for pager adding a column; -7 for nroff
-# indent;
-my $max_width = 80 - 1 - 7;
+# 80 column terminal - 2 for pager adding 2 columns; -4 for indent for
+# non-heading lines;
+my $max_width = 80 - 2 - 4;
 
 if (@ARGV) {
     my $workdir = shift;
@@ -139,7 +139,6 @@ my $pack_scn = 'Pack and Unpack';
 my $pad_scn = 'Pad Data Structures';
 my $password_scn = 'Password and Group access';
 my $paths_scn = 'Paths to system commands';
-my $intrpvar_scn = 'Per-Interpreter Variables';
 my $prototypes_scn = 'Prototype information';
 my $regexp_scn = 'REGEXP Functions';
 my $signals_scn = 'Signals';
@@ -301,7 +300,6 @@ my %valid_sections = (
     $pad_scn => {},
     $password_scn => {},
     $paths_scn => {},
-    $intrpvar_scn => {},
     $prototypes_scn => {},
     $regexp_scn => {},
     $signals_scn => {},

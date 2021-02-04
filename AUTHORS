@@ -175,6 +175,7 @@ Brad Lanam                     <bll@gentoo.com>
 Bradley Dean                   <bjdean@bjdean.id.au>
 Bram                           <perl-rt@wizbit.be>
 Brandon Black                  <blblack@gmail.com>
+Branislav Zahradník            <barney@cpan.org>
 Brendan Byrd                   <BBYRD@CPAN.org>
 Brendan O'Dea                  <bod@debian.org>
 Breno G. de Oliveira           <garu@cpan.org>
@@ -294,11 +295,13 @@ Dan Kogai                      <dankogai@dan.co.jp>
 Dan Schmidt                    <dfan@harmonixmusic.com>
 Dan Sugalski                   <dan@sidhe.org>
 Daniel Berger                  <djberg86@attbi.com>
+Daniel Böhmer                  <post@daniel-boehmer.de>
 Daniel Chetlin                 <daniel@chetlin.com>
 Daniel Dragan                  <bulk88@hotmail.com>
 Daniel Frederick Crisman       <daniel@crisman.org>
 Daniel Grisinger               <dgris@dimensional.com>
 Daniel Kahn Gillmor            <dkg@fifthhorseman.net>
+Daniel Laügt                   <daniel.laugt@gmail.com>
 Daniel Lieberman               <daniel@bitpusher.com>
 Daniel Muiño                   <dmuino@afip.gov.ar>
 Daniel P. Berrange             <dan@berrange.com>
@@ -460,6 +463,7 @@ Gerd Knops                     <gerti@BITart.com>
 Gerrit P. Haase                <gp@familiehaase.de>
 Gideon Israel Dsouza           <gideon@cpan.org>
 Giles Lean                     <giles@nemeton.com.au>
+Giovanni Tataranni             <gtataranni@users.noreply.github.com>
 Gisle Aas                      <gisle@aas.no>
 GitHub                         <noreply@github.com>
 Glenn D. Golden                <gdg@zplane.com>
@@ -554,6 +558,7 @@ Jacinta Richardson             <jarich@perltraining.com.au>
 Jack Shirazi                   <JackS@GemStone.com>
 Jacques Germishuys             <jacquesg@striata.com>
 Jacqui Caren                   <Jacqui.Caren@ig.co.uk>
+Jae Bradley                    <jae.b.bradley@gmail.com>
 Jake Hamby                     <jehamby@lightside.com>
 Jakub Wilk                     <jwilk@jwilk.net>
 James                          <james@rf.net>
@@ -621,6 +626,7 @@ Jim Miner                      <jfm@winternet.com>
 Jim Richardson
 Jim Schneider                  <james.schneider@db.com>
 Jirka Hruška                   <jirka@fud.cz>
+jkahrman                       <jkahrman@users.noreply.github.com>
 Joachim Huober
 Joaquin Ferrero                <explorer@joaquinferrero.com>
 Jochen Wiedmann                <joe@ispsoft.de>
@@ -651,6 +657,7 @@ John Hawkinson                 <jhawk@mit.edu>
 John Heidemann                 <johnh@isi.edu>
 John Holdsworth                <coldwave@bigfoot.com>
 John Hughes                    <john@AtlanTech.COM>
+John Karr                      <brainbuz@brainbuz.org>
 John Kristian                  <jmk2001@engineer.com>
 John L. Allen                  <allen@grumman.com>
 John Lightsey                  <jd@cpanel.net>
@@ -1154,7 +1161,9 @@ Sebastian Wittmeier            <Sebastian.Wittmeier@ginko.de>
 Sebastien Barre                <Sebastien.Barre@utc.fr>
 Sergey Alekseev                <varnie29a@mail.ru>
 Sergey Aleynikov               <sergey.aleynikov@gmail.com>
+Sergey Poznyakoff              <gray@gnu.org>
 Sergiy Borodych                <bor@cpan.org>
+Sevan Janiyan                  <venture37@geeklan.co.uk>
 Shawn                          <svicalifornia@gmail.com>
 Shawn M Moore                  <sartak@gmail.com>
 Sherm Pendley                  <sherm@dot-app.org>

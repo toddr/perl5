@@ -996,14 +996,6 @@ sub run_tests {
         }
 
         undef $w;
-        {
-            () = eval q ["\N{TRAILING SPACE }"];
-            like ($@, qr/charnames alias definitions may not contain trailing white-space/, "Trailing white-space in a charnames alias is fatal");
-            eval q [use utf8; () = "\N{TRAILING SPACE }"];
-            like ($@, qr/charnames alias definitions may not contain trailing white-space/, "... same under utf8");
-        }
-
-        undef $w;
         my $Cedilla_Latin1 = "GAR"
                            . uni_to_native("\xC7")
                            . "ON";
@@ -2565,12 +2557,9 @@ EOF
     {   # GH $17278 assertion fails
         fresh_perl_is('use locale;
                        my $A_grave = "\N{LATIN CAPITAL LETTER A WITH GRAVE}";
-                       utf8::encode($A_grave);
                        my $a_grave = "\N{LATIN SMALL LETTER A WITH GRAVE}";
-                       utf8::encode($a_grave);
 
                        my $z="q!$a_grave! =~ m!(?^i)[$A_grave]!";
-                       utf8::decode($z);
                        print eval $z, "\n";',
                        1,
                        {}, "GH #17278");

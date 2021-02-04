@@ -118,7 +118,7 @@ package B::Op_private;
 our %bits;
 
 
-our $VERSION = "5.033004";
+our $VERSION = "5.033007";
 
 $bits{$_}{3} = 'OPpENTERSUB_AMPER' for qw(entersub rv2cv);
 $bits{$_}{6} = 'OPpENTERSUB_DB' for qw(entersub rv2cv);
@@ -275,6 +275,7 @@ $bits{backtick}{0} = $bf[0];
 @{$bits{bit_xor}}{1,0} = ($bf[1], $bf[1]);
 @{$bits{bless}}{3,2,1,0} = ($bf[4], $bf[4], $bf[4], $bf[4]);
 @{$bits{caller}}{3,2,1,0} = ($bf[4], $bf[4], $bf[4], $bf[4]);
+$bits{catch}{0} = $bf[0];
 @{$bits{chdir}}{3,2,1,0} = ($bf[4], $bf[4], $bf[4], $bf[4]);
 @{$bits{chmod}}{3,2,1,0} = ($bf[4], $bf[4], $bf[4], $bf[4]);
 $bits{chomp}{0} = $bf[0];

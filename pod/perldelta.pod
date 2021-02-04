@@ -5,15 +5,15 @@
 [ this is a template for a new perldelta file.  Any text flagged as XXX needs
 to be processed before release. ]
 
-perldelta - what is new for perl v5.33.4
+perldelta - what is new for perl v5.33.7
 
 =head1 DESCRIPTION
 
-This document describes differences between the 5.33.3 release and the 5.33.4
+This document describes differences between the 5.33.6 release and the 5.33.7
 release.
 
-If you are upgrading from an earlier release such as 5.33.2, first read
-L<perl5333delta>, which describes differences between 5.33.2 and 5.33.3.
+If you are upgrading from an earlier release such as 5.33.5, first read
+L<perl5336delta>, which describes differences between 5.33.5 and 5.33.6.
 
 =head1 Notice
 
@@ -21,9 +21,21 @@ XXX Any important notices here
 
 =head1 Core Enhancements
 
-XXX New core language features go here.  Summarize user-visible core language
-enhancements.  Particularly prominent performance optimisations could go
-here, but most should go in the L</Performance Enhancements> section.
+=head2 Experimental Try/Catch Syntax
+
+An initial experimental attempt at providing C<try>/C<catch> notation has
+been added.
+
+    use feature 'try';
+
+    try {
+        a_function();
+    }
+    catch ($e) {
+        warn "An error occurred: $e";
+    }
+
+For more information, see L<perlsyn/"Try Catch Exception Handling">.
 
 [ List each enhancement as a =head2 entry ]
 
@@ -330,9 +342,17 @@ L</Modules and Pragmata> section.
 
 =over 4
 
-=item XXX-some-platform
+=item Windows
 
-XXX
+Building with mingw.org compilers (version 3.4.5 or later) using mingw runtime
+versions < 3.22 now works again.  This was broken in Perl 5.31.4.
+
+Building with mingw.org compilers (version 3.4.5 or later) using mingw runtime
+versions >= 3.21 now works (for compilers up to version 5.3.0).
+
+Makefile.mk, and thus support for dmake, has been removed. It is still possible
+to build Perl on Windows using nmake (Makefile) and GNU make (GNUmakefile).
+[L<GH #18511|https://github.com/Perl/perl5/pull/18511>]
 
 =back
 
@@ -403,7 +423,7 @@ died, add a short obituary here.
 
 XXX Generate this with:
 
-  perl Porting/acknowledgements.pl v5.33.3..HEAD
+  perl Porting/acknowledgements.pl v5.33.6..HEAD
 
 =head1 Reporting Bugs
 
